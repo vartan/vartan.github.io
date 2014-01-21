@@ -8,8 +8,8 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : mvartan
-tagline: tinkerings & tutorials
+title : mvartan.com
+tagline: tinkerings and tutorials
 author :
   name : Michael Vartan
   email : admin@mvartan.com
