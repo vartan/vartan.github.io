@@ -4,42 +4,42 @@ title: Hello World!
 tagline: Supporting tagline
 ---
 {% include JB/setup %}
-
-Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.html)
-
-Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
-
-## Update Author Attributes
-
-In `_config.yml` remember to specify your own data:
-    
-    title : My Blog =)
-    
-    author :
-      name : Name Lastname
-      email : blah@email.test
-      github : username
-      twitter : username
-
-The theme should reference these variables whenever needed.
-    
-## Sample Posts
-
-This blog contains sample posts which help stage pages and blog data.
-When you don't need the samples anymore just delete the `_posts/core-samples` folder.
-
-    $ rm -rf _posts/core-samples
-
-Here's a sample "posts list".
-
-<ul class="posts">
-  {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+<div class="row">
+  {% for post in site.posts limit:3 %}
+  <div class="col-md-4">
+    <a href="{{ BASE_PATH }}{{ post.url }}"><h2>{{ post.title }}</h2></a>
+  <hr />
+  <p>{% if post.thumbnail %}
+  <img src="{{ post.thumbnail }}" style="height: 280px" align="center" />
+  {% else %}
+  <img src="/images/placeholder-thumbnail-medium.png"
+  style="height: 280px" align="center" />
+  {% endif %}</p>
+  <p>&nbsp;</p>
+  <p>
+  {{ post.content | strip_html | truncatewords:20 }}
+  </p>
+  <p>
+  <a class="btn" href="{{ BASE_PATH }}{{ post.url }}">Read more...</a>
+  </p>
+  </div>
   {% endfor %}
-</ul>
+</div>
 
-## To-Do
-
-This theme is still unfinished. If you'd like to be added as a contributor, [please fork](http://github.com/dbtek/jekyll-bootstrap-3)!
-
-
+{% for post in site.posts limit:15 offset:3 %}
+<hr />
+<div class="row">
+  <div class="col-sm-4 col-md-3">
+    {% if post.thumbnail %}
+  <img src="{{ post.thumbnail }}" align="center" />
+  {% else %}
+  <img src="/assets/themes/tmtxt-responsive/images/no-thumnail.jpg" align="center" />
+  {% endif %}
+  </div>
+  <div class="col-sm-8 col-md-9">
+    <p><a href="{{ BASE_PATH }}{{ post.url }}"><h3>{{ post.title }}</h3></a></p>
+  <p>{{ post.content | strip_html | truncatewords: 80 }}
+  </p>
+  </div>
+</div>
+{% endfor %}
