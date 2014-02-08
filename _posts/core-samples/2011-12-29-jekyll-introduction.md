@@ -2,6 +2,7 @@
 layout: post
 category : lessons
 tagline: "Supporting tagline"
+thumbnail: "/images/thumbnail-led-matrix.jpg"
 tags : [intro, beginner, jekyll, tutorial]
 ---
 {% include JB/setup %}

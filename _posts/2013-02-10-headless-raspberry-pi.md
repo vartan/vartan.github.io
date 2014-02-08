@@ -1,0 +1,85 @@
+---
+layout: post
+title: "Setting up a Headless Raspberry Pi"
+description: "Setting up a raspberry pi with no monitor, keyboard, or mouse optional: WiFi"
+thumbnail: "/images/thumbnail-led-matrix.jpg"
+category : raspberry-pi
+tagline: "no monitor, keyboard, or mouse. (optional: Wifi)"
+tags : [raspberry-pi, embedded, linux]
+---
+{% include JB/setup %}
+ 
+
+Things you will need:
+
+1. A [Raspberry Pi](http://www.amazon.com/exec/obidos/ASIN/B009SQQF9C/mvartan-20). 
+They should sell as low as $35 on some websites, but if you need it quickly, it will be in stock at amazon. 
+Make sure to have a [Micro-USB cable](http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=microusb%7C%28Micro+usb%29&tag=mvartan-20) and [USB power adapter](http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=usb+power%7Ccharger%7Cac&rh=i%3Aaps%2Ck%3Ausb+power%7Ccharger%7Cac&tag=mvartan-20) handy as well.
+
+2. An SD Card. I recommend getting a Class 10 SD Card for the fastest speeds. The small ones go for as little as 5 dollars.
+
+3. SSH. If you are using Windows, I recommend using PuTTy. You can also SSH using apps on your smartphone or tablet. 
+
+4. A VNC viewer/client. I recommend TightVNC for your PC. You can also find VNC clients for your smartphone or tablet
+
+5. Ethernet connection.
+
+6. (optional) WiFi adapter. I bought the Edimax Wireless Nano USB Adapter and have had no issues.
+
+
+
+First, download Raspbian, the primary operating system for the Raspberry Pi, and write it to the SD card. If you are using Windows, use Win32DiskImager. After the image is written to your SD card, pop it into your Raspberry Pi
+
+
+Connect your Raspberry Pi to Ethernet, and power it up. Meanwhile, log in to your WiFi router to find all of the clients connected to it.
+
+You should be able to find your raspberry pi’s local IP address
+
+
+Now, ssh into your Raspberry Pi, in port 22. The default login is:
+
+**Username**: pi
+	
+**Password**: raspberry
+
+I suggest you first type the command:
+
+
+	sudo raspi-config
+
+and change your password, as well as update raspberry pi.
+
+If you do not need to ever use a desktop environment, you are done! Otherwise, read on.
+
+ 
+
+The next thing we need to do is install a VNC server. VNC stands for “Virtual Network Computing”, and allows you to view your computer screen remotely. Type the command:
+
+
+	sudo apt-get install tightvncserver
+
+Now we have a VNC server installed!
+
+ 
+
+I prefer to leave VNC off until I need it, so that the Raspberry Pi doesn’t maintain a desktop environment unless I need it, saving processing power. When I need to view the desktop, I type this command in ssh: (change the resolution as desired)
+
+
+	tightvncserver -geometry 1366×768
+
+This will create a server, usually on port 1. It may ask you for a password on the first time, it must be less than 8 characters.
+
+Then, just log into your VNC viewer and put in your server details and login credentials.
+
+
+If you want to close the VNC server, type (where [port] is most likely 1)
+
+
+	tightvncserver -kill :[port]
+
+##Adding WiFi:
+
+Plug your WiFi dongle into a USB port of the Raspberry Pi. On the desktop, you should see WiFi Config. If not, go to Start->Other->wpa_supplicant user interface. Click Scan and configure your network.
+
+That’s it! Thanks for reading!
+
