@@ -4,8 +4,8 @@ title: "Arduino 5x7 Matrix Controller"
 tagline: Using HDSP-4403 LED Matrix
 description: "How to control an HDSP-4403 5x7 LED Matrix with an Arduino"
 thumbnail: "/images/thumbnails/5x7.jpg"
-category: 
-tags: []
+category: arduino
+tags: [arduino, hardware, display]
 ---
 {% include JB/setup %}
 I began by taking a power supply and running 10mA across each possible combination of the twelve pins. Since they are diodes, it mattered which direction the current flows, so there is, I believe, 12^2*2=288 possible combinations. Anyways, I eventually found what pin combinations light up what LEDs, and the trend was, each row corresponds to a pin connected to ground, and each column corresponds to a pin connected to the power source. I lost the original document, but this is the new one I sketched up that (each pin corresponds to a number on a breadboard)

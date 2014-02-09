@@ -4,8 +4,8 @@ title: "Online Webcam Viewer"
 description: "Online Webcam Viewer"
 thumbnail: "/images/thumbnails/webcam.jpg"
 tagline: "Via PHP and python"
-category: 
-tags: []
+category: Web
+tags: [PHP, Python, Webcam]
 ---
 I just remembered a small project I had in 2011 that I wanted to share with you guys. I had just bought a webcam, and also gotten a cat, and decided to combine the two with programming to make this, a webcam viewer. This way, I could see what my cat was doing while I wasn't home, by checking the website on my phone.
 

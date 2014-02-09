@@ -5,7 +5,7 @@ description: "Setting up a raspberry pi with no monitor, keyboard, or mouse opti
 thumbnail: "/images/thumbnails/rpi.jpg"
 category : raspberry-pi
 tagline: "no monitor, keyboard, or mouse. (optional: Wifi)"
-tags : [raspberry-pi, embedded, linux]
+tags : [raspberry-pi, hardware, linux]
 ---
 {% include JB/setup %}
 ## Things you will need

@@ -4,8 +4,8 @@ title: "$1 Photo-Theremin"
 tagline: and more fun with reversed LEDs
 description: "$1 Photo-Theremin and More Fun With Reversed LEDs"
 thumbnail: "/images/thumbnails/photoled.jpg"
-category: 
-tags: []
+category: arduino
+tags: [arduino, cheap, music, hardware]
 ---
 {% include JB/setup %}
 

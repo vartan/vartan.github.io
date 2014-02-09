@@ -4,8 +4,8 @@ title: "PHP Flash Card Generator"
 tagline: Using PHP to generate microsoft office documents
 description: "Using PHP to generate microsoft office documents"
 thumbnail: "/images/thumbnails/flashcard.jpg"
-category: 
-tags: []
+category: Web
+tags: [PHP, HTML, software]
 ---
 {% include JB/setup %}
 

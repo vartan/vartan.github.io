@@ -4,8 +4,8 @@ title: "Making an online r&egrave;sum&egrave;"
 tagline: Using HTML/CSS to generate seperate online/print views
 description: "Using PHP to generate microsoft office documents"
 thumbnail: "/images/thumbnails/resume.jpg"
-category: 
-tags: []
+category: Web
+tags: [HTML, CSS, Software]
 ---
 {% include JB/setup %}
 
