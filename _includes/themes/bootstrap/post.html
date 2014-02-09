@@ -1,17 +1,20 @@
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
+  <code>{{ page.date | date_to_long_string }}</code>
+
 </div>
 
 <div class="row post-full">
   <div class="col-md-12">
     <div class="date">
-      <span>{{ page.date | date_to_long_string }}</span>
     </div>
     <div class="content">
       {{ content }}
     </div>
     <hr/>
-    <h2>Elsewhere...</h2>
+
+
+
     {% unless page.categories == empty %}
       <div class="btn-group">
         <span class="btn btn-primary"><span class="glyphicon glyphicon-folder-open"></span></span>
@@ -29,6 +32,7 @@
       </a>
     {% endfor %}
   {% endif %}      </div>
+
     {% endunless %}
 
     {% unless page.tags == empty %}
@@ -50,9 +54,10 @@
 {% endif %}
 {% assign tags_list = nil %}
       </div>
+    <hr/>
+
     {% endunless %}
 
-    <hr>
     
     <ul class="pagination">
       {% if page.previous %}
@@ -67,7 +72,7 @@
         <li class="next disabled"><a>Next &rarr;</a>
       {% endif %}
     </ul>
-    <hr>
+    <hr />
     {% include JB/comments %}
   </div>
 </div>

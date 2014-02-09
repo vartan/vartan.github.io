@@ -2,14 +2,12 @@
 layout: post
 title: "Setting up a Headless Raspberry Pi"
 description: "Setting up a raspberry pi with no monitor, keyboard, or mouse optional: WiFi"
-thumbnail: "/images/thumbnails/rpi.png"
+thumbnail: "/images/thumbnails/rpi.jpg"
 category : raspberry-pi
 tagline: "no monitor, keyboard, or mouse. (optional: Wifi)"
 tags : [raspberry-pi, embedded, linux]
 ---
 {% include JB/setup %}
- 
-
 ## Things you will need
 
 1. A [Raspberry Pi](http://www.amazon.com/exec/obidos/ASIN/B009SQQF9C/mvartan-20). 
