@@ -1,13 +1,17 @@
+
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
+  <code>{{ page.date | date_to_long_string }}</code>
 </div>
-  <code class="lead">{{ page.date | date_to_long_string }}</code>
 
 <div class="row post-full">
   <div class="col-md-12">
     <div class="date">
     </div>
     <div class="content">
+        {% if page.thumbnail %}
+    <img src="{{ page.thumbnail }}" class="thumbnail pull-right hidden-xs"/>
+  {% endif %}
       {{ content }}
     </div>
     <hr />

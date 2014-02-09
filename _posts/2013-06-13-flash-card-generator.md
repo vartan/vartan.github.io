@@ -17,7 +17,7 @@ My first concern was, naturally, how in the world do you dynamically generate a 
 
 There are a few caveats however. Firstly, you get a somewhat limited repertoire of CSS that will work correctly. Secondly, you have to add a few special CSS rules to customize page formatting. For reference, here is the source code for the flash card generator: [http://mvartan.com/doc/download.php.txt](http://mvartan.com/doc/download.php.txt).
 
-##`@page rule`
+##`@page` rule
 
 Create a page rule in CSS with of the constraints to your pages in the word document. Here is where you specify the page size and margins. There are some special CSS properties that begin with mso, such as mso-header-margin and mso-footer-margin which you should look into. Wrap your content in an element such as a div, and give it your page rule.
 {% highlight css %}

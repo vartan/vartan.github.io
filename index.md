@@ -40,7 +40,7 @@ tagline: Tinkerings and Tutorials
     <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
   </h2>
   <p class="postdescription">
-                  <p><code>{{ post.date | date_to_long_string }}</code></p>
+                  <small><code>{{ post.date | date_to_long_string }}</code></small>
   {{ post.content | strip_html | truncatewords:80 }}
   </p>
   <p>
@@ -68,8 +68,9 @@ tagline: Tinkerings and Tutorials
 </a>
   </div>
   <div class="col-sm-8 col-md-9">
-  <p><code>{{ post.date | date_to_long_string }}</code></p>
   <p>
+      <small><code>{{ post.date | date_to_long_string }}</code></small>
+
     {{ post.content | strip_html | truncatewords: 150 }}
   </p>
   <p>
