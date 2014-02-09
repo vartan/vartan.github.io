@@ -9,7 +9,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-Making a résumé in Microsoft Word felt really generic and boring to me. I tried LaTeX with mixed results, and then I realized that I already know a markup language: HTML. An example of an HTML/CSS résumé that we will cover in this post can be seen here, as a shameless plug for my own résumé.
+Making a résumé in Microsoft Word felt really generic and boring to me. I tried LaTeX with mixed results, and then I realized that I already know a markup language: HTML. An example of an HTML/CSS résumé that we will cover in this post can be seen [here](http://www.mvartan.com/resume), as a shameless plug for my own résumé.
 
 Setting up your page
 
