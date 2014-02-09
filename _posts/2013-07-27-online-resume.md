@@ -5,7 +5,7 @@ tagline: Using HTML/CSS to generate seperate online/print views
 description: "Using PHP to generate microsoft office documents"
 thumbnail: "/images/thumbnails/resume.jpg"
 category: Web
-tags: [HTML, CSS, Software]
+tags: [HTML, CSS, software]
 ---
 {% include JB/setup %}
 
