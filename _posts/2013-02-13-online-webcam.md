@@ -2,6 +2,7 @@
 layout: post
 title: "Online Webcam Viewer"
 description: "Online Webcam Viewer"
+thumbnail: "/images/thumbnails/webcam.jpg"
 tagline: "Via PHP and python"
 category: 
 tags: []

@@ -10,24 +10,32 @@ tagline: Supporting tagline
     text-align:left;
     text-align:justify;
   }
+  .thumbnail {
+    min-height:200px;
+    line-height:200px;
+    text-align:center !important;
+
+  }
   .thumbnail img {
-    height:200px !important;
+    max-height:200px !important;
     max-width:200px;
+    display:inline-block;
+    text-align:center !important;
+   display: inline-block !important;
+    vertical-align: middle !important;
   }
 
   </style>
   {% for post in site.posts limit:3 %}
   <div class="col-sm-4">
     <hr class="visible-xs visible-sm"/>
-  <p class="thumbnail">
-    <a href="{{ BASE_PATH }}{{ post.url }}">
+    <a class="thumbnail"href="{{ BASE_PATH }}{{ post.url }}">
   {% if post.thumbnail %}
     <img src="{{ post.thumbnail }}" />
   {% else %}
     <img src="/images/placeholder-thumbnail-medium.png"/>
   {% endif %}
   </a>
-</p>
   <h2>
     <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
   </h2>
@@ -50,8 +58,8 @@ tagline: Supporting tagline
 <div class="col-sm-8 col-md-9">
   <p><h2><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> <small>{{ post.tagline }}</small></h2></p>
 </div>
-<div class="col-sm-4 col-md-3 thumbnail">
-  <a href="{{ BASE_PATH }}{{ post.url }}">
+<div class="col-sm-4 col-md-3">
+  <a href="{{ BASE_PATH }}{{ post.url }}" class="thumbnail">
   {% if post.thumbnail %}
     <img src="{{ post.thumbnail }}" />
   {% else %}
@@ -61,7 +69,6 @@ tagline: Supporting tagline
   </div>
   <div class="col-sm-8 col-md-9">
   <p><code>{{ post.date | date_to_long_string }}</code></p>
-
   <p>
     {{ post.content | strip_html | truncatewords: 150 }}
   </p>
