@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Hello World!
-tagline: Supporting tagline
+title: Michael Vartan
+tagline: Tinkerings and Tutorials
 ---
 {% include JB/setup %}
 <div class="row">
@@ -51,7 +51,7 @@ tagline: Supporting tagline
 </div>
 
 {% for post in site.posts limit:15 offset:3 %}
-<hr />
+<hr/>
 <div class="row">
   <div class="col-sm-4 col-md-3 ">
 </div>

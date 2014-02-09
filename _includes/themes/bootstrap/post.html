@@ -1,8 +1,7 @@
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-  <code>{{ page.date | date_to_long_string }}</code>
-
 </div>
+  <code class="lead">{{ page.date | date_to_long_string }}</code>
 
 <div class="row post-full">
   <div class="col-md-12">
@@ -11,7 +10,7 @@
     <div class="content">
       {{ content }}
     </div>
-    <hr/>
+    <hr />
 
 
 
