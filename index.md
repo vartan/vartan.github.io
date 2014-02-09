@@ -2,6 +2,7 @@
 layout: page
 title: Michael Vartan
 tagline: Tinkerings and Tutorials
+group: navigation
 ---
 {% include JB/setup %}
 <div class="row">

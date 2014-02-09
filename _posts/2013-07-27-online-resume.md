@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Making an online r&egrave;sum&egrave;"
+title: "Making an online resume"
 tagline: Using HTML/CSS to generate seperate online/print views
 description: "Using PHP to generate microsoft office documents"
 thumbnail: "/images/thumbnails/resume.jpg"
