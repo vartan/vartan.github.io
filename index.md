@@ -6,7 +6,7 @@ tagline: Supporting tagline
 {% include JB/setup %}
 <div class="row">
   {% for post in site.posts limit:3 %}
-  <div class="col-md-4">
+  <div class="col-sm-4">
     <a href="{{ BASE_PATH }}{{ post.url }}"><h2>{{ post.title }}</h2></a>
   <hr />
   <p>{% if post.thumbnail %}

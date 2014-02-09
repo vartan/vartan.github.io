@@ -10,21 +10,46 @@
     <div class="content">
       {{ content }}
     </div>
-
+    <hr/>
+    <h2>Elsewhere...</h2>
     {% unless page.categories == empty %}
-      <ul class="tag_box inline">
-        <li><i class="icon-folder-open"></i></li>
+      <div class="btn-group">
+        <span class="btn btn-primary"><span class="glyphicon glyphicon-folder-open"></span></span>
         {% assign categories_list = page.categories %}
-        {% include JB/categories_list %}
-      </ul>
+  {% if categories_list.first[0] == null %}
+    {% for category in categories_list %} 
+      <a class="btn btn-primary" href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref">
+        {{ category | join: "/" }} <span>{{ site.categories[category].size }}</span>
+      </a>
+    {% endfor %}
+  {% else %}
+    {% for category in categories_list %} 
+      <a class="btn btn-primary" href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref">
+        {{ category[0] | join: "/" }} <span>{{ category[1].size }}</span>
+      </a>
+    {% endfor %}
+  {% endif %}      </div>
     {% endunless %}
 
     {% unless page.tags == empty %}
-      <ul class="tag_box inline">
-        <li><i class="icon-tags"></i></li>
+      <div class="btn-group">
+        <span class="btn btn-primary"><span class="glyphicon glyphicon-tags"></span></span>
         {% assign tags_list = page.tags %}
-        {% include JB/tags_list %}
-      </ul>
+{% if site.JB.tags_list.provider == "custom" %}
+  {% include custom/tags_list %}
+{% else %}
+  {% if tags_list.first[0] == null %}
+    {% for tag in tags_list %} 
+      <a class="btn btn-primary" href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag }}-ref">{{ tag }} <span class="label label-primary">{{ site.tags[tag].size }}</span></a>
+    {% endfor %}
+  {% else %}
+    {% for tag in tags_list %} 
+      <a class="btn btn-primary" href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag[0] }}-ref">{{ tag[0] }} <span class="label label-info">{{ tag[1].size }}</span></a>
+    {% endfor %}
+  {% endif %}
+{% endif %}
+{% assign tags_list = nil %}
+      </div>
     {% endunless %}
 
     <hr>
