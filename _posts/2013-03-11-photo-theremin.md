@@ -9,6 +9,8 @@ tags: []
 ---
 {% include JB/setup %}
 
+
+
 A little known fact about LEDs (Light Emitting Diodes) is that when hooked up backwards, they act as photodiodes. I have manipulated this property to make a few fun and cheap Arduino projects, including a musical instrument I call a photo-theremin.
 
 I am going to begin with my understanding of physically how this works. Bare with me, my 4th grade teacher once told my mother that she was certain I’d never be an artist. If you’re not interested in exactly how it works, feel free to scroll past my crude diagrams. If you’re just interested in the photo-theremin, you will find it at the bottom of this post.
@@ -32,6 +34,8 @@ LEDs exhibit an interesting property: photons can excite the LED and allow some 
 So how can we use this with the Arduino?
 
 ##Light sensitive dimmed blinking LED
+
+<iframe width="100%" height="400" src="//www.youtube.com/embed/Ce-1MpBxUCQ" frameborder="0" allowfullscreen></iframe>
 
 My first project with the reverse LEDs was a photosensitive blinking light. This is a very simple arduino circuit, requiring only a single LED and a current limiting resistor (100Ω).  I found the basis of the project on Arduino Playground – LEDSensor. If I were to do this project over again, I’d look into using analogRead and analogWrite to achieve the same effect, probably more efficiently.
 
@@ -103,6 +107,8 @@ In this example, we are reading the LED by treating it somewhat like a capacitor
 The second half of the loop function is dedicated to dimming the LED. When we turn the LED off and on very fast, it looks to our human eye like the LED is on continuously but dim.
 
 ##Photo-Theremin
+
+<iframe width="100%" height="400" src="//www.youtube.com/embed/oDPm3Qe4U90" frameborder="0" allowfullscreen></iframe>
 
 To create a photo-theremin, you could do it with only an LED and a piezo buzzer. These are cheap components you could get at even radioshack for probably around $1. In my example, I am additionally using a push button to play the notes, as well as a potentiometer (variable resistor) to control the volume of the piezo buzzer. These are also very cheap components you could easily get.
 
