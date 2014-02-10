@@ -1,16 +1,35 @@
-
+code {
+	max-width:100% !important;
+	overflow:auto !important;
+	 white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
 pre {
     overflow-x: auto;
 }
 pre code {
+		display:block !important;
+
     overflow-wrap: normal;
     white-space: pre;
     font-size:9pt;
 }
 
 
-
-
+figcaption {
+	font-variant:small-caps;
+	font-style:italic;
+}
+.mdimage {
+	display:inline-block;
+	margin-left:5%;
+}
+.mdimage img {
+		max-width:100% !important;
+}
 .hll { background-color: #ffffcc }
 .c { color: #999988;  } /* Comment */
 .err { color: #a61717; background-color: #e3d2d2 } /* Error */

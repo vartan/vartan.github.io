@@ -31,7 +31,7 @@ tagline: Tinkerings and Tutorials
     <hr class="visible-xs visible-sm"/>
     <a class="thumbnail"href="{{ BASE_PATH }}{{ post.url }}">
   {% if post.thumbnail %}
-    <img src="{{ post.thumbnail }}" />
+    <img src="{{ post.thumbnail }}"/>
   {% else %}
     <img src="/images/placeholder-thumbnail-medium.png"/>
   {% endif %}

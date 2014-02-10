@@ -8,6 +8,10 @@ tagline: "no monitor, keyboard, or mouse. (optional: Wifi)"
 tags : [raspberry-pi, hardware, linux]
 ---
 {% include JB/setup %}
+A headless raspberry pi is a raspberry pi that is not hooked up to a monitor, a keyboard, or a mouse. It is pretty easy to set a raspberry pi up 
+and then remove the peripherals, but this guide is for those who do not want to take their setups apart to set up their raspberry pi.
+
+
 ## Things you will need
 
 1. A [Raspberry Pi](http://www.amazon.com/exec/obidos/ASIN/B009SQQF9C/mvartan-20). 
@@ -34,6 +38,8 @@ Connect your Raspberry Pi to Ethernet, and power it up. Meanwhile, log in to you
 
 You should be able to find your raspberry pi’s local IP address
 
+![Find your Raspberry Pi's IP through your router's web interface](/images/headless-raspberry-pi/router.png)
+
 ## Logging into your pi
 
 Now, ssh into your Raspberry Pi, in port 22. The default login is:
@@ -41,6 +47,9 @@ Now, ssh into your Raspberry Pi, in port 22. The default login is:
 **Username**: pi
 	
 **Password**: raspberry
+
+![](/images/headless-raspberry-pi/putty.png)
+
 
 I suggest you first type the command: `sudo raspi-config` and change your password. Then, update your raspberry pi by `sudo apt-get upgrade`.
 
