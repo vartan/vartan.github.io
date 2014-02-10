@@ -23,11 +23,21 @@ This my very simplified way of thinking of diodes, if you want a better and accu
 
 My understanding is that particles there are positively charged (P-type) and negatively charged (N-type) sides on the diode. In the middle, there is what is called a “depletion zone”. This can be simplified to a positive side, a negative side, and a “hole”. When the voltage drop is in the correct direction of the diode, the negatively charged particles are repelled by the negatively charged wire, and fills the hole. In an LED, as they cross the gap, they release electromagnetic energy, a photon, or light.
 
+
+
+![Simplified view of electrons in diodes](/images/phototheremin/diode.jpg)
+
+
+
 ###Hooked up backwards
 
 When a diode is hooked up backwards, the positive side is now connected to the negatively charged wire, so instead of going across the wire, the particles are attracted to the edges and no current flows.
 
+![photon excites an electron](/images/phototheremin/photodiode.jpg)
+
 LEDs exhibit an interesting property: photons can excite the LED and allow some current to flow through. Notice in the diagram above, the LED is hooked up backwards, but the photon has excited the electron to fill the gap between the P-type and N-type, allowing a bit of current to flow. In essence, the LED becomes a photodiode.
+
+
 
 #Arduino
 

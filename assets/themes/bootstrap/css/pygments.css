@@ -23,12 +23,14 @@ figcaption {
 	font-variant:small-caps;
 	font-style:italic;
 }
+
 .mdimage {
 	display:inline-block;
 	margin-left:5%;
 }
 .mdimage img {
 		max-width:100% !important;
+		max-height:400px !important;
 }
 .hll { background-color: #ffffcc }
 .c { color: #999988;  } /* Comment */
