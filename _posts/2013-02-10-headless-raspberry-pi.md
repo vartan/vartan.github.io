@@ -44,12 +44,14 @@ You should be able to find your raspberry pi’s local IP address
 
 Now, ssh into your Raspberry Pi, in port 22. The default login is:
 
-I suggest you first change your password and set up your pi by typing `sudo raspi-config` Then, update your raspberry pi by `sudo apt-get upgrade`.
 
 
 **Username**: pi
 	
 **Password**: raspberry
+
+I suggest you first change your password and set up your pi by typing `sudo raspi-config` Then, update your raspberry pi by `sudo apt-get upgrade`.
+
 
 ![](/images/headless-raspberry-pi/putty.png)
 
@@ -82,7 +84,7 @@ Now you have your headless raspberry pi set up!
 
 ## Adding WiFi <small>(optional)</small>
 
-Plug your WiFi dongle into a USB port of the Raspberry Pi. On the desktop, you should see WiFi Config. If not, go to `Start`->`Other`->`wpa_supplicant user interface`. 
+Plug your WiFi dongle into a USB port of the Raspberry Pi. On the desktop, you should see WiFi Config. If not, go to `Start`&rarr;`Other`&rarr;`wpa_supplicant user interface`. 
 
 Click *Scan* and configure your network.
 
