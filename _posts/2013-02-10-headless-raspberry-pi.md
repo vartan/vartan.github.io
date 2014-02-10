@@ -44,6 +44,9 @@ You should be able to find your raspberry pi’s local IP address
 
 Now, ssh into your Raspberry Pi, in port 22. The default login is:
 
+I suggest you first change your password and set up your pi by typing `sudo raspi-config` Then, update your raspberry pi by `sudo apt-get upgrade`.
+
+
 **Username**: pi
 	
 **Password**: raspberry
@@ -51,7 +54,8 @@ Now, ssh into your Raspberry Pi, in port 22. The default login is:
 ![](/images/headless-raspberry-pi/putty.png)
 
 
-I suggest you first type the command: `sudo raspi-config` and change your password. Then, update your raspberry pi by `sudo apt-get upgrade`.
+
+
 
  
 ## Accessing your Desktop Environment
@@ -61,6 +65,8 @@ If you do not need to ever use a desktop environment, you are done! Otherwise, r
 The next thing we need to do is install a VNC server. VNC stands for “Virtual Network Computing”, and allows you to view your computer screen remotely. Type the command: `sudo apt-get install tightvncserver`
 
 Now we have a VNC server installed!
+
+![Raspberry Pi Desktop on VNC](/images/headless-raspberry-pi/desktop.png)
  
 
 I prefer to leave VNC off until I need it, so that the Raspberry Pi doesn’t maintain a desktop environment unless I need it, saving processing power. When I need to view the desktop, I type this command in ssh: `tightvncserver -geometry 1366×768` (change the resolution as desired)
@@ -72,9 +78,12 @@ Then, just log into your VNC viewer and put in your server details and login cre
 
 If you want to close the VNC server, type `tightvncserver -kill :[port]` (where [port] is most likely 1)
 
-## Adding WiFi:
+Now you have your headless raspberry pi set up!
 
-Plug your WiFi dongle into a USB port of the Raspberry Pi. On the desktop, you should see WiFi Config. If not, go to Start->Other->wpa_supplicant user interface. Click Scan and configure your network.
+## Adding WiFi <small>(optional)</small>
 
-That’s it! Thanks for reading!
+Plug your WiFi dongle into a USB port of the Raspberry Pi. On the desktop, you should see WiFi Config. If not, go to `Start`->`Other`->`wpa_supplicant user interface`. 
+
+Click *Scan* and configure your network.
+
 
