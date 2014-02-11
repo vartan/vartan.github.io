@@ -48,7 +48,7 @@ So how can we use this with the Arduino?
 
 My first project with the reverse LEDs was a photosensitive blinking light. This is a very simple arduino circuit, requiring only a single LED and a current limiting resistor (100Ω). The LED is lighter when the room is lighter.
 
-I found the basis of the project on Arduino Playground – LEDSensor. If I were to do this project over again, I’d look into using analogRead and analogWrite to achieve the same effect, probably more efficiently.
+I found the basis of the project on [Arduino Playground – LEDSensor](http://playground.arduino.cc/Learning/LEDSensor). If I were to do this project over again, I’d look into using analogRead and analogWrite to achieve the same effect, probably more efficiently.
 
 Here is my code; the negative side of the LED is hooked up to pin 2, the positive to pin 3.
 
