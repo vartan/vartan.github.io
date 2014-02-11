@@ -162,7 +162,7 @@ void loop() {
   //Begin averaging out reads to get an accurate result
   long total=0;
   for(int i=0;i<NUM_AVG;i++)
-    total += analogRead(0); //reads the potentiometer information
+    total += analogRead(0); //reads the light information
   int avg=(total/NUM_AVG);
   //end averaging out reads.
  
