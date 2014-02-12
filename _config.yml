@@ -4,7 +4,7 @@ permalink: /:year/:month/:day/:title
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 pygments: true
-relative_permalinks: true
+relative_permalinks: false
 url: http://mvartan.com
 BASE_PATH: "http://mvartan.com/"
 # Themes are encouraged to use these universal variables 
