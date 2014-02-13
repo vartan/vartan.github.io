@@ -1,0 +1,33 @@
+@font-face {
+	font-family:verdana;
+}
+
+iframe, body, html {
+	margin:0;
+	padding:0;
+	border:none;
+	width:100%;
+	min-height:100%;
+}
+body,html {
+
+	padding-top:25px;
+	font:10pt verdana;
+	background-color:#ddd;
+	background-image:-moz-linear-gradient(#fff,#ddd);
+	background-image:-webkit-gradient(linear,0% 0%,0% 100%,from(#fff),to(#ddd));
+}
+.box {
+	display:block;
+	float:left;
+	max-width:300px;
+	padding:5px;
+	margin:10px;
+	margin-left:1%;
+	margin-right:1%;
+
+	box-shadow:0px 0px 5px rgba(0,0,0,.8);
+	background-image:-moz-linear-gradient(#fff,#ddd);
+	background-image:-webkit-gradient(linear,0% 0%,0% 100%,from(#fff),to(#ddd));
+
+}

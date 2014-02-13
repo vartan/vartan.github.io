@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>Closing dialog example</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <script src="js/7cups.js"></script>
+  <script src="js/prettify.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/prettify.css"/>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body onload="prettyPrint()">
+<div class="container">
+<div class="jumbotron">
+  <h1>Hi 7 cups listeners!</h1>
+  <p>Drag the button below into your bookmarks. When you begin a chat, just click the bookmark. For the rest of the chat in that page, you should be notified when a guest messaged you in another tab. You must do this for each tab each time you're in a chat. </p>
+  <p><a class="btn btn-primary btn-large" href='javascript:originalTitle = document.title; focused = true; alerting = false; shouldAlert = true; function blinkTitle() { shouldAlert = false; lastMsg = $(".msg:last"); if (lastMsg.attr('class').indexOf("msg-otherUser") != -1) shouldAlert = true; if (!shouldAlert) { alerting = false; } else { alerting = !alerting; } if (focused) alerting = false; document.title = (alerting ? "(*)" : "") + originalTitle; } setInterval(blinkTitle, 250); $(window).blur(function () { focused = false; }); $(window).focus(function () { focused = true; });'>Notify Me!</a></p>
+</div>
+
+<h1>Code Snippets</h1>
+<h2>Automatically notifying on unanswered message</h2>
+<pre class="prettyprint linenums language-js"><code>originalTitle = document.title; //let's keep record of what the title SHOULD be
+focused = true; //for keeping track of whether or not the window is focused
+alerting = false; //keeps track of if the window is currently in alerting state
+
+function blinkTitle() {
+    shouldAlert = false;
+    lastMsg = $(".msg:last");
+    if (lastMsg.attr('class').indexOf("msg-otherUser") != -1) //if the last message is also class "msg-otheruser"
+      shouldAlert = true;
+    if (shouldAlert && !focused)
+        alerting = !alerting;
+    else
+      alerting = false;
+    document.title = (alerting ? "(*)" : "") + originalTitle;
+}
+setInterval(blinkTitle, 250); //period of 500ms.
+$(window).blur(function () {
+    focused = false;
+});
+$(window).focus(function () {
+    focused = true;
+});</code></pre>
+<h2>If you want to continue your chat with [Name] or leave a small donation for helping, you may stay on this page :)</h2>
+<div class="alert alert-success" id="donate">End the conversation to donate to [Name]</div>
+
+<pre class="prettyprint linenums language-js"><code>  window.onbeforeunload = function(e) {
+  setTimeout(function(){ //this function will execute after staying on the page
+    document.getElementById("donate").style.display="default";
+  },100)
+
+  var output = "If you want to continue your chat with [Name] or leave a small donation for helping, you may stay on this page :)";
+    if ( /Firefox[\/\s](\d+)/.test(navigator.userAgent) && new Number(RegExp.$1) >= 4) { //firefox doesn't have a customized onbeforeunload dialog,
+      alert(output); //but may alert() before.
+    }
+    return output; 
+  };  </code></pre>
+</body>
+</html>

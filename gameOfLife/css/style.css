@@ -1,0 +1,12 @@
+body {
+	padding-top:52px;
+}
+canvas {
+	margin:auto;
+}
+.rules {
+	font-size:.75em;
+}
+.slider {
+	vertical-align: middle;
+}
