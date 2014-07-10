@@ -243,7 +243,21 @@ em {
 .software, .software fieldset  {
 	border-color:#007AFF !important;
 }
-
+#warning {
+	display:block;
+	top:0;left:0;
+	width:100%;
+	/*margin:-10px 0 0 -10px;*/
+			line-height:40px;
+			font-size:16px;
+		background:white;
+		z-index:10;
+		position:fixed;
+		text-align:center;
+}
+body {
+	padding-top:40px;
+}
 @media only screen and (max-device-width: 480px) {
 	body {
 		/*font-size:13pt;*/
@@ -260,6 +274,9 @@ em {
 	}
 }
 @media print {
+	#warning {
+		display:none !important;
+	}
 	#resume {
 		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
