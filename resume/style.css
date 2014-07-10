@@ -216,7 +216,7 @@ em {
 }
 @media only screen and (min-device-width: 480px) {
     body {
-    	background-color:#666;
+    	background-color:#ccc;
 
     }
     .page {
@@ -225,7 +225,7 @@ em {
 		min-height:9.5in; /* IDK why the size is 9.5in instead of 10 */
 		padding:0.5in;
 		margin:30px auto;
-		box-shadow:0 0 100px #222, 0 0 10px #ffd;
+		box-shadow:0 0 100px #AAA, 0 0 10px #ffd;
 	}
 }
 .programming, .programming fieldset {
