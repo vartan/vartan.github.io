@@ -256,9 +256,7 @@ em {
 		text-align:center;
 		border-bottom:1px solid #aaa;
 }
-body {
-	padding-top:40px;
-}
+
 @media only screen and (max-device-width: 480px) {
 	body {
 		/*font-size:13pt;*/
@@ -269,9 +267,13 @@ body {
 	}
 
 }
+@media not print {
+	body {
+	padding-top:40px;
+		}
+}
 @media only screen and (max-device-width: 480px) and  (orientation: landscape) {
 	body {
-		padding-top:0;
 		/*font-size:9pt;*/
 	}
 }
