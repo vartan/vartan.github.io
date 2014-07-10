@@ -3,162 +3,189 @@
 
 <html>
 <head>
-    <meta charset="UTF-8">
-    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge'><![endif]-->  <!--disables compatibility mode in IE-->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge'><![endif]-->  <!--disables compatibility mode in IE-->
 
-    <title>Resume: Michael Vartan - Written Purely in HTML/CSS</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+  <title>Resume &ndash; Michael Vartan</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+ <!-- <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">-->
 </head>
 
 <body>
-    <div class="page">
-        <div id="resume">
-            <div class="name">
-                <a href="http://www.mvartan.com/">Michael Vartan</a>
+  <div class="page">
+    <div id="resume">
+      <span class="address">
+        1072 w 24th St. San Pedro, CA 90731
+      </span>
+      <div class="name">
+        <a href="http://www.mvartan.com/">Michael Vartan</a>
+      </div>
+      <hr>
+
+      <div class="contact">
+        (310) 989-6757 <span class="bull">&bull;</span> <a href="mailto:michael@mvartan.com">michael@mvartan.com</a> <span class="bull">&bull;</span> <a href="http://www.mvartan.com/">www.mvartan.com</a>
+      </div>
+
+      <div class="content">
+        <h1>Objective</h1>
+
+        <p>
+          I am interested in a full-time stable position in the computing field upon graduation in 2016.
+        </p>
+
+        <h1>Education</h1>
+
+        <div class="gpa">
+          <span class="num">3.9</span>GPA
+        </div>
+
+        <p class="school">
+          <span class="schoolname">California State University Long Beach <span class="bull">&bull;</span> Engineering Honor's Program </span>
+        </p>
+        <p class="degree">
+          <span class="degreename">Bachelor of Science in <em>Computer Engineering</em> <span class="bull">&bull;</span> Expected Graduation: 2016</span>
+        </p>
+
+        <h1>Work Experience</h1>
+
+        <p class="job"><!--note: year goes first, but displays last, because it has float:right attribute-->
+          <span class="year">(2014)</span> 
+          <span class="employer">Exergy Controls</span>
+        </p>
+
+        <p class="jobtitle">Hardware & Software Engineer</p>
+
+        <ul class="description">
+          <li>Designing/developing web application which controls thousands of light fixtures simultaneously.</li>
+          <li>Designing firmware for ARM chip, including developing custom interrupt-driven SPI interface in mesh network.</li>
+        </ul>
+
+        <p class="job"><!--note: year goes first, but displays last, because it has float:right attribute-->
+          <span class="year">(2012 &ndash; 2014)</span> 
+          <span class="employer">California State University, Long Beach &ndash; College of Engineering</span>
+        </p>
+
+
+        <p class="jobtitle">Computer Tech/Peer Advisor</p>
+
+        <ul class="description">
+          <li>Developed programs to generate students' semester schedules, parse transcripts, and analyze performance. Created web app for hundreds of students to make appointment with our advisors.</li>
+          <li>Met with students one-on-one to discuss their studies, prospective courses, and future goals. </li>
+        </ul>
+
+        <p class="job"><!--note: year goes first, but displays last, because it has float:right attribute-->
+          <span class="year">(2013 &ndash; 2014)</span> 
+          <span class="employer">Microsoft</span>
+        </p>
+
+        <p class="jobtitle">Microsoft Student Representative</p>
+        <h1>Technical Skills</h1>
+
+        <ul class="description" id="skills">
+          <li class="skillset OS">
+            <fieldset>
+              <legend align="center">Web Development</legend> 
+              PHP <span class="bull">&bull;</span> 
+              HTML <span class="bull">&bull;</span> 
+              CSS <span class="bull">&bull;</span> 
+              Javascript (JQuery)
+            </fieldset>
+
+            <fieldset>
+              <legend align="center">App Development</legend> 
+              Java <span class="bull">&bull;</span> 
+              Objective-C <span class="bull">&bull;</span> 
+              C# 
+            </fieldset>
+                        <fieldset>
+              <legend align="center">Misc. Languages</legend> 
+              Python <span class="bull">&bull;</span> SQL <span class="bull">&bull;</span> Verilog <span class="bull">&bull;</span> Excel
+            </fieldset>
+            </li>
+            <li class="skillset Hardware">
+            <fieldset align="center">
+              <legend>Low Level</legend>
+              C <span class="bull">&bull;</span> 
+              C++ <span class="bull">&bull;</span> 
+              8051/ARM Assembly
+              </fieldset>
+                          <fieldset>
+              <legend align="center">Hardware</legend> Arduino <span class="bull">&bull;</span> Raspberry Pi <span class="bull">&bull;</span> FPGA <span class="bull">&bull;</span>
+              Electrical Testing Equipment
+            </fieldset>
+          </li>
+
+
+        </ul>
+
+        <h1>Awards/Involvement</h1>
+
+        <p class="award">
+          <span class="year">(2012 &ndash; Present)</span> 
+          <span class="awardname">Embedded Applications Technology Society</span>
+        </p>
+        <div class="eatyears"> 
+
+            <div class="eatyear">
+              <div class="eattime">2012 &ndash; 2013</div>
+              <div class="eatposition">Webmaster</div>
             </div>
-
-            <div class="address">
-                1072 w 24th st. San Pedro, CA 90731
+            <div class="eatyear">
+              <div class="eattime">2013 &ndash; 2014</div>
+              <div class="eatposition">Vice President</div>
             </div>
-            <hr>
-
-            <div class="contact">
-                (310) 989-6757 &bull; <a href="mailto:admin@mvartan.com">admin@mvartan.com</a> &bull; <a href="http://www.mvartan.com/">www.mvartan.com</a>
-            </div>
-
-            <div class="content">
-                <h1>Objective</h1>
-
-                <p>
-                    I am interested in an internship in order to apply my computer engineering/programming skills and knowledge.
-                </p>
-
-                <h1>Education</h1>
-
-                <div class="gpa">
-                    <span class="num">3.9</span>GPA
-                </div>
-
-                <p class="school">
-                    <b>California State University Long Beach</b> &bull; Long Beach, California, U.S.A.
-                </p>
-
-                <p class="degree">
-                    <b>Bachelor of Science in <i>Computer Engineering</i></b> &bull; Expected graduation in 2016
-                </p>
-
-                <h1>Work Experience</h1>
-
-                <p class="job"><!--note: year goes first, but displays last, because it has float:right attribute-->
-                    <span class="year">(2012 &ndash; Present)</span> 
-                    <span class="employer">California State University, Long Beach &ndash; College of Engineering</span>
-                </p>
-
-                <p class="jobtitle">Computer Tech Assistant/Peer Advisor</p>
-
-                <ul class="description">
-                    <li><i>Developing programs</i> to process students' data, which automatically place them into classes saving weeks of manual processing.</li>
-                    <li><i>Managing databases</i> regarding our students' sensitive information and advising
-                    appointments.</li>
-                    <li><i>Advising students</i> one-on-one in the selection of their classes.</li>
-                    <li><i>Conducting presentations</i> to groups of students on various engineering topics.</li>
-                </ul>
-
-                <h1>Technical Skills</h1>
-
-                <ul class="description" id="skills">
-                    <li class="programming">
-                        <fieldset>
-                            <legend>Web Development</legend> 
-                            PHP &bull; HTML &bull; CSS &bull; Javascript (JQuery)
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>App Development</legend> 
-                            Java &bull; Objective-C
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Misc. Languages</legend> 
-                            Python &bull; SQL &bull; LaTeX &bull; Verilog &bull; XML
-                        </fieldset>
-                    </li>
-
-                    <li class="OS">
-                        <fieldset>
-                            <legend>Operating Systems</legend> 
-                            Microsoft Windows &bull; Mac OS &bull; Linux (Ubuntu &bull; Mint &bull; Arch &bull; Debian)
-                        </fieldset>
-                    </li>
-
-                    <li class="software">
-                        <fieldset>
-                            <legend>Software</legend> Microsoft Office &bull; Xilinx &bull; Netbeans &bull; VMWare
-                            &bull; Google Sketchup &bull; Adobe Photoshop &bull; LAMP/WAMP
-                        </fieldset>
-                    </li>
-
-                    <li class="hardware">
-                        <fieldset>
-                            <legend>Hardware/Other Skills</legend> Arduino &bull; Raspberry Pi &bull; FPGA &bull;
-                            Oscilloscope &bull; Function Generator &bull; Transistors &bull; Servos &bull; Soldering
-                        </fieldset>
-                    </li>
-                </ul>
-
-                <h1>Awards/Involvement</h1>
-
-                <p class="award">
-                    <span class="year">(2013)</span> 
-                    <b>Boeing Engineering Scholarship Recipient</b>
-                </p>
-
-                <p class="award">
-                    <span class="year">(2013)</span> 
-                    <b>President's List Honor</b>
-                </p>
-
-                <p class="award">
-                    <span class="year">(2012)</span> 
-                    <b>Dean's List Honor</b>
-                </p>
-
-                <p class="award">
-                    <span class="year">(2012 &ndash; Present)</span> 
-                    <b>Embedded Applications Technology Society</b>
-                </p>
-
-                <ul class="description">
-                    <li>Elected 2013 &ndash; 2014 <i>Vice President</i></li>
-                    <li>Design, develop, and maintain the website as <i>Webmaster</i>.</li>
-                    <li>Plan and conduct workshops which teach students skills such as soldering</li>
-                </ul>
-
-                <p class="award">
-                    <span class="year">(2013 &ndash; Present)</span> <b>Project Sunfish Autonomous Submarine</b>
-                </p>
-
-                    <ul class="description">
-                        <li>Executive board member and <i>Artificial Intelligence</i> team leader</li>
-                    </ul>
-
-                <p class="award">
-                    <b>Personal Projects</b>
-                </p>
-                    <ul class="description">
-                        <li>
-                            I work on many Arduino/Raspberry Pi/software/web projects which I document at <a href="http://www.mvartan.com">mvartan.com</a>
-                        </li>
-                        <li>
-                            Personal hardware projects include <i>Arduino</i> phototheremin, LED Matrix Controller, and more.
-                        </li>
-                        <li>
-                            This resume was developed in HTML and is hosted on a <i>Raspberry Pi</i> at <a href="http://www.mvartan.com/resume">mvartan.com/resume</a>
-                        </li>
-                    </ul>
+            <div class="eatyear">
+              <div class="eattime">2014 &ndash; 2015</div>
+              <div class="eatposition">President</div>
             </div>
         </div>
+        <ul class="description">
+
+                    <!--
+          <li>2014 &ndash; 2015 <strong>President</strong></li>
+          <li>2013 &ndash; 2014 Vice President</li>
+          <li>2012 &ndash; 2013 Webmaster</li>-->
+          <li>
+            Hosting weekly meetings, in which responsibilities include planning, speaking, and finding speakers.
+          </li>
+          <li>
+            Managing teams involved in projects and national competitions
+          </li> 
+
+        </ul>
+        <p class="award">
+          <span class="year">(2014)</span> 
+          <span class="awardname">UCLA Developer's Contest &ndash; First Place</span>
+        </p>
+        <ul class="description">
+          <li>With a teammate, developed a mobile-first web application for tracking/improving students' study habits.</li>
+        </ul>
+        <p class="award">
+          <span class="year">(2013 &ndash; 2014)</span> 
+          <span class="awardname">President's List Honor &ndash; CSULB</span>
+        </p>
+        <p class="award">
+          <span class="year">(2013)</span> 
+          <span class="awardname">Boeing Engineering Scholarship Recipient</span>
+        </p>
+
+        <p class="award">
+          <span class="year">(2012)</span> 
+          <span class="awardname">Dean's List Honor</span>
+        </p>
+
+
+
+        <p class="award">
+          <span class="awardname">Personal Projects</span>
+        </p>
+          <ul class="description">
+            <li>
+              I work on many Arduino/Raspberry Pi/software/web projects which I document at <a href="http://www.mvartan.com">mvartan.com</a> and <a href="http://www.github.com/vartan">github.com/vartan</a>
+          </ul>
+      </div>
     </div>
+  </div>
 </body>
 </html>
