@@ -214,6 +214,9 @@ p, span {
 em {
 	font-style:normal;
 }
+.page {
+	margin:0;
+}
 @media only screen and (min-device-width: 640px) {
     body {
     	background-color:#ccc;
@@ -257,17 +260,7 @@ em {
 		border-bottom:1px solid #aaa;
 }
 
-@media only screen and (max-device-width: 640px) {
-	body {
-		/*font-size:13pt;*/
-	}
-	.page, #resume {
-		margin-top:0;
-		/*height:auto;
-		width:auto;*/
-	}
 
-}
 @media not print {
 	body {
 	padding-top:40px;
