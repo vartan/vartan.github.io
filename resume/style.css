@@ -214,7 +214,7 @@ p, span {
 em {
 	font-style:normal;
 }
-@media only screen and (min-device-width: 480px) {
+@media only screen and (min-device-width: 640px) {
     body {
     	background-color:#ccc;
 
@@ -276,6 +276,14 @@ em {
 	body {
 		/*font-size:9pt;*/
 	}
+}
+@media screen and (device-width:320px) and (orientation:landscape) {
+#warning {
+	display:none;
+}
+body {
+	padding-top:0;
+}
 }
 @media print {
 	#warning {
