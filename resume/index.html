@@ -213,10 +213,12 @@
   (function(c){var b,d,e,f,g,h=c.body,a=c.createElement("div");a.innerHTML='<span style="'+["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;")+'">'+Array(100).join("wi")+"</span>";a=a.firstChild;b=function(b){a.style.fontFamily=b;h.appendChild(a);g=a.clientWidth;h.removeChild(a);return g};d=b("monospace");e=b("serif");f=b("sans-serif");window.isFontAvailable=function(a){return d!==b(a+",monospace")||f!==b(a+",sans-serif")||e!==b(a+",serif")}})(document);
   	var warning = document.getElementById("warning");
   if(isIE()) {
-  	warning.innerHTML = "Certain elements do not render correctly in IE. Please view this resume in PDF."
+  	window.location = "resume.pdf"
   } else if(!isFontAvailable("Helvetica Neue")) {
-  	warning.innerHTML="It appears you do not have the fonts installed in this document. Click here to view the PDF version"
+  	warning.innerHTML="It appears you do not have the fonts installed for this document. Click here to view the PDF version instead"
   	//window.location="resume.pdf"
+  } else if(!!('ontouchstart' in window)) {
+  	warning.innerHTML = "Tap here to print or see the PDF version"
   }
   </script>
 </body>

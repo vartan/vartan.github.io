@@ -254,6 +254,7 @@ em {
 		z-index:10;
 		position:fixed;
 		text-align:center;
+		border-bottom:1px solid #aaa;
 }
 body {
 	padding-top:40px;
