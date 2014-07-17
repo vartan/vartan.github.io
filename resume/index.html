@@ -90,7 +90,7 @@
         <ul class="description" id="skills">
           <li class="skillset OS">
             <fieldset>
-              <legend align="center">Web Development</legend>
+              <legend>Web Development</legend>
               PHP <span class="bull">&bull;</span>
               HTML <span class="bull">&bull;</span>
               CSS <span class="bull">&bull;</span>
@@ -98,13 +98,13 @@
             </fieldset>
 
             <fieldset>
-              <legend align="center">App Development</legend>
+              <legend>App Development</legend>
               Java <span class="bull">&bull;</span>
               Objective-C <span class="bull">&bull;</span>
               C#
             </fieldset>
                         <fieldset>
-              <legend align="center">Misc. Languages</legend>
+              <legend>Misc. Languages</legend>
               Python <span class="bull">&bull;</span> SQL <span class="bull">&bull;</span> Verilog <span class="bull">&bull;</span> Excel
             </fieldset>
             </li>
@@ -116,7 +116,7 @@
               8051/ARM Assembly
               </fieldset>
                           <fieldset>
-              <legend align="center">Hardware</legend> Arduino <span class="bull">&bull;</span> Raspberry Pi <span class="bull">&bull;</span> FPGA <span class="bull">&bull;</span>
+              <legend>Hardware</legend> Arduino <span class="bull">&bull;</span> Raspberry Pi <span class="bull">&bull;</span> FPGA <span class="bull">&bull;</span>
               Electrical Testing Equipment
             </fieldset>
           </li>
@@ -195,6 +195,12 @@
 
 
   <script>
+  // fix for firefox to align fieldset legend center, cannot be done with css
+  var legends = document.getElementsByTagName("legend");
+  for(var i=0;i<legends.length;i++) {
+    var legend = legends[i]
+    legend.setAttribute("align","center")
+  }
   function isIE()
 {
   var rv = -1;
