@@ -273,7 +273,7 @@ em {
 }
 @media only screen and (max-width: 480px) {
 	body {
-		font-size:9pt;
+		width:200%;
 	}
 }
 @media screen and (max-height:320px) and (orientation:landscape) {
