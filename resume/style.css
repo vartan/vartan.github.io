@@ -1,8 +1,8 @@
 @page Section1 {
-	size:8in 11in; 
-	margin:1in 1in 1in 1in; 
-	mso-header-margin:0.5in; 
-	mso-footer-margin:0.5in; 
+	size:8in 11in;
+	margin:1in 1in 1in 1in;
+	mso-header-margin:0.5in;
+	mso-footer-margin:0.5in;
 	mso-paper-source:0;
 }
 * {
@@ -48,7 +48,7 @@ font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', He
 	overflow:hidden;
 	/*border:1px solid #bbb;*/
 
-} 
+}
 fieldset {
 	display:inline-block;
 	border:1px solid #bbb;
@@ -210,7 +210,7 @@ p, span {
 	font-size:.3in;
 	padding:0;
 	margin:0;
-} 
+}
 em {
 	font-style:normal;
 }
