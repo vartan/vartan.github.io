@@ -271,12 +271,11 @@ em {
 	padding-top:40px;
 		}
 }
-@media only screen and (max-width: 480px) {
-	body {
-		/*font-size:9pt;*/
-	}
+
+@media screen and (max-height:500px) and (orientation:landscape) {
+html {
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
 }
-@media screen and (max-height:320px) and (orientation:landscape) {
 #warning {
 	display:none;
 }
