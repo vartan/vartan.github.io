@@ -217,7 +217,7 @@ em {
 .page {
 	margin:0;
 }
-@media only screen and (min-device-width: 640px) {
+@media only screen and (min-width: 8.2in) {
     body {
     	background-color:#ccc;
 
@@ -229,6 +229,11 @@ em {
 		padding:0.5in;
 		margin:30px auto;
 		box-shadow:0 0 100px #AAA, 0 0 10px #ffd;
+	}
+}
+@media only screen and (max-width: 6in) {
+	.name {
+		font-size:20pt;
 	}
 }
 .programming, .programming fieldset {
@@ -266,12 +271,12 @@ em {
 	padding-top:40px;
 		}
 }
-@media only screen and (max-device-width: 480px) and  (orientation: landscape) {
+@media only screen and (max-width: 480px) and  (orientation: landscape) {
 	body {
 		/*font-size:9pt;*/
 	}
 }
-@media screen and (device-width:320px) and (orientation:landscape) {
+@media screen and (max-height:320px) and (orientation:landscape) {
 #warning {
 	display:none;
 }
