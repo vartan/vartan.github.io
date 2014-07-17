@@ -14,17 +14,17 @@
  <!-- <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">-->
 </head>
 
-<body>
+<body itemscope itemtype="http://schema.org/WebPage">
 
 <a href="Michael_Vartan_Resume.pdf" id="warning">Click here to print or see the PDF version</a>
   <div class="page">
-    <div id="resume" itemscope="http://schema.org/Person">
+    <div id="resume" itemscope itemtype="http://schema.org/Person">
 
-      <span class="address" itemprop="address" itemscope="http://schema.org/PostalAddress">
+      <span class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
         <span itemprop="streetAddress">1072 w 24th St.</span> <span itemprop="addressLocality">San Pedro</span>, <span itemprop="addressRegion">CA</span> <span itemprop="postalCode">90731</span>
       </span>
       <div class="name">
-        <a href="http://www.mvartan.com/" itemprop="url"><span itemprop="familyName">Michael</span> <span itemprop="givenName">Vartan</span></a><span itemprop="rating" style="display:hidden">5<meta name="rating" content="5" /></span>
+        <a href="http://www.mvartan.com/" itemprop="url"><span itemprop="familyName">Michael</span> <span itemprop="givenName">Vartan</span></a>
       </div>
       <hr>
 
@@ -44,9 +44,9 @@
         <div class="gpa">
           <span class="num">3.9</span>GPA
         </div>
-        <div itemscope="http://schema.org/EducationalOrganization">
+        <div itemscope itemtype="http://schema.org/EducationalOrganization">
         <p class="school">
-          <span class="schoolname"><span itemprop="legalName">California State University Long Beach</span> <span class="bull">&bull;</span> <span itemprop="subOrganization" itemscope="http://schema.org/Organization"><span itemprop="legalName">Engineering Honor's Program</span></span>
+          <span class="schoolname"><span itemprop="legalName">California State University Long Beach</span> <span class="bull">&bull;</span> <span itemprop="subOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="legalName">Engineering Honor's Program</span></span>
         </p>
         <p class="degree">
           <span class="degreename">Bachelor of Science in <em>Computer <span itemprop="department">Engineering</span></em> <span class="bull">&bull;</span> Expected Graduation: 2016</span>
@@ -226,5 +226,7 @@
   	warning.innerHTML = "Tap here to print or see the PDF version"
   }
   </script>
+  <span 
+<meta itemprop="aggregateRating" name="rating">5</meta>
 </body>
 </html>
