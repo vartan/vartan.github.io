@@ -271,10 +271,13 @@ em {
 	padding-top:40px;
 		}
 }
-@media only screen and (max-width: 480px) and  (orientation: landscape) {
+@media only screen and (max-width: 480px) {
 	body {
 		/*font-size:9pt;*/
 	}
+}
+@media only screen and (min-width : 320px) and (max-width : 560px) {
+	body {-webkit-text-size-adjust: none;}
 }
 @media screen and (max-height:320px) and (orientation:landscape) {
 #warning {
