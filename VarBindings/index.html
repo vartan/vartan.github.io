@@ -1,85 +1,128 @@
 <html>
-	<head>
-		<title>
-			Test
-		</title>
-	</head>
-	<body>
-		This is my name: <span bind="firstName"></span> <span bind="lastName"></span>
-		<br/>
-		<input bind="firstName" value="Michael"/>
-		<input bind="lastName" value="Vartan"/>
-		<button id="whatismyname">What is my name?</button>
-	</body>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
-<script>
-$(function() {
-	var firstName = boundObject();
-	var lastName = boundObject();
-	$("[bind=firstName]").each(function(index, element) {
-		firstName.bind(element);
-	})
-	$("[bind=lastName]").each(function(index, element) {
-		lastName.bind(element);
-	})
-	$("#whatismyname").click(function(){alert(firstName.get()+" "+lastName.get())})
-
-})
+<head>
+  <title>
+    Test
+  </title>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css">
+</head>
+<body>
+  <p>
+    <dt>First Name:</dt>
+    <dd><input bind="firstName" value="Michael"/></dd> <!--Defined in input-->
+    <dt>Middle Name:</dt>
+    <dd><input bind="middleName"/></dd>                <!--Setting value is optional-->
+    <dt>Last Name:</dt>
+    <dd><input bind="lastName" value="Vartan"/></dd>   <!--Defined in code-->
+    <button id="whatismyname">What is my name?</button>
+  </p>
+  <p>
+    This is my name: 
+    <strong bind="firstName"></strong> 
+    <strong bind="middleName"></strong>
+    <strong bind="lastName"></strong>
+  </p>
+  <pre><code id="mycode">test</code></pre>
 
 
-var boundObject = function(){return function() {
-		var _value = undefined
-		var thisProperty
-		var bound = []
-		return {
-			bind: function(element) {
-				if(!thisProperty)
-					thisProperty = this
-				bound.push(element);
-				this.apply(element);
-				if(element.tagName == "INPUT") {
-					if(_value==undefined && element.value!=undefined && element.value.length>0) {
-						thisProperty.set(element.value);
-					}
-					if("oninput" in window) {
-						element.oninput = this.onBoundChange
-					} else {
-						element.onkeypress = this.onBoundChange
-						element.onchange   = this.onBoundChange
-						element.onpaste    = this.onBoundChange
-						element.oncut      = this.onBoundChange
-					}
-				}
-			},
-			set: function(val) {
-				if(val!=_value) {
-					_value = val
-					for(var i=0; i<bound.length;i++) {
-						this.apply(bound[i])
-					}
-				}
-			},
-			get: function() {return _value},
-			apply: function(element) {
-				if(_value != undefined) {
-					if(element.tagName == "INPUT") {
-						if(element.value != _value) 
-							element.value=_value; 
-					} else {
-						if(element.innerHTML!=_value) 
-							element.innerHTML = _value
-					}
-				}
-			},
-			onBoundChange:function(event){
-				thisProperty.set(event.target.value);
-			}
-		}
-	}()};
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+
+  <script>
+  $(function() {
+    showCode();
+
+    var me = {
+      firstName: boundObject()
+    }
+    var firstName = boundObject()
+    var middleName  = boundObject()
+    var lastName  = boundObject("Vartan")
+    $("[bind=firstName]").each(function(index, element) {
+      firstName.bind(element);
+    })
+    $("[bind=middleName]").each(function(index, element) {
+      middleName.bind(element);
+    })
+    $("[bind=lastName]").each(function(index, element) {
+      lastName.bind(element);
+    })
+
+    $("#whatismyname").click(function(){
+      nameParts = []
+      var first = firstName.get();
+      var middle = middleName.get();
+      var last = lastName.get();
+      if(first)nameParts.push(first);
+      if(middle)nameParts.push(middle);
+      if(last)nameParts.push(last);
+      alert("My name is: "+nameParts.join(" "))
+    })
 
 
-</script>
 
+  })
+
+  /*** START boundObject definition ***/
+  var boundObject = function(startingValue){return function(startingValue) {
+      var _value = startingValue
+      var thisProperty
+      var bound = []
+      return {
+        bind: function(element) {
+          if(!thisProperty)
+            thisProperty = this
+          bound.push(element);
+          this.apply(element);
+          if(element.tagName == "INPUT") {
+            if(_value==undefined && element.value!=undefined && element.value.length>0) {
+              thisProperty.set(element.value);
+            }
+            if("oninput" in window) {
+              element.oninput = this.onBoundChange
+            } else {
+              element.onkeypress = this.onBoundChange
+              element.onchange   = this.onBoundChange
+              element.onpaste    = this.onBoundChange
+              element.oncut      = this.onBoundChange
+            }
+          }
+        },
+        set: function(val) {
+          if(!thisProperty)thisProperty = this;
+          if(val!=_value) {
+            _value = val
+            for(var i=0; i<bound.length;i++) {
+              this.apply(bound[i])
+            }
+          }
+          return thisProperty
+        },
+        get: function() {return _value},
+        apply: function(element) {
+          if(_value != undefined) {
+            if(element.tagName == "INPUT") {
+              if(element.value != _value) 
+                element.value=_value; 
+            } else {
+              if(element.innerHTML!=_value) 
+                element.innerHTML = _value
+            }
+          }
+        },
+        onBoundChange:function(event){
+          thisProperty.set(event.target.value);
+        }
+      }
+    }(startingValue)};
+  function showCode() {
+  var content = $("body").html()
+    console.log(content)
+    $("#mycode").text(content)
+
+    hljs.highlightBlock($("#mycode")[0]);
+  }
+  </script>
+
+</body>
 </html>
 
