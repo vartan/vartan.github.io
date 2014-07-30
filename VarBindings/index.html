@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>
+			Test
+		</title>
+	</head>
+	<body>
+		This is my name: <span bind="firstName"></span> <span bind="lastName"></span>
+		<br/>
+		<input bind="firstName" value="Michael"/>
+		<input bind="lastName" value="Vartan"/>
+		<button id="whatismyname">What is my name?</button>
+	</body>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+$(function() {
+	var firstName = boundObject();
+	var lastName = boundObject();
+	$("[bind=firstName]").each(function(index, element) {
+		firstName.bind(element);
+	})
+	$("[bind=lastName]").each(function(index, element) {
+		lastName.bind(element);
+	})
+	$("#whatismyname").click(function(){alert(firstName.get()+" "+lastName.get())})
+
+})
+
+
+var boundObject = function(){return function() {
+		var _value = undefined
+		var thisProperty
+		var bound = []
+		return {
+			bind: function(element) {
+				if(!thisProperty)
+					thisProperty = this
+				bound.push(element);
+				this.apply(element);
+				if(element.tagName == "INPUT") {
+					if(_value==undefined && element.value!=undefined && element.value.length>0) {
+						thisProperty.set(element.value);
+					}
+					if("oninput" in window) {
+						element.oninput = this.onBoundChange
+					} else {
+						element.onkeypress = this.onBoundChange
+						element.onchange   = this.onBoundChange
+						element.onpaste    = this.onBoundChange
+						element.oncut      = this.onBoundChange
+					}
+				}
+			},
+			set: function(val) {
+				if(val!=_value) {
+					_value = val
+					for(var i=0; i<bound.length;i++) {
+						this.apply(bound[i])
+					}
+				}
+			},
+			get: function() {return _value},
+			apply: function(element) {
+				if(_value != undefined) {
+					if(element.tagName == "INPUT") {
+						if(element.value != _value) 
+							element.value=_value; 
+					} else {
+						if(element.innerHTML!=_value) 
+							element.innerHTML = _value
+					}
+				}
+			},
+			onBoundChange:function(event){
+				thisProperty.set(event.target.value);
+			}
+		}
+	}()};
+
+
+</script>
+
+</html>
+
