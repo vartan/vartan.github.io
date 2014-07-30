@@ -6,15 +6,15 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css">
 </head>
 <body>
-  <p>
+  <form id="nameform">
     <dt>First Name:</dt>
     <dd><input bind="firstName" value="Michael"/></dd> <!--Defined in input-->
     <dt>Middle Name:</dt>
     <dd><input bind="middleName"/></dd>                <!--Setting value is optional-->
     <dt>Last Name:</dt>
     <dd><input bind="lastName" value="Vartan"/></dd>   <!--Defined in code-->
-    <button id="whatismyname">What is my name?</button>
-  </p>
+    <button id="whatismyname" type="submit">What is my name?</button>
+  </form>
   <p>
     This is my name: 
     <strong bind="firstName"></strong> 
@@ -36,13 +36,11 @@
       middleName: VarBinding(),
       lastName: VarBinding("Vartan"),
       getFullName: function() {
+        var first,middle,last;
         nameParts  = []
-        var first  = this.firstName.get();
-        var middle = this.middleName.get();
-        var last   = this.lastName.get();
-        if(first)nameParts.push(first);
-        if(middle)nameParts.push(middle);
-        if(last)nameParts.push(last);
+        if(first  = this.firstName.get())  nameParts.push(first);
+        if(middle = this.middleName.get()) nameParts.push(middle);
+        if(last   = this.lastName.get())   nameParts.push(last);
         return nameParts.join(" ")
       }
     }
@@ -56,8 +54,8 @@
       me.lastName.bind(element);
     })
 
-    $("#whatismyname").click(function(){
-
+    $("#nameform").submit(function(e){
+      e.preventDefault()
       alert("My name is: "+me.getFullName())
     })
 
