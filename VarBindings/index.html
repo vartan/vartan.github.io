@@ -4,126 +4,67 @@
     VarBindings v0.0.0
   </title>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 </head>
-<body>
-  <form id="nameform">
-    <dt>First Name:</dt>
-    <dd><input bind="firstName" value="Michael"/></dd> <!--Defined in input-->
-    <dt>Middle Name:</dt>
-    <dd><input bind="middleName"/></dd>                <!--Setting value is optional-->
-    <dt>Last Name:</dt>
-    <dd><input bind="lastName" value="Vartan"/></dd>   <!--Defined in code-->
-    <button id="whatismyname" type="submit">What is my name?</button>
-  </form>
+<body class="container">
+<h1>VarBindings 0.0.0 <small>A proof of concept</small></h1>
+  <h2>The concept</h2>
   <p>
-    This is my name: 
+    This is a proof of concept for an event-based two-way-binding. This system is very simple:
+    <ol>
+      <li><samp>var myBoundVariable = VarBinding()</samp></li>
+      <li><samp>myBoundVariable.set("This is my value")</samp></li>
+      <li><samp>var myElement = document.getElementByID("myElementID")</samp></li>
+      <li><samp>myBoundVariable.bind(myElement)</samp></li>
+    </ol>
+    or more succinctly, <code>var myBoundVariable = VarBinding("This is my value").bind(document.getElementById("myElementID"))</code>
+  </p>
+  <h2>Demo:</h2>
+  <div class="text-center well lead"> 
+    Hello,
     <strong bind="firstName"></strong> 
     <strong bind="middleName"></strong>
     <strong bind="lastName"></strong>
-  </p>
-  <pre><code id="mycode">test</code></pre>
-
-
+  </div>
+  <div class="col-sm-2">&nbsp;</div>
+  <form id="nameform" class="form-horizontal col-sm-8 center jumbotron">
+    <div class="form-group">
+      <label for="myFirstName">First Name:</label>
+      <!--IMPORTANT: bind="firstName"                       Value defined in input-->
+      <input bind="firstName" id="myFirstName" value="Michael" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="myMiddleName">Middle Name:</label>
+      <!--IMPORTANT: bind="middleName"        Value blank by default-->
+      <input bind="middleName" id="myMiddleName" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="myLastName">Last Name:</label>
+      <!--IMPORTANT: bind="lastName"                Value defined in javascript-->
+      <input bind="lastName" id="myLastName" value="Vartan" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <button id="whatismyname" type="submit" class="btn btn-primary">Can you fetch my name programatically?</button>
+    </div>
+  </form>
+  <div class="col-sm-2">&nbsp;</div>
+    <div class="clearfix"></div>
+  <h2>Code:</h2>
+  <strong>index.html</strong>
+  <pre><code src="index.html"></code></pre>
+  <strong>app.js</strong>
+  <pre><code src="app.js"></code></pre>
+  <strong>varbindings.js</strong>
+  <pre><code src="varbindings.js"></code></pre>
+  <!--JQuery for my quick bindings -->
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <!--Syntax highlighting for your viewing pleasure-->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
-
-  <script>
-  $(function() {
-    showCode();
-
-    var me = {
-      firstName: VarBinding(),
-      middleName: VarBinding(),
-      lastName: VarBinding("Vartan"),
-      getFullName: function() {
-        var first,middle,last;
-        nameParts  = []
-        if(first  = this.firstName.get())  nameParts.push(first);
-        if(middle = this.middleName.get()) nameParts.push(middle);
-        if(last   = this.lastName.get())   nameParts.push(last);
-        return nameParts.join(" ")
-      }
-    }
-    $("[bind=firstName]").each(function(index, element) {
-      me.firstName.bind(element);
-    })
-    $("[bind=middleName]").each(function(index, element) {
-      me.middleName.bind(element);
-    })
-    $("[bind=lastName]").each(function(index, element) {
-      me.lastName.bind(element);
-    })
-
-    $("#nameform").submit(function(e){
-      e.preventDefault()
-      alert("My name is: "+me.getFullName())
-    })
-
-
-
-  })
-
-  /*** START VarBinding definition ***/
-  var VarBinding = function(startingValue){return function(startingValue) {
-      var _value = startingValue
-      var thisProperty
-      var bound = []
-      return {
-        bind: function(element) {
-          if(!thisProperty)
-            thisProperty = this
-          bound.push(element);
-          this.apply(element);
-          if(element.tagName == "INPUT") {
-            if(_value==undefined && element.value!=undefined && element.value.length>0) {
-              thisProperty.set(element.value);
-            }
-            if("oninput" in window) {
-              element.oninput = this.onBoundChange
-            } else {
-              element.onkeypress = this.onBoundChange
-              element.onchange   = this.onBoundChange
-              element.onpaste    = this.onBoundChange
-              element.oncut      = this.onBoundChange
-            }
-          }
-        },
-        set: function(val) {
-          if(!thisProperty)thisProperty = this;
-          if(val!=_value) {
-            _value = val
-            for(var i=0; i<bound.length;i++) {
-              this.apply(bound[i])
-            }
-          }
-          return thisProperty
-        },
-        get: function() {return _value},
-        apply: function(element) {
-          if(_value != undefined) {
-            if(element.tagName == "INPUT") {
-              if(element.value != _value) 
-                element.value=_value; 
-            } else {
-              if(element.innerHTML!=_value) 
-                element.innerHTML = _value
-            }
-          }
-        },
-        onBoundChange:function(event){
-          thisProperty.set(event.target.value);
-        }
-      }
-    }(startingValue)};
-  function showCode() {
-  var content = $("body").html()
-    console.log(content)
-    $("#mycode").text(content)
-
-    hljs.highlightBlock($("#mycode")[0]);
-  }
-  </script>
-
+  <!--Variable Bindings-->
+  <script src="varbindings.js"></script>
+  <!--Sets up the demo-->
+  <script src="app.js"></script>
 </body>
 </html>
 
