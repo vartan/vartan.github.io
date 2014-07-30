@@ -32,38 +32,41 @@
     showCode();
 
     var me = {
-      firstName: boundObject()
+      firstName: VarBinding(),
+      middleName: VarBinding(),
+      lastName: VarBinding("Vartan"),
+      getFullName: function() {
+        nameParts  = []
+        var first  = this.firstName.get();
+        var middle = this.middleName.get();
+        var last   = this.lastName.get();
+        if(first)nameParts.push(first);
+        if(middle)nameParts.push(middle);
+        if(last)nameParts.push(last);
+        return nameParts.join(" ")
+      }
     }
-    var firstName = boundObject()
-    var middleName  = boundObject()
-    var lastName  = boundObject("Vartan")
     $("[bind=firstName]").each(function(index, element) {
-      firstName.bind(element);
+      me.firstName.bind(element);
     })
     $("[bind=middleName]").each(function(index, element) {
-      middleName.bind(element);
+      me.middleName.bind(element);
     })
     $("[bind=lastName]").each(function(index, element) {
-      lastName.bind(element);
+      me.lastName.bind(element);
     })
 
     $("#whatismyname").click(function(){
-      nameParts = []
-      var first = firstName.get();
-      var middle = middleName.get();
-      var last = lastName.get();
-      if(first)nameParts.push(first);
-      if(middle)nameParts.push(middle);
-      if(last)nameParts.push(last);
-      alert("My name is: "+nameParts.join(" "))
+
+      alert("My name is: "+me.getFullName())
     })
 
 
 
   })
 
-  /*** START boundObject definition ***/
-  var boundObject = function(startingValue){return function(startingValue) {
+  /*** START VarBinding definition ***/
+  var VarBinding = function(startingValue){return function(startingValue) {
       var _value = startingValue
       var thisProperty
       var bound = []
