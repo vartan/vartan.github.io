@@ -4,25 +4,23 @@ html {
   overflow: hidden;
 }
 body {
-
 	height:100%;
 	width:100%;
-	overflow:hidden;
+	overflow:auto;
+		-webkit-overflow-scrolling : touch;
+
 }
+
 
 .nav-justified li {
 	float:none;
 }
 
-.container {
-	clear:both;
+.appbody {
 	overflow:auto;
-	position:absolute;
-	top:50px;
-	bottom:0;
-	  overflow-y: scroll; /* has to be scroll, not auto */
-
-	-webkit-overflow-scrolling : touch;
+	width:100%;
+	padding-top:50px;
+	overflow-y: scroll; /* has to be scroll, not auto */
 
 }
 
@@ -101,10 +99,11 @@ li.nav-back-arrow {
 .tabs > .nav {
 	height:auto;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
 	.tabs {
 		position:fixed;
+		margin:auto;
 		bottom:0;
 		left:0;
 		width:100%;
@@ -158,8 +157,8 @@ li.nav-back-arrow {
 		position:relative;
 		left:-50%;
 	}
-	.container {
-		bottom:50px;
+	.appbody {
+		padding-bottom:50px;
 	}
 }
 
