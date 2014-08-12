@@ -1,13 +1,29 @@
-body {
-	padding-bottom:50px;
-	padding-top:50px;
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
+body {
+
+	height:100%;
+	width:100%;
+	overflow:hidden;
+}
+
 .nav-justified li {
 	float:none;
 }
 
 .container {
 	clear:both;
+	overflow:auto;
+	position:absolute;
+	top:50px;
+	bottom:0;
+	  overflow-y: scroll; /* has to be scroll, not auto */
+
+	-webkit-overflow-scrolling : touch;
+
 }
 
 
@@ -96,6 +112,9 @@ li.nav-back-arrow {
 		background:linear-gradient(rgba(247,247,247,0.95),rgba(247,247,247,1));
 		border-top:1px solid #C1C1C1;
 		border-width: 0.5px 0 0 0;
+		max-height:51px;
+		overflow:hidden;
+	-webkit-overflow-scrolling:none;
 	}
 		.tabs > .nav > li > a {
 		height:50px;
@@ -134,12 +153,14 @@ li.nav-back-arrow {
 	left:50%;
 	top:0;
 	line-height:50px;
-}
-.navbar-fixed-top .navbar-header .navbar-brand {
-	position:relative;
-	left:-50%;
-}
-
+	}
+	.navbar-fixed-top .navbar-header .navbar-brand {
+		position:relative;
+		left:-50%;
+	}
+	.container {
+		bottom:50px;
+	}
 }
 
 .btn-transparent {
