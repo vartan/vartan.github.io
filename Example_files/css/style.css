@@ -4,7 +4,6 @@ html {
 	overflow:hidden;
 }
 body {
-	padding-top:50px;
 	height:100%;
 	width:100%;
 	overflow: hidden;
@@ -19,12 +18,22 @@ body {
 
 
 .navbar-nav {
+	z-index:2;
 width:100%;
 }
 .appbody {
-	height:100%;
-	width:100%;
-	overflow:auto;
+
+z-index:0;
+	overflow-y:scroll;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+			bottom:0;
+padding-top:50px;
+	/*
+		height:100%;
+	width:100%;*/
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -154,8 +163,9 @@ li.nav-back-arrow {
 		position:relative;
 		left:-50%;
 	}
-	body {
+	.appbody {
 		padding-bottom:50px;
+
 	}
 }
 
