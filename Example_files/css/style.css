@@ -1,14 +1,13 @@
 html {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-body {
 	height:100%;
 	width:100%;
-	overflow:auto;
-		-webkit-overflow-scrolling : touch;
-
+	overflow:hidden;
+}
+body {
+	padding-top:50px;
+	height:100%;
+	width:100%;
+	overflow: hidden;
 }
 
 
@@ -16,17 +15,17 @@ body {
 	float:none;
 }
 
-.appbody {
-	overflow:auto;
-	width:100%;
-	padding-top:50px;
-	overflow-y: scroll; /* has to be scroll, not auto */
 
-}
 
 
 .navbar-nav {
 width:100%;
+}
+.appbody {
+	height:100%;
+	width:100%;
+	overflow:auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 .tabs .nav-pills li a {
@@ -112,8 +111,6 @@ li.nav-back-arrow {
 		border-top:1px solid #C1C1C1;
 		border-width: 0.5px 0 0 0;
 		max-height:51px;
-		overflow:hidden;
-	-webkit-overflow-scrolling:none;
 	}
 		.tabs > .nav > li > a {
 		height:50px;
@@ -157,7 +154,7 @@ li.nav-back-arrow {
 		position:relative;
 		left:-50%;
 	}
-	.appbody {
+	body {
 		padding-bottom:50px;
 	}
 }
