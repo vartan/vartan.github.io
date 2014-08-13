@@ -1,0 +1,256 @@
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background:black;
+}
+
+.nav-justified li {
+  float: none;
+}
+
+.navbar {
+  box-sizing: content-box !important;
+}
+
+.navbar-nav {
+  width: 100%;
+}
+
+.appbody {
+  z-index: 2;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 50px;
+	/*
+		height:100%;
+	width:100%;*/
+  -webkit-overflow-scrolling: touch;
+}
+.app-image-spacer {
+  height: calc(40% + 20px);
+  background:transparent;
+}
+.app-image {
+  position:fixed;
+  top:50px;
+  z-index:0;
+  width:100%;
+  height:40%;
+  background-image: url('http://i.imgur.com/6lb7msd.jpg');
+  background-color:black;
+  background-position: center center;
+  background-repeat:no-repeat no-repeat;
+  background-size: cover;
+  box-shadow: inset 0px 11px 8px -10px rgba(0,0,0,0.2);
+}
+.appbg {
+  background:#f2f2f6;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2),
+0 0 1px black;
+
+}
+.tabs .nav-pills li a {
+  height:50px;
+  color: #929292;
+}
+.tabs .nav-pills li.active a {
+  background: transparent;
+  color: #4579fb;
+}
+
+.tabs .nav-pills a, .tabs .nav-pills a:active, .tabs .nav-pills a:hover, .tabs .nav-pills a:focus {
+  background: transparent;
+}
+
+.tabs {
+  bottom: 0 !important;
+  margin: 0;
+  height: 50px;
+  background: linear-gradient(rgba(247,247,247,0.95),rgba(247,247,247,1));
+}
+
+.navbar-nav > li > a {
+  padding: 15px;
+  height: 50px;
+  font-size: 14pt;
+  font-weight: 400;
+}
+nav .nav.navbar-nav {
+background:linear-gradient(rgba(247,247,247,0.95),rgba(247,247,247,1)) !important;
+}
+.header-arrow {
+  display: inline-block;
+  -webkit-transform: scale(1,2);
+  margin-right: 2px;
+  font-weight: 500;
+  line-height:14px;
+  vertical-align: top;
+}
+
+.navbar-nav, .nav {
+  max-height: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-fixed-top .nav  li {
+  float: left;
+}
+
+.navbar-fixed-top .navbar-header a {
+  font-weight: 500;
+  font-size: 14pt;
+}
+
+.navbar-fixed-top {
+  margin: 0;
+}
+
+.tabs .glyphicon {
+  display: none;
+}
+
+li.nav-back-arrow {
+  display: none;
+}
+
+.tabs > .nav > li > a {
+  line-height: 50px;
+  font-size: 14pt;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: auto;
+}
+
+.tabs > .nav > li {
+  width: auto;
+  height: 50px;
+  padding: 0;
+}
+.tabs {
+  background:transparent;
+}
+.tabs > .nav {
+  height: auto;
+}
+
+  @media (max-width: 768px) {
+  h1 small {
+    display:block;
+  }
+  .container {
+    border-radius:0;
+    padding-bottom:50px;
+  }
+  .tabs {
+    position: fixed;
+    margin: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(rgba(247,247,247,0.95),rgba(247,247,247,1));
+    border-top: 0.5px solid #C1C1C1;
+    box-shadow: 0 -0.5px 0 #C1C1C1;
+    max-height: 51px;
+  }
+
+  .tabs > .nav > li > a {
+    height: 50px;
+    min-width: 10px;
+    border-radius: 0;
+    font-weight: normal;
+    font-size: 8pt;
+    line-height: 9pt;
+  }
+
+  .tabs .glyphicon {
+    display: inline-block;
+  }
+
+  li.nav-back-arrow {
+    display: inline-block;
+  }
+
+  .tabs .nav-pills > li {
+    float: none;
+  }
+
+  .tabs .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  .tabs .nav-justified > li > a {
+    margin-bottom: 0 !important;
+  }
+
+  .glyphicon.bottom-icon {
+    display: block;
+    font-size: 20pt;
+    margin-top: 6px;
+    margin-bottom: 3px;
+  }
+
+  .navbar-fixed-top .navbar-header {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    line-height: 50px;
+  }
+
+  .navbar-fixed-top .navbar-header .navbar-brand {
+    position: relative;
+    left: -50%;
+  }
+
+}
+@media (min-width:769px) {
+  .tabs > .nav > li > a {
+    font-size: 12pt;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: auto;
+    background:white;
+    line-height:40px;
+    height:40px;
+    box-shadow:0.5px 1px 1px rgba(0,0,0,0.2);
+    margin: 5px -1px;
+    color:#595959;
+    border-radius:0;
+  }
+  .tabs > .nav > li:first-child > a {
+    border-radius:4px 0 0 4px;
+  }
+  .tabs > .nav > li:last-child > a {
+    border-radius:0 4px 4px 0;
+  }
+  .tabs > .nav > li > a:hover {
+    background:white
+  }
+
+  .tabs > .nav > li > a:active {
+    background:#e3e3e3;
+    color:black;
+  }
+  .tabs > .nav > li.active a {
+    background:#6b6b6c;
+    color:white;
+  }
+}
+
+.btn-transparent {
+  background: transparent;
+}
+

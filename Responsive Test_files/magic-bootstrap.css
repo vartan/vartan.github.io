@@ -276,7 +276,7 @@ body {
 h1 {
 font-family:-apple-system-headline, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-h2,h3,h4,h5,h6,h7,h8,h9 {
+h2,h3,h4,h5,h6 {
   font-family:-apple-system-subheadline, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
@@ -2381,8 +2381,8 @@ input[type="button"].btn-block {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.eot');
+  src: url('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.woff') format('woff'), url('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -3037,7 +3037,7 @@ input[type="button"].btn-block {
 }
 .dropdown-menu .divider {
   height: 1px;
-  height: 0.5px;
+  max-height: 0.5px;
   margin: 9px 0;
   overflow: hidden;
   background-color: #C1C1C1;
@@ -3647,9 +3647,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: relative;
   min-height: 50px;
   margin-bottom: 20px;
-  border: solid transparent;
-  border-width: 0 0 1px 0;
-  border-width: 0 0 0.5px 0;
+  border: 78px solid #c1c1c1;
+  border-width:0 0 0.5px 0;
+  box-shadow: 0 0.5px 0 #C1C1C1;
 }
 @media (min-width: 768px) {
   .navbar {
@@ -3735,6 +3735,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-top {
   top: 0;
+  border-style:solid;
   border-width: 0 0 0.5px 0;
 }
 .navbar-fixed-bottom {
