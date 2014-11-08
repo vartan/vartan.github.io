@@ -49,6 +49,7 @@ tagline: Tinkerings and Tutorials
   </div>
   {% endfor %}
 </div>
+<hr/>
 <div class="row">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Responsive-Schejoule -->
