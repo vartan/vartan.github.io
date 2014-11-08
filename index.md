@@ -49,7 +49,7 @@ tagline: Tinkerings and Tutorials
   </div>
   {% endfor %}
 </div>
-
+<div class="row">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Responsive-Schejoule -->
 <ins class="adsbygoogle"
@@ -60,7 +60,7 @@ tagline: Tinkerings and Tutorials
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
+</div>
 
 {% for post in site.posts limit:15 offset:3 %}
 <hr/>
