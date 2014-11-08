@@ -50,6 +50,18 @@ tagline: Tinkerings and Tutorials
   {% endfor %}
 </div>
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Responsive-Schejoule -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7388947224467540"
+     data-ad-slot="6925392360"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
 {% for post in site.posts limit:15 offset:3 %}
 <hr/>
 <div class="row">
