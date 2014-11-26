@@ -70,10 +70,8 @@ Next, run these commands to finish setting up the pi and restart LIRC.
 
 NodeJS is a platform which allows unshackles javascript from the web browser. We will use NodeJS to run our webserver.
 
-Install NodeJS with the following commands:
+Install NodeJS and the with the following commands:
 <script src="https://gist.github.com/vartan/6dcdb707d003f19fb727.js"></script>
-
-Next, download and run the webapp by running the following commands:
 <script src="https://gist.github.com/vartan/2aeccca2c08c66d861d5.js"></script>
 
 The meat of the webapp can at the end of this section. For the most part, it serves static files located in the `html/` folder. However the special functionality is:
