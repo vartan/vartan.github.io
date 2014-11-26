@@ -5,8 +5,8 @@ tagline: Introduce anything with a remote to the Internet of Things
 description: "Introduce anything with a remote to the Internet of Things by
             controlling it with your raspberry pi"
 thumbnail: "/images/thumbnails/remote-pi.jpg"
-category: Raspberry Pi
-tags: [internet of things, HTML, raspberry pi, infrared]
+category: raspberry-pi
+tags: [internet of things, HTML, raspberry-pi, infrared]
 ---
 {% include JB/setup %}
 
