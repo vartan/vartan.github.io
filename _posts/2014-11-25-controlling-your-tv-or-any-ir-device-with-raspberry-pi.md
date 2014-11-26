@@ -71,4 +71,5 @@ The meat of the webapp can be seen below. For the most part, it serves static fi
 
 #References
 
+--------
 [Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/) | alexba.in | http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
