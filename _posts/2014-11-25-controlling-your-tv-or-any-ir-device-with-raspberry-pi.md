@@ -18,6 +18,9 @@ Although the Internet of Things is relatively new, controlling devices remotely 
 * One infrared receiver (optional)
 * Various resistors (10kΩ, 37Ω)
 
+<iframe width="100%" height="400" src="//www.youtube.com/embed/-FreZMkgs1I" frameborder="0" allowfullscreen></iframe>
+
+
 # Hardware
 
 The hardware required for this project are all basic components that you can pick up locally. The schematics are provided below, followed by descriptions of each part.
