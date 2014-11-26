@@ -59,18 +59,23 @@ NodeJS is a platform which allows unshackles javascript from the web browser. We
 Install NodeJS with the following commands:
 <script src="https://gist.github.com/vartan/6dcdb707d003f19fb727.js"></script>
 
-Next, download the webapp by running the following command:
-{% highlight bash %}
-git clone https://github.com/vartan/pi-remote.git
-{% endhighlight %}
+Next, download and run the webapp by running the following commands:
+<script src="https://gist.github.com/vartan/2aeccca2c08c66d861d5.js"></script>
 
 The meat of the webapp can at the end of this section. For the most part, it serves static files located in the `html/` folder. However the special functionality is:
 
 * Upon run, it queries LIRC for the list of devices, then for each device's button/keys. 
 * When a user requests (GET) `http://webappurl/deviceName/buttonName`, it will send that key code by running `irsend SEND_ONCE deviceName keyName`. 
 
-**Please do not copy and paste this script, pull it from github instead to receive the rest of the files.**
+Here is the app code for your perusing. *Please do not copy and paste this script, clone it from git instead to receive the rest of the files.*
 <script src="https://gist.github.com/vartan/fb6fd26006fb6fb87a90.js"></script>
+
+
+### Running the app
+The app can be ran with the following command: `sudo node app.js`. Ideally, though, this app runs whenever the raspberry pi boots up. This can be achieved by editing `/etc/rc.local` with the command `sudo nano /etc/rc.local` and adding this before `exit 0`
+
+    sudo node /path/to/remote-pi/app.js
+
 
 <style>  .file-data {max-height: 500px;}</style>
 #References
