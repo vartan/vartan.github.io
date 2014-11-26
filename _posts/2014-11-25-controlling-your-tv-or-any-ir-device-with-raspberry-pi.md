@@ -64,7 +64,28 @@ Next, run these commands to finish setting up the pi and restart LIRC.
 <script src="https://gist.github.com/vartan/a4654f526915aadaaf31.js"></script>
 
 ### Recording your remote
-(will flush this section out)
+*As previously mentioned, if your remote(s) is already in the [LIRC Remote Database](http://lirc.sourceforge.net/remotes/), you can skip this section.*
+
+You can record your remote using the `irrecord` command. In order to run `irrecord`, you must first turn off LIRC with the following command:
+
+    sudo /etc/init.d/lirc stop
+
+Run this command to see the different names you are allowed to give your keys/buttons:
+
+    irrecord --list-namespace 
+
+Next, use `irrecord` with the command below. the `/dev/lirc0` specifies where the lirc device is on your filesystem, and the `~/lircd.conf` specifies to save the configuration in your home directory.
+
+    irrecord -d /dev/lirc0 ~/lircd.conf
+
+When you're done, edit the conf file `nano ~/lircd.conf` and change the name line to the name you want your device to be.
+
+Lastly, move the new configuration into LIRC and start it back up!
+
+    sudo cp ~/lircd.conf /etc/lirc/lircd.conf
+    sudo /etc/init.d/lirc start
+
+
 
 ##NodeJS and Webapp
 
@@ -77,7 +98,7 @@ Install NodeJS and the with the following commands:
 The meat of the webapp can at the end of this section. For the most part, it serves static files located in the `html/` folder. However the special functionality is:
 
 * Upon run, it queries LIRC for the list of devices, then for each device's button/keys. 
-* When a user requests (GET) `http://webappurl/deviceName/buttonName`, it will send that key code by running `irsend SEND_ONCE deviceName keyName`. 
+* When a user requests (GET) `http://webappurl/send/deviceName/buttonName`, it will send that key code by running `irsend SEND_ONCE deviceName keyName`. 
 
 Here is the app code for your perusing. *Please do not copy and paste this script, clone it from git instead to receive the rest of the files.*
 <script src="https://gist.github.com/vartan/fb6fd26006fb6fb87a90.js"></script>
