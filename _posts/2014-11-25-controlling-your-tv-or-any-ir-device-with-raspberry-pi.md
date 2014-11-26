@@ -20,6 +20,8 @@ Although the Internet of Things is relatively new, controlling devices remotely 
 
 # Hardware
 
+The hardware required for this project are all basic components that you can pick up locally. The schematics are provided below, followed by descriptions of each part.
+
 ![Raspberry Pi Receiver/Transmitter Schematic](/images/remote-pi/schem.png)
 ![Breadboard example](/images/remote-pi/bb.png)
 
