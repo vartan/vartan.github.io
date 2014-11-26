@@ -46,7 +46,7 @@ Next, we have to fix the configuration of lirc for your pi. Modify `/etc/lirc/ha
 
 <script src="https://gist.github.com/vartan/984286efea1230664e3a.js"></script>
 
-Next, run these commands:
+Next, run these commands to finish setting up the pi and restart LIRC.
 <script src="https://gist.github.com/vartan/a4654f526915aadaaf31.js"></script>
 
 ### Recording your remote
@@ -70,4 +70,5 @@ The meat of the webapp can be seen below. For the most part, it serves static fi
 <script src="https://gist.github.com/vartan/fb6fd26006fb6fb87a90.js"></script>
 
 #References
-[Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/)
+
+[Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/) | alexba.in | http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
