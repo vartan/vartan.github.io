@@ -20,18 +20,24 @@ Although the Internet of Things is relatively new, controlling devices remotely 
 
 # Hardware
 
-#IR Blaster
-The infrared blaster consists of a IR LED, 37Ω/10KΩ resistor, and a PNP transistor. Don't worry if your resistor values are slightly off. Rather than power the infrared LED directly from the GPIO, we have the IR LED powered from the 5V power supply of the pi (in series with the 37Ω current limiting resistor) to the collector of a PNP transistor. This is because the IR LED will want to use 100mA, but the GPIO of the pi can only output 50mA. 
+![Raspberry Pi Receiver/Transmitter Schematic](/images/remote-pi/schem.png)
+![Breadboard example](/images/remote-pi/bb.png)
 
-The GPIO #22, instead, is connected to the base of the transistor, which acts as a switch in this case, with a 10KΩ resistor. The emitter is connected directly to ground.
+
+#IR Blaster
+The infrared blaster consists of a IR LED, 37Ω/10KΩ resistor, and a PNP transistor. 
+
+Because the GPIO of the raspberry pi can only handle 50mA maximum, and our LED wants to use 100mA, we will power the IR LED using a PNP transistor and the 5V power supply instead. 
+
+Connect the IR LED in series from the 5V pin on the Raspberry pi through a 37Ω current limiting resistor to the collector of your PNP transistor (top side in the diagram below, the line in the schematic represents the flat side of the transistor package.) The resistor ensures that the LED will never exceed its 100mA rating. Hook the emitter (bottom) directly to ground.
+
+The base of the transistor is what will be used to switch the transistor on and off. Connect it through a 10KΩ resistor to GPIO 22.  
 
 #IR Receiver
 The infrared receiver is optional, and is only required if you cannot find your remote already in the [LIRC Remote Database](http://lirc.sourceforge.net/remotes/). The receiver is connected to ground and 3v3 from GND and Vcc respectively. The Data pin on the receiver should be connected to GPIO 23.
 
 Because the GPIO varies slightly between raspberry pi models, please check out [this GPIO reference guide](http://raspi.tv/2014/rpi-gpio-quick-reference-updated-for-raspberry-pi-b) to find exactly which pin to connect to.
 
-![Raspberry Pi Receiver/Transmitter Schematic](/images/remote-pi/schem.png)
-![Breadboard example](/images/remote-pi/bb.png)
 
 
 # Installing necessary software on the pi
