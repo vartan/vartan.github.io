@@ -52,12 +52,20 @@ Next, run these commands:
 ### Recording your remote
 (will flush this section out)
 
+##NodeJS and Webapp
 
+NodeJS is a platform which allows unshackles javascript from the web browser. We will use NodeJS to run our webserver.
 
+Install NodeJS with the following commands:
+<script src="https://gist.github.com/vartan/6dcdb707d003f19fb727.js"></script>
 
-#References
-[Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/)
+Next, download the webapp by running the following command:
+    https://github.com/vartan/pi-remote.git
 
+The meat of the webapp can be seen below. For the most part, it serves static files located in the `html/` folder. Additionally, it sends remote commands when a user requests `http://webappurl/deviceName/buttonName`. 
 
 <!-- app.js -->
 <script src="https://gist.github.com/vartan/fb6fd26006fb6fb87a90.js"></script>
+
+#References
+[Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/)
