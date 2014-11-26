@@ -69,7 +69,7 @@ The meat of the webapp can be seen below. For the most part, it serves static fi
 **Please do not copy and paste this script, pull it from github instead to receive the rest of the files.**
 <script src="https://gist.github.com/vartan/fb6fd26006fb6fb87a90.js"></script>
 
+<style>  .gist-data {max-height: 100%;}</style>
 #References
 
-|---:|:---:|:----|
-[Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/) | alexba.in | http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
+**alexba.in**: [Setting Up LIRC on the RaspberryPi](http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/) http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
