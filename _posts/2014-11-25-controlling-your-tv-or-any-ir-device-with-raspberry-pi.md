@@ -37,6 +37,7 @@ Because the GPIO varies slightly between raspberry pi models, please check out [
 LIRC stands for Linux Infrared Remote Control. The acronym speaks for itself, really. With almost no work, this package allows you to record and play back from any infrared remote control. 
 
 If you do not already LIRC installed, run the following command on your pi:
+
 {% highlight bash %}
     sudo apt-get update && sudo apt-get install lirc
 {% endhighlight %}
