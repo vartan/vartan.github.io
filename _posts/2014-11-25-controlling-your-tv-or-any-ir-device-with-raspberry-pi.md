@@ -44,40 +44,10 @@ If you do not already LIRC installed, run the following command on your pi:
 
 Next, we have to fix the configuration of lirc for your pi. Modify `/etc/lirc/hardware.conf` to match alexba's below using your `nano /etc/lirc/hardware.conf` or your favorite text editor.
 
-    ########################################################
-    # /etc/lirc/hardware.conf
-    #
-    # Arguments which will be used when launching lircd
-    LIRCD_ARGS="--uinput"
-     
-    # Don't start lircmd even if there seems to be a good config file
-    # START_LIRCMD=false
-     
-    # Don't start irexec, even if a good config file seems to exist.
-    # START_IREXEC=false
-     
-    # Try to load appropriate kernel modules
-    LOAD_MODULES=true
-     
-    # Run "lircd --driver=help" for a list of supported drivers.
-    DRIVER="default"
-    # usually /dev/lirc0 is the correct setting for systems using udev
-    DEVICE="/dev/lirc0"
-    MODULES="lirc_rpi"
-     
-    # Default configuration files for your hardware if any
-    LIRCD_CONF=""
-    LIRCMD_CONF=""
-    ########################################################
+<script src="https://gist.github.com/vartan/984286efea1230664e3a.js"></script>
 
 Next, run these commands:
-{% highlight bash %}
-sudo echo "
-lirc_dev
-lirc_rpi gpio_in_pin=23 gpio_out_pin=22" >> /etc/modules
-sudo /etc/init.d/lirc stop
-sudo /etc/init.d/lirc start
-{% endhighlight %}
+<script src="https://gist.github.com/vartan/a4654f526915aadaaf31.js"></script>
 
 ### Recording your remote
 (will flush this section out)
