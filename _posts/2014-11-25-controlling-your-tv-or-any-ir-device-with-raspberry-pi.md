@@ -64,7 +64,10 @@ Next, download the webapp by running the following command:
 git clone https://github.com/vartan/pi-remote.git
 {% endhighlight %}
 
-The meat of the webapp can be seen below. For the most part, it serves static files located in the `html/` folder. Additionally, it sends remote commands when a user requests `http://webappurl/deviceName/buttonName`. 
+The meat of the webapp can at the end of this section. For the most part, it serves static files located in the `html/` folder. However the special functionality is:
+
+* Upon run, it queries LIRC for the list of devices, then for each device's button/keys. 
+* When a user requests (GET) `http://webappurl/deviceName/buttonName`, it will send that key code by running `irsend SEND_ONCE deviceName keyName`. 
 
 **Please do not copy and paste this script, pull it from github instead to receive the rest of the files.**
 <script src="https://gist.github.com/vartan/fb6fd26006fb6fb87a90.js"></script>
