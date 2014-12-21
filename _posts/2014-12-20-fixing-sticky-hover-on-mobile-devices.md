@@ -25,7 +25,7 @@ Next, I went online to try to fix this issue. I found [this](http://stackoverflo
 2. Often this solution causes other hover artifacts! Sometimes, the new element that is re-inserted still gets the hover effect! Other times, other elements nearby get the hover effect instead! This was wholly confusing and unsuitable for production.
 
 #### Simulating hover psuedo-class by using actual CSS classes
-(This solution)[http://www.nczonline.net/blog/2012/07/05/ios-has-a-hover-problem/] proposes programatically adding a "no-touch" class to your elements, which you add your `:hover` psuedo-class to as such:
+[This solution](http://www.nczonline.net/blog/2012/07/05/ios-has-a-hover-problem/) proposes programatically adding a "no-touch" class to your elements, which you add your `:hover` psuedo-class to as such:
 
 {% highlight css %}
 button.no-touch:hover {
