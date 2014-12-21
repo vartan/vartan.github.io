@@ -2,8 +2,7 @@
 layout: post
 title: "Fixing Sticky Hover on Mobile Devices"
 tagline: "Converting :hover CSS to :active CSS on mobile devices"
-description: "Introduce anything with a remote to the Internet of Things by
-            controlling it with your raspberry pi"
+description: "This guide explains how to fix sticky links and buttons on mobile devices and other touch devices."
 thumbnail: "/images/thumbnails/javascript.png"
 category: web
 tags: [javascript, CSS, javascript]
