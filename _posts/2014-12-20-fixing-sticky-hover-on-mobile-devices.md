@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Fixing Sticky Hover on Mobile Devices"
-tagline: "Converts :hover CSS to :active CSS on mobile devices"
+tagline: "Converting :hover CSS to :active CSS on mobile devices"
 description: "Introduce anything with a remote to the Internet of Things by
             controlling it with your raspberry pi"
 thumbnail: "/images/thumbnails/javascript.png"
