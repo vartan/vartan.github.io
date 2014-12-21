@@ -6,7 +6,7 @@ description: "Introduce anything with a remote to the Internet of Things by
             controlling it with your raspberry pi"
 thumbnail: "/images/thumbnails/javascript.png"
 category: web
-tags: [javascript]
+tags: [javascript, CSS, javascript]
 ---
 {% include JB/setup %}
 
