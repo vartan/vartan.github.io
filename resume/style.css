@@ -38,7 +38,7 @@ font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', He
 	color:#555;
 }
 #skills {
-		margin:0 0 0 .5in;
+		margin:0 0 -6pt .5in;
 
 }
 #resume {
@@ -52,7 +52,7 @@ font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', He
 fieldset {
 	display:inline-block;
 	border:1px solid #bbb;
-	padding: 4pt;
+	padding: 3pt;
 	margin:2pt 2pt 2pt 2pt;
 	border-radius:9pt;
 }
@@ -187,6 +187,7 @@ p, span {
 }
 .description {
 	margin:5px 0 0 .5in;padding:0;
+
 }
 
 .gpa {
