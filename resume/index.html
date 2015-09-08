@@ -32,11 +32,11 @@
       </div>
 
       <div class="content">
-        <h1>Objective</h1>
+        <!--<h1>Objective</h1>
 
         <p itemprop="seeks" itemscope itemtype="Demand"><span itemprop="name">
           I am interested in an internship which may transition to a full-time position upon graduation in 2016.
-        </span></p>
+        </span></p>-->
 
         <h1>Education</h1>
 
@@ -45,17 +45,36 @@
         </div>
         <div itemscope itemtype="http://schema.org/EducationalOrganization">
         <p class="school">
-          <span class="schoolname"><span itemprop="name">California State University Long Beach</span> <span class="bull">&bull;</span> <span itemprop="subOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name">Engineering Honor's Program</span></span></span>
+          <span class="schoolname"><span itemprop="name">California State University Long Beach</span>  <span class="bull">&bull;</span> <span itemprop="name">Graduating with honors in May 2016</span>
         </p>
         <p class="degree">
-          <span class="degreename">Bachelor of Science in <em>Computer <span itemprop="department">Engineering</span></em> <span class="bull">&bull;</span> Expected Graduation: 2016</span>
+          <span class="degreename">Bachelor of Science in <em>Computer <span itemprop="department">Engineering</span> <span class="bull">&bull;</span> Minor in Computer Science</span>
         </p>
         </div>
-
         <h1>Work Experience</h1>
 
+
         <p class="job" itemprop="worksFor" itemscope itemtype="http://schema.org/Organization"><!--note: year goes first, but displays last, because it has float:right attribute-->
-          <span class="year">2014</span>
+          <span class="year">2015 &ndash; 2016</span>
+          <span class="employer" itemprop="name">Raytheon Company</span>
+        </p>
+
+        <p class="jobtitle" itemprop="jobTitle">Software Engineering Intern</p>
+
+        <ul class="description">
+          <li>Obtained secret level security clearance. Took special interest in encryption and security.</li>
+          <li>
+            Developed verification software for RADAR. Consolidated several C command line tools 
+            with UI. Wrote binary file parsing system in C++.
+          </li>
+        </ul>
+
+
+
+
+
+        <p class="job" itemprop="worksFor" itemscope itemtype="http://schema.org/Organization"><!--note: year goes first, but displays last, because it has float:right attribute-->
+          <span class="year">2014 &ndash; 2015</span>
           <span class="employer" itemprop="name">Exergy Controls</span>
         </p>
 
@@ -63,7 +82,8 @@
 
         <ul class="description">
           <li>Designing/developing web application which controls thousands of light fixtures simultaneously.</li>
-          <li>Designing firmware for ARM chip, including developing custom interrupt-driven SPI interface in mesh network.</li>
+          <li>Designing firmware for ARM chip, developed new product line for distributing and playing light shows.</li>
+          <li>Solely responsible for development of bluetooth android app, direct communication with customer.</li>
         </ul>
 
         <p class="job"><!--note: year goes first, but displays last, because it has float:right attribute-->
@@ -88,44 +108,56 @@
         <h1>Technical Skills</h1>
 
         <ul class="description" id="skills">
-          <li class="skillset OS">
+          <li class="skillset software">
             <fieldset>
               <legend>Web Development</legend>
-              PHP <span class="bull">&bull;</span>
-              HTML <span class="bull">&bull;</span>
-              CSS <span class="bull">&bull;</span>
-              Javascript (JQuery)
+              Javascript <span class="bull">&bull;</span>
+              PHP (node)
             </fieldset>
 
             <fieldset>
               <legend>App Development</legend>
               Java <span class="bull">&bull;</span>
-              Objective-C <span class="bull">&bull;</span>
-              C#
+              Objective-C/Swift
             </fieldset>
-                        <fieldset>
-              <legend>Misc. Languages</legend>
-              Python <span class="bull">&bull;</span> SQL <span class="bull">&bull;</span> Verilog <span class="bull">&bull;</span> Excel
+            <fieldset>
+              <legend>Scripting Languages</legend>
+              Python <span class="bull">&bull;</span> MySQL
             </fieldset>
-            </li>
-            <li class="skillset Hardware">
             <fieldset>
               <legend>Low Level</legend>
               C <span class="bull">&bull;</span>
               C++ <span class="bull">&bull;</span>
-              8051/ARM Assembly
+              ARM Assembly
               </fieldset>
-                          <fieldset>
+            </li>
+<!--            <li class="skillset hardware">
+
+            <fieldset>
               <legend>Hardware</legend> Arduino <span class="bull">&bull;</span> Raspberry Pi <span class="bull">&bull;</span> FPGA <span class="bull">&bull;</span>
               Electrical Testing Equipment
             </fieldset>
-          </li>
+          </li>-->
 
 
         </ul>
 
         <h1>Awards/Involvement</h1>
-
+        <p class="award">
+          <span class="awardname">Zeebo Autonomous Submarine</span>
+          <span class="year">2014 &ndash; 2015</span>
+        </p>
+          <ul class="description">
+            <li>
+              Architected & developed event-based communications/protocol between hardware systems.
+            </li>
+            <li>
+              Developed six-degrees-of-freedom motor control algorithm; PWM implemented via hardware timers.
+            </li>
+            <li>
+              Prototypal image recognition control system via openCV & nodeJS
+            </li>
+          </ul>
         <p class="award" itemprop="memberOf" itemscope itemtype="http://schema.org/Organization">
           <span class="year">2012 &ndash; Present</span>
           <span class="awardname" itemprop="name">Embedded Applications Technology Society</span>
@@ -166,19 +198,14 @@
         <ul class="description">
           <li>With a teammate, developed a mobile-first web application for tracking/improving students' study habits.</li>
         </ul>
-        <p class="award">
+<!--        <p class="award">
           <span class="year">2013 &ndash; 2014</span>
           <span class="awardname">President's List Honor &ndash; CSULB</span>
         </p>
         <p class="award">
           <span class="year">2013</span>
           <span class="awardname">Boeing Engineering Scholarship Recipient</span>
-        </p>
-
-        <p class="award">
-          <span class="year">2012</span>
-          <span class="awardname">Dean's List Honor</span>
-        </p>
+        </p>-->
 
 
 
@@ -187,7 +214,8 @@
         </p>
           <ul class="description">
             <li>
-              I work on many Arduino/Raspberry Pi/software/web projects which I document at <a href="http://www.mvartan.com">mvartan.com</a> and <a href="http://www.github.com/vartan">github.com/vartan</a><a style="position:absolute;top:-1000px;left:-1000px;" href="https://plus.google.com/103958202674791827163?rel=author" rel="publisher">by Michael Vartan</a>
+              I work on many Arduino/Raspberry Pi/software/web projects which I document at <!--<a href="http://www.mvartan.com">mvartan.com</a> and --><a href="http://www.github.com/vartan">github.com/vartan</a><a style="position:absolute;top:-1000px;left:-1000px;" href="https://plus.google.com/103958202674791827163?rel=author" rel="publisher">by Michael Vartan</a>
+              </li>
           </ul>
       </div>
     </div>

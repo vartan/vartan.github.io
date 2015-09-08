@@ -200,9 +200,10 @@ p, span {
 	float:left;
 	text-align:center;
 	line-height:.1in;
-	margin:0 .2in 0 .2in;
+	margin:0 .2in .1in .2in;
 	color:#555;
 	text-shadow:1pt 1pt 1pt white;
+
 }
 .gpa > .num {
 	line-height:.3in;
@@ -250,6 +251,9 @@ em {
 }
 .software, .software fieldset  {
 	border-color:#007AFF !important;
+}
+.hardware, .hardware fieldset {
+	border-color: #4DBCF9 !important;
 }
 #warning {
 	display:block;
