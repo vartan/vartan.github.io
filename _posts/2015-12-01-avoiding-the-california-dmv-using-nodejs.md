@@ -11,7 +11,7 @@ tags: [javascript, node]
 
 The DMV needs no introduction; you don't need to be convinced that the DMV website is a hassle. This project exists because the DMV exists.
 
-I developed this over the summer when trying to book an appointment at the DMV for someone. All appointments were booked 2-3 months in advance at my local DMV office, and I decided to do something about it.
+I developed [the California DMV Poller](https://github.com/vartan/ca-dmv-poller) over the summer when trying to book an appointment at the DMV for someone. All appointments were booked 2-3 months in advance at my local DMV office, and I decided to do something about it.
 
 
 Why use this?
