@@ -9,9 +9,6 @@ tags: [javascript, node]
 ---
 {% include JB/setup %}
 
-Avoiding the California DMV with NodeJS
-====
-
 The DMV needs no introduction; you don't need to be convinced that the DMV website is a hassle. This project exists because the DMV exists.
 
 I developed this over the summer when trying to book an appointment at the DMV for someone. All appointments were booked 2-3 months in advance at my local DMV office, and I decided to do something about it.
