@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Avoiding the California DMV with NodeJS"
-tagline: "Making better appointment times."
+tagline: "Making the DMV a better place."
 description: "This guide explains how to use nodeJS to get better appointment times at the DMV."
 thumbnail: "/images/thumbnails/node.png"
 category: node
@@ -9,7 +9,7 @@ tags: [javascript, node]
 ---
 {% include JB/setup %}
 
-#Avoiding the California DMV with NodeJS
+Avoiding the California DMV with NodeJS
 ====
 
 The DMV needs no introduction; you don't need to be convinced that the DMV website is a hassle. This project exists because the DMV exists.
