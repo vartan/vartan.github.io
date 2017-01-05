@@ -10,6 +10,7 @@ BASE_PATH: "http://mvartan.com/"
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
+theme: "bootstrap"
 title : Michael Vartan
 tagline: tinkerings and tutorials
 author :
