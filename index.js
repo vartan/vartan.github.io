@@ -38,7 +38,8 @@ function drawFloor() {
 let lastTick = 0;
 const rootSpikes = [];
 function tick(time) {
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Don't bother clearing the canvas since we never need to erase previously
+  // drawn spikes.
   const timeChange = time - lastTick;
   const sizeChange = timeChange / 1000 * SPIKE_GROWTH_PER_MS;
 
