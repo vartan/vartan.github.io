@@ -77,7 +77,7 @@ class Spike {
     if (this.size / this.maxSize < 0.9 && this.depth > 0) {
       if (Math.random() < sizeChange) {
         const newAngle = this.angle + (Math.random() - 0.5) * Math.PI;
-        const newMaxSize = this.maxSize * (0.33 + Math.random() * 0.33);
+        const newMaxSize = (this.maxSize - this.size) * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const newRelativePosition = this.size;
         const newSpike = new Spike(newAngle, newDepth, newRelativePosition, newMaxSize);
