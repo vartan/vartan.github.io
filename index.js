@@ -80,7 +80,7 @@ class Spike {
     if (this.size / this.maxSize < 0.9 && this.depth > 0) {
       if (Math.random() < sizeChange) {
         const newAngle = this.angle + (Math.random() - 0.5) * Math.PI;
-        const newMaxSize = (this.maxSize - this.size) * (0.33 + Math.random() * 0.33);
+        const newMaxSize = (this.maxSize - this.size / 2) * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const newRelativePosition = this.size;
         const newSpike = new Spike(newAngle, newDepth, newRelativePosition, newMaxSize);
@@ -100,7 +100,7 @@ class Spike {
     const baseOffset = this.getBaseOffset();
     ctx.lineTo((this.x + baseOffset.x) * PX_PER_UNIT, (this.y + baseOffset.y) * PX_PER_UNIT)
     ctx.lineTo((this.x - baseOffset.x) * PX_PER_UNIT, (this.y - baseOffset.y) * PX_PER_UNIT)
-    ctx.fillStyle = "#333";
+    ctx.fillStyle = SPIKE_COLOR;
     ctx.fill();
   }
 
