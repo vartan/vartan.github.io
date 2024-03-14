@@ -8,7 +8,7 @@ function onLoad() {
   canvas.height = window.innerHeight;
   ctx = canvas.getContext("2d");
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 10; i++) {
     const angle = (Math.random()*0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = Math.random();
