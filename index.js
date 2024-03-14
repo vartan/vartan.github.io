@@ -108,7 +108,7 @@ class Spike {
   }
 
   getBaseOffset() {
-    const length = this.size * this.maxSize / 20;
+    const length = this.size * this.maxSize / 50;
     const angle = this.angle + Math.PI / 4;
     const x = Math.cos(angle) * length;
     const y = Math.sin(angle) * length;
