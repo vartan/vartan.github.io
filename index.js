@@ -62,10 +62,11 @@ class Spike {
     this.size = 0;
   }
 
+  /* Grows the spike and redraws it, including its children. */
   advance(sizeChange) {
     if (this.size !== this.maxSize) {
+      // If the spike is already fully grown, don't bother growing/drawing it.
       this.size = Math.min(this.size + sizeChange, this.maxSize);
-      // todo: reposition childrens' x,y coordinates?
       this.maybeBranch(sizeChange);
       this.draw();
     }
@@ -74,6 +75,7 @@ class Spike {
     }
   }
 
+  /** Randomly generates branches off the spike during growth. */
   maybeBranch(sizeChange) {
     if (this.size / this.maxSize < 0.9 && this.depth > 0) {
       if (Math.random() < sizeChange) {
@@ -90,6 +92,7 @@ class Spike {
     }
   }
 
+  /** Draws the spike. */
   draw() {
     const end = this.getCoordinatesAtSize(this.size);
     ctx.beginPath();
@@ -101,6 +104,10 @@ class Spike {
     ctx.fill();
   }
 
+  /**
+   * Generates the coordinates for the end of the spike, given its current
+   * position and provided size. 
+   */
   getCoordinatesAtSize(size) {
     const length = size * this.maxSize;
     const x = this.x + Math.cos(this.angle) * length;
@@ -108,6 +115,7 @@ class Spike {
     return { x: x, y: y };
   }
 
+  /** Generates the offset from the origin of the spike to the edge of its base. */
   getBaseOffset() {
     const length = this.size * this.maxSize / 20;
     const angle = this.angle + Math.PI / 4;
@@ -116,16 +124,14 @@ class Spike {
     return {x: x, y: y}
   }
 
+  /** For debugging purposes, generates a recursive count of spikes. */
   getTotalCount() {
     return 1 + this.children.map((child) => child.getTotalCount()).reduce(sum, 0);
   }
 }
 
-
 function sum(acc, value) {
   return acc + value;
 }
-
-
 
 addEventListener("load", onLoad);
