@@ -2,9 +2,17 @@ body {
   font-size: 16pt;
   background: #000;
   color: #BBB;
+  text-shadow: 0 0 10px black;
 }
 
 .content {
   font-family: monospace;
   white-space: pre-wrap;
+}
+
+#spike-field {
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
 }
