@@ -23,7 +23,7 @@ const BACKGROUND_FLICKER_RATE_MS = 1000 / 30;
 const LENGTH_TO_BASE_RATIO = 1 / 20;
 
 /** The maximum distance along the spike to branch (from 0-1) */
-const MAX_BRANCH_SIZE_RATIO = 0.8;
+const MAX_BRANCH_SIZE_RATIO = 0.9;
 
 /** The minimum distance along the spike to branch (from 0-1) */
 const MIN_BRANCH_SIZE_RATIO = 0.2;
@@ -193,7 +193,7 @@ class Spike {
       this.draw();
     }
     for (const branch of this.branches) {
-      branch.advance(sizeChange / 2);
+      branch.advance(sizeChange / 4);
     }
   }
 
@@ -202,7 +202,7 @@ class Spike {
     const percentGrown = this.size / this.maxSize;
     const isBranchElligible = percentGrown < MAX_BRANCH_SIZE_RATIO || percentGrown > MIN_BRANCH_SIZE_RATIO;
     if (isBranchElligible && this.depth > 0) {
-      if (Math.random() * 8 < sizeChange) {
+      if (Math.random() * 5 < sizeChange) {
         const angleDirection = Math.random() > 0.5 ? 1 : -1;
         // Branches grow out 45-90 degrees in either direction from their parent.
         const angleOffset = angleDirection * (Math.random() * 0.25 + 0.25) * Math.PI;
