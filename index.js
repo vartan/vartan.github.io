@@ -1,20 +1,60 @@
-let canvas;
-let ctx;
 const SPIKE_GROWTH_PER_MS = 1;
 const PX_PER_UNIT = 50;
 const SPIKE_COLOR =  "#333";
+const NUMBER_OF_ROOT_SPIKES = 10;
+
+let canvas;
+let ctx;
+let lastTick = 0;
+const rootSpikes = [];
+
 function onLoad() {
   canvas = document.getElementById("spike-field");
-  canvas.width = document.body.offsetWidth;
-  canvas.height = window.innerHeight;
   ctx = canvas.getContext("2d");
-  drawFloor();
+  init();
 
-  for (let i = 0; i < 10; i++) {
-    const angle = (Math.random()*0.5 + 1.25) * Math.PI;
+  addEventListener("resize", onResize);
+  requestAnimationFrame(tick);
+}
+
+/** 
+ * Disposes any existing spikes, clears the canvas, and resets the spike field.
+ */
+function onResize() {
+  reset();
+  init();
+}
+
+/** 
+ * Disposes any existing spikes, resets the spike field, and clears the canvas.
+ */
+function reset() {
+  for(const spike of rootSpikes) {
+    spike.dispose();
+  }
+  rootSpikes.length = 0;
+  ctx.reset();
+}
+
+/** 
+ * Initializes the canvas to cover the client background, draws a floor, and
+ * initializes the root spikes 
+ */
+function init() {
+  // Resize the canvas to match the screen.
+  canvas.width = document.body.clientWidth;
+  canvas.height = document.body.clientHeight;
+
+  // Draw a floor so the spikes appear to grow out of a medium.
+  // As an added bonus, the floor hides the bottom edge of the spikes.
+  drawFloor();
+  for (let i = 0; i < NUMBER_OF_ROOT_SPIKES; i++) {
+    // These values were mostly chosen by trial and error for what I
+    // personally feel looks good.
+    const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = Math.random();
-    const maxSize = 0.8 + Math.random() * 3;
+    const maxSize = document.body.clientHeight / PX_PER_UNIT / 4;
     const spike = new Spike(
       angle,
       depth,
@@ -25,18 +65,14 @@ function onLoad() {
     spike.y = canvas.height / PX_PER_UNIT;
     rootSpikes.push(spike);
   }
-
-
-  requestAnimationFrame(tick);
 }
 
+/** Fills a 1 unit tall floor at the bottom of the canvas. */
 function drawFloor() {
   ctx.fillStyle = SPIKE_COLOR;
   ctx.fillRect(0, canvas.height - PX_PER_UNIT, canvas.width, PX_PER_UNIT);
 }
 
-let lastTick = 0;
-const rootSpikes = [];
 function tick(time) {
   // Don't bother clearing the canvas since we never need to erase previously
   // drawn spikes.
@@ -127,6 +163,13 @@ class Spike {
   /** For debugging purposes, generates a recursive count of spikes. */
   getTotalCount() {
     return 1 + this.children.map((child) => child.getTotalCount()).reduce(sum, 0);
+  }
+
+  dispose() {
+    for(const child of this.children) {
+      child.dispose();
+    }
+    this.children = [];
   }
 }
 
