@@ -48,15 +48,14 @@ function init() {
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
   drawFloor();
-  for (let i = 0; i < NUMBER_OF_ROOT_SPIKES; i++) {
+  const spikeCount = Math.max(4, canvas.width / PX_PER_UNIT / 4);
+  for (let i = 0; i < spikeCount; i++) {
     // These values were mostly chosen by trial and error for what I
     // personally feel looks good.
     const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = Math.random();
-    const maxSize =
-      Math.min(document.body.clientHeight, document.body.clientWidth)
-      / PX_PER_UNIT / 4;
+    const maxSize = document.body.clientHeight / PX_PER_UNIT / 4.5
     const spike = new Spike(
       angle,
       depth,
