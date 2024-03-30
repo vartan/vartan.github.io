@@ -25,6 +25,9 @@ const LENGTH_TO_BASE_RATIO = 1 / 20;
 /** The maximum distance along the spike to branch (from 0-1) */
 const MAX_BRANCH_SIZE_RATIO = 0.9;
 
+/** How often the cursor blinks on or off.*/
+const CURSOR_BLINK_MS = 500;
+
 /** HTML canvas element for the spike field. */
 let canvas;
 
@@ -37,16 +40,52 @@ let lastTick = 0;
 /** Root spikes which grow from the bottom of the screen. */
 const rootSpikes = [];
 
+let contentFull;
+let contentText;
+let cursor;
+
 /** Runs when the document is finished loading. */
 function onLoad() {
   canvas = document.getElementById("spike-field");
   ctx = canvas.getContext("2d");
+  contentFull = document.getElementById("content-full");
+  contentText = document.getElementById("content-text");
+  cursor = document.getElementById("cursor");
   init();
 
   addEventListener("resize", onResize);
   requestAnimationFrame(tick);
 
   setInterval(flickerBackground, BACKGROUND_FLICKER_RATE_MS);
+  setInterval(toggleCursorVisibility, CURSOR_BLINK_MS);
+  typeNextCharacter();
+}
+
+/** 
+ * Shows and hides the cursor at a regular interval.
+ * 
+ * Every {@link CURSOR_BLINK_MS} this will either hide or show the cursor.
+ */
+function toggleCursorVisibility() {
+  cursor.className = cursor.className ? "" : "hidden";
+}
+
+/** 
+ * Appends the next character to visible content, and schedules the next one. 
+ */
+function typeNextCharacter() {
+  const currentLength = contentText.textContent.length;
+  const maxLength = contentFull.textContent.length;
+  if(currentLength < maxLength) {
+    const nextChar = contentFull.textContent.charAt(currentLength);
+    contentText.textContent += contentFull.textContent.charAt(currentLength);
+    let maxTimeout = nextChar.match(/[a-z]/i) ? 50 : 100;
+    if(nextChar === "\n") {
+      maxTimeout = 300;
+    }
+    const timeout = maxTimeout * (0.25 + Math.random() * 0.75)
+    setTimeout(typeNextCharacter, timeout);
+  }
 }
 
 /** 

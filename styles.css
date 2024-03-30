@@ -6,9 +6,13 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.content {
+#content {
   font-family: monospace;
   white-space: pre-wrap;
+}
+
+#content-full {
+  display: none;
 }
 
 #spike-field {
@@ -20,4 +24,8 @@ body {
 
 #mastodon {
   display: none;
+}
+
+.hidden {
+  visibility: hidden;
 }
