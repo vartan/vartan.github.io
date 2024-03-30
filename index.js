@@ -94,7 +94,7 @@ function init() {
     const spike = new Spike(
       angle,
       depth,
-      maxSize
+      maxSize * (0.75 + Math.random() * 0.25)
     );
     spike.x = canvas.width * relativePosition / PX_PER_UNIT;
     spike.y = canvas.height / PX_PER_UNIT;
