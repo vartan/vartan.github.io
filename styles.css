@@ -2,8 +2,11 @@ body {
   font-size: 16pt;
   background: #000;
   color: #BBB;
-  text-shadow: 0 0 10px black, 0 0 20px black;
   transition: background-color 0.2s ease;
+}
+
+#content-text {
+  text-shadow: 0 0 10px black, 0 0 20px black;
 }
 
 #content {
@@ -17,9 +20,9 @@ body {
 
 #spike-field {
   position: fixed;
-  z-index:-1;
-  top:0;
-  left:0;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
 
 #mastodon {
