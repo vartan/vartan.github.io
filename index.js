@@ -15,6 +15,8 @@ function onLoad() {
 
   addEventListener("resize", onResize);
   requestAnimationFrame(tick);
+
+  setInterval(flickerBackground, 200);
 }
 
 /** 
@@ -180,3 +182,12 @@ function sum(acc, value) {
 }
 
 addEventListener("load", onLoad);
+
+
+function flickerBackground() {
+  let redness = Math.floor(Math.random() * 16).toString(16);
+  if(redness.length === 1) {
+    redness = "0" + redness;
+  }
+  document.body.style.backgroundColor = `${redness}0000`;
+}
