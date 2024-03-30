@@ -49,12 +49,13 @@ function init() {
   // As an added bonus, the floor hides the bottom edge of the spikes.
   drawFloor();
   const spikeCount = Math.max(4, canvas.width / PX_PER_UNIT / 4);
+  const averageSpikeDistance = 1 / spikeCount;
   for (let i = 0; i < spikeCount; i++) {
     // These values were mostly chosen by trial and error for what I
     // personally feel looks good.
     const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
-    const relativePosition = Math.random();
+    const relativePosition = averageSpikeDistance * (i + Math.random());
     const maxSize = document.body.clientHeight / PX_PER_UNIT / 4.5
     const spike = new Spike(
       angle,
