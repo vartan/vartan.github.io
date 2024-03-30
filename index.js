@@ -65,7 +65,6 @@ function init() {
     const spike = new Spike(
       angle,
       depth,
-      relativePosition,
       maxSize
     );
     spike.x = canvas.width * relativePosition / PX_PER_UNIT;
@@ -94,7 +93,7 @@ function tick(time) {
 }
 
 class Spike {
-  constructor(angle, depth, relativePosition, maxSize) {
+  constructor(angle, depth, maxSize) {
     /** List of all branches off of the spike. */
     this.children = [];
     /** X coordinate of the spike base. */
@@ -105,8 +104,6 @@ class Spike {
     this.angle = angle;
     /** The maximum number of generations of branches a spike can have. */
     this.depth = depth;
-    /** The relative position of this spike to its parent, from 0-1. */
-    this.relativePosition = relativePosition;
     /** The maximum length of the spike. */
     this.maxSize = maxSize;
     /** The current length of the spike. */
@@ -137,9 +134,9 @@ class Spike {
         const maxSizeLimit = this.maxSize - this.size / 2;
         const newMaxSize = maxSizeLimit * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
-        const newRelativePosition = this.size;
-        const newSpike = new Spike(newAngle, newDepth, newRelativePosition, newMaxSize);
-        const origin = this.getCoordinatesAtSize(newRelativePosition);
+        const relativePosition = this.size;
+        const newSpike = new Spike(newAngle, newDepth, newMaxSize);
+        const origin = this.getCoordinatesAtSize(relativePosition);
         newSpike.x = origin.x;
         newSpike.y = origin.y;
         this.children.push(newSpike);
