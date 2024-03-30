@@ -1,16 +1,43 @@
-const SPIKE_GROWTH_PER_MS = 1;
+/** Defines the size of a unit in pixels. */
 const PX_PER_UNIT = 50;
+
+/** How many units spikes grow each second. */
+const SPIKE_GROWTH_PER_SECOND = 1;
+
+/** The color of a spike. */
 const SPIKE_COLOR = "#333";
+
+/** The minimum number of spikes to draw when the browser has a small width. */
 const MIN_SPIKE_COUNT = 3;
+
+/** The maximum amount of redness in the background color, from Ox00-0x0F */
 const MAX_BACKGROUND_REDNESS = 0x20;
+
+/** 
+ * How often the background color is changed. Note that the browser may draw
+ * the background more frequently due to the transition style. 
+ */
 const BACKGROUND_FLICKER_RATE_MS = 1000 / 30;
+
+/** The ratio between the base of a spike and the length. */
 const LENGTH_TO_BASE_RATIO = 1 / 20;
 
+/** The maximum distance along the spike to branch (from 0-1) */
+const MAX_BRANCH_SIZE_RATIO = 0.9;
+
+/** HTML canvas element for the spike field. */
 let canvas;
+
+/** {@link canvas} context */
 let ctx;
+
+/** Used to track the time since the last tick. */
 let lastTick = 0;
+
+/** Root spikes which grow from the bottom of the screen. */
 const rootSpikes = [];
 
+/** Runs when the document is finished loading. */
 function onLoad() {
   canvas = document.getElementById("spike-field");
   ctx = canvas.getContext("2d");
@@ -23,7 +50,9 @@ function onLoad() {
 }
 
 /** 
- * Disposes any existing spikes, clears the canvas, and resets the spike field.
+ * Handler ran when the browser is resized.
+ * 
+ * Resets the canvas and reinitializes the spike field for the new size.
  */
 function onResize() {
   reset();
@@ -79,12 +108,15 @@ function drawFloor() {
   ctx.fillRect(0, canvas.height - PX_PER_UNIT, canvas.width, PX_PER_UNIT);
 }
 
+/** 
+ * Canvas animation tick.
+ * 
+ * Advances spike growth depending on the amount of time elapsed since the
+ * previous frame was rendered.
+ */
 function tick(time) {
-  // Don't bother clearing the canvas since we never need to erase previously
-  // drawn spikes.
   const timeChange = time - lastTick;
-  const sizeChange = timeChange / 1000 * SPIKE_GROWTH_PER_MS;
-
+  const sizeChange = timeChange / 1000 * SPIKE_GROWTH_PER_SECOND;
   for (const spike of rootSpikes) {
     spike.advance(sizeChange);
   }
@@ -125,7 +157,7 @@ class Spike {
 
   /** Randomly generates branches off the spike during growth. */
   maybeBranch(sizeChange) {
-    if (this.size / this.maxSize < 0.9 && this.depth > 0) {
+    if (this.size / this.maxSize < MAX_BRANCH_SIZE_RATIO && this.depth > 0) {
       if (Math.random() < sizeChange) {
         // Branches grow out 90 degrees in either direction from their parent.
         const angleOffset = (Math.random() - 0.5) * Math.PI;
@@ -181,6 +213,7 @@ class Spike {
     return 1 + this.children.map((child) => child.getTotalCount()).reduce(sum, 0);
   }
 
+  /** Recursively disposes references to branches. */
   dispose() {
     for (const child of this.children) {
       child.dispose();
@@ -193,9 +226,6 @@ function sum(acc, value) {
   return acc + value;
 }
 
-addEventListener("load", onLoad);
-
-
 function flickerBackground() {
   let redness = Math.floor(Math.random() * MAX_BACKGROUND_REDNESS).toString(16);
   if (redness.length === 1) {
@@ -203,3 +233,5 @@ function flickerBackground() {
   }
   document.body.style.backgroundColor = redness + "0000";
 }
+
+addEventListener("load", onLoad);
