@@ -1,6 +1,6 @@
 const SPIKE_GROWTH_PER_MS = 1;
 const PX_PER_UNIT = 50;
-const SPIKE_COLOR =  "#333";
+const SPIKE_COLOR = "#333";
 const NUMBER_OF_ROOT_SPIKES = 10;
 
 let canvas;
@@ -29,7 +29,7 @@ function onResize() {
  * Disposes any existing spikes, resets the spike field, and clears the canvas.
  */
 function reset() {
-  for(const spike of rootSpikes) {
+  for (const spike of rootSpikes) {
     spike.dispose();
   }
   rootSpikes.length = 0;
@@ -54,7 +54,9 @@ function init() {
     const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = Math.random();
-    const maxSize = document.body.clientHeight / PX_PER_UNIT / 4;
+    const maxSize =
+      Math.min(document.body.clientHeight, document.body.clientWidth)
+      / PX_PER_UNIT / 4;
     const spike = new Spike(
       angle,
       depth,
@@ -157,7 +159,7 @@ class Spike {
     const angle = this.angle + Math.PI / 4;
     const x = Math.cos(angle) * length;
     const y = Math.sin(angle) * length;
-    return {x: x, y: y}
+    return { x: x, y: y }
   }
 
   /** For debugging purposes, generates a recursive count of spikes. */
@@ -166,7 +168,7 @@ class Spike {
   }
 
   dispose() {
-    for(const child of this.children) {
+    for (const child of this.children) {
       child.dispose();
     }
     this.children = [];
