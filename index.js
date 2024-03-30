@@ -1,7 +1,7 @@
 const SPIKE_GROWTH_PER_MS = 1;
 const PX_PER_UNIT = 50;
 const SPIKE_COLOR = "#333";
-const NUMBER_OF_ROOT_SPIKES = 10;
+const MIN_SPIKE_COUNT = 3;
 
 let canvas;
 let ctx;
@@ -48,7 +48,7 @@ function init() {
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
   drawFloor();
-  const spikeCount = Math.max(4, canvas.width / PX_PER_UNIT / 4);
+  const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / PX_PER_UNIT / 4);
   const averageSpikeDistance = 1 / spikeCount;
   for (let i = 0; i < spikeCount; i++) {
     // These values were mostly chosen by trial and error for what I
