@@ -2,7 +2,7 @@
 const PX_PER_UNIT = 50;
 
 /** How many units spikes grow each second. */
-const SPIKE_GROWTH_PER_SECOND = 1;
+const SPIKE_GROWTH_PER_SECOND = 2;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
@@ -23,7 +23,10 @@ const BACKGROUND_FLICKER_RATE_MS = 1000 / 30;
 const LENGTH_TO_BASE_RATIO = 1 / 20;
 
 /** The maximum distance along the spike to branch (from 0-1) */
-const MAX_BRANCH_SIZE_RATIO = 0.9;
+const MAX_BRANCH_SIZE_RATIO = 0.8;
+
+/** The minimum distance along the spike to branch (from 0-1) */
+const MIN_BRANCH_SIZE_RATIO = 0.2;
 
 /** How often the cursor blinks on or off.*/
 const CURSOR_BLINK_MS = 500;
@@ -115,8 +118,8 @@ function reset() {
  */
 function init() {
   // Resize the canvas to match the screen.
-  canvas.width = document.body.clientWidth;
-  canvas.height = document.body.clientHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
@@ -129,11 +132,11 @@ function init() {
     const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = averageSpikeDistance * (i + Math.random());
-    const maxSize = document.body.clientHeight / PX_PER_UNIT / 4.5;
+    const maxSize = canvas.height / PX_PER_UNIT;
     const spike = new Spike(
       angle,
       depth,
-      maxSize * (0.75 + Math.random() * 0.25)
+      maxSize * (0.5 + Math.random() * 0.5)
     );
     spike.x = canvas.width * relativePosition / PX_PER_UNIT;
     spike.y = canvas.height / PX_PER_UNIT;
@@ -190,20 +193,22 @@ class Spike {
       this.draw();
     }
     for (const branch of this.branches) {
-      branch.advance(sizeChange);
+      branch.advance(sizeChange / 2);
     }
   }
 
   /** Randomly generates branches off the spike during growth. */
   maybeBranch(sizeChange) {
-    if (this.size / this.maxSize < MAX_BRANCH_SIZE_RATIO && this.depth > 0) {
-      if (Math.random() < sizeChange) {
+    const percentGrown = this.size / this.maxSize;
+    const isBranchElligible = percentGrown < MAX_BRANCH_SIZE_RATIO || percentGrown > MIN_BRANCH_SIZE_RATIO;
+    if (isBranchElligible && this.depth > 0) {
+      if (Math.random() * 8 < sizeChange) {
         const angleDirection = Math.random() > 0.5 ? 1 : -1;
         // Branches grow out 45-90 degrees in either direction from their parent.
         const angleOffset = angleDirection * (Math.random() * 0.25 + 0.25) * Math.PI;
         const newAngle = this.angle + angleOffset
-        // Branches get increasingly smaller the closer they are to the end.
-        const maxSizeLimit = this.maxSize - this.size / 2;
+        // Branches get smaller the closer they are to the end.
+        const maxSizeLimit = this.maxSize - this.size;
         const newMaxSize = maxSizeLimit * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const relativePosition = this.size;
@@ -233,7 +238,7 @@ class Spike {
    * position and provided size. 
    */
   getCoordinatesAtSize(size) {
-    const length = size * this.maxSize;
+    const length = size;
     const x = this.x + Math.cos(this.angle) * length;
     const y = this.y + Math.sin(this.angle) * length;
     return { x: x, y: y };
@@ -241,7 +246,7 @@ class Spike {
 
   /** Generates the offset from the origin of the spike to the edge of its base. */
   getBaseOffset() {
-    const length = this.size * this.maxSize * LENGTH_TO_BASE_RATIO;
+    const length = this.size * LENGTH_TO_BASE_RATIO;
     const angle = this.angle + Math.PI / 4;
     const x = Math.cos(angle) * length;
     const y = Math.sin(angle) * length;
