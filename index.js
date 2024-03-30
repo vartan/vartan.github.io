@@ -2,6 +2,9 @@ const SPIKE_GROWTH_PER_MS = 1;
 const PX_PER_UNIT = 50;
 const SPIKE_COLOR = "#333";
 const MIN_SPIKE_COUNT = 3;
+const MAX_BACKGROUND_REDNESS = 0x20;
+const BACKGROUND_FLICKER_RATE_MS = 1000 / 30;
+const LENGTH_TO_BASE_RATIO = 1 / 20;
 
 let canvas;
 let ctx;
@@ -16,7 +19,7 @@ function onLoad() {
   addEventListener("resize", onResize);
   requestAnimationFrame(tick);
 
-  setInterval(flickerBackground, 1000 / 30);
+  setInterval(flickerBackground, BACKGROUND_FLICKER_RATE_MS);
 }
 
 /** 
@@ -92,13 +95,21 @@ function tick(time) {
 
 class Spike {
   constructor(angle, depth, relativePosition, maxSize) {
+    /** List of all branches off of the spike. */
     this.children = [];
+    /** X coordinate of the spike base. */
     this.x = 0;
+    /** Y coordinate of the spike base. */
     this.y = 0;
+    /** The absolute angle of the spike. */
     this.angle = angle;
+    /** The maximum number of generations of branches a spike can have. */
     this.depth = depth;
+    /** The relative position of this spike to its parent, from 0-1. */
     this.relativePosition = relativePosition;
+    /** The maximum length of the spike. */
     this.maxSize = maxSize;
+    /** The current length of the spike. */
     this.size = 0;
   }
 
@@ -119,8 +130,12 @@ class Spike {
   maybeBranch(sizeChange) {
     if (this.size / this.maxSize < 0.9 && this.depth > 0) {
       if (Math.random() < sizeChange) {
-        const newAngle = this.angle + (Math.random() - 0.5) * Math.PI;
-        const newMaxSize = (this.maxSize - this.size / 2) * (0.33 + Math.random() * 0.33);
+        // Branches grow out 90 degrees in either direction from their parent.
+        const angleOffset = (Math.random() - 0.5) * Math.PI;
+        const newAngle = this.angle + angleOffset
+        // Branches get increasingly smaller the closer they are to the end.
+        const maxSizeLimit = this.maxSize - this.size / 2;
+        const newMaxSize = maxSizeLimit * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const newRelativePosition = this.size;
         const newSpike = new Spike(newAngle, newDepth, newRelativePosition, newMaxSize);
@@ -157,7 +172,7 @@ class Spike {
 
   /** Generates the offset from the origin of the spike to the edge of its base. */
   getBaseOffset() {
-    const length = this.size * this.maxSize / 20;
+    const length = this.size * this.maxSize * LENGTH_TO_BASE_RATIO;
     const angle = this.angle + Math.PI / 4;
     const x = Math.cos(angle) * length;
     const y = Math.sin(angle) * length;
@@ -185,9 +200,9 @@ addEventListener("load", onLoad);
 
 
 function flickerBackground() {
-  let redness = Math.floor(Math.random() * 32).toString(16);
-  if(redness.length === 1) {
+  let redness = Math.floor(Math.random() * MAX_BACKGROUND_REDNESS).toString(16);
+  if (redness.length === 1) {
     redness = "0" + redness;
   }
-  document.body.style.backgroundColor = `${redness}0000`;
+  document.body.style.backgroundColor = redness + "0000";
 }
