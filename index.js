@@ -28,7 +28,7 @@ const MAX_BRANCH_SIZE_RATIO = 0.9;
 /** HTML canvas element for the spike field. */
 let canvas;
 
-/** {@link canvas} context */
+/** {@link canvas} context. */
 let ctx;
 
 /** Used to track the time since the last tick. */
@@ -90,7 +90,7 @@ function init() {
     const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = averageSpikeDistance * (i + Math.random());
-    const maxSize = document.body.clientHeight / PX_PER_UNIT / 4.5
+    const maxSize = document.body.clientHeight / PX_PER_UNIT / 4.5;
     const spike = new Spike(
       angle,
       depth,
