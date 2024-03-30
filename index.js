@@ -127,7 +127,7 @@ function tick(time) {
 class Spike {
   constructor(angle, depth, maxSize) {
     /** List of all branches off of the spike. */
-    this.children = [];
+    this.branches = [];
     /** X coordinate of the spike base. */
     this.x = 0;
     /** Y coordinate of the spike base. */
@@ -142,7 +142,7 @@ class Spike {
     this.size = 0;
   }
 
-  /* Grows the spike and redraws it, including its children. */
+  /* Grows the spike and redraws it, including its branches. */
   advance(sizeChange) {
     if (this.size !== this.maxSize) {
       // If the spike is already fully grown, don't bother growing/drawing it.
@@ -150,8 +150,8 @@ class Spike {
       this.maybeBranch(sizeChange);
       this.draw();
     }
-    for (const childSpike of this.children) {
-      childSpike.advance(sizeChange);
+    for (const branch of this.branches) {
+      branch.advance(sizeChange);
     }
   }
 
@@ -171,7 +171,7 @@ class Spike {
         const origin = this.getCoordinatesAtSize(relativePosition);
         newSpike.x = origin.x;
         newSpike.y = origin.y;
-        this.children.push(newSpike);
+        this.branches.push(newSpike);
       }
     }
   }
@@ -210,15 +210,15 @@ class Spike {
 
   /** For debugging purposes, generates a recursive count of spikes. */
   getTotalCount() {
-    return 1 + this.children.map((child) => child.getTotalCount()).reduce(sum, 0);
+    return 1 + this.branches.map((child) => child.getTotalCount()).reduce(sum, 0);
   }
 
   /** Recursively disposes references to branches. */
   dispose() {
-    for (const child of this.children) {
-      child.dispose();
+    for (const branch of this.branches) {
+      branch.dispose();
     }
-    this.children = [];
+    this.branches = [];
   }
 }
 
