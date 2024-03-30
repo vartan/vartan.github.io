@@ -159,8 +159,9 @@ class Spike {
   maybeBranch(sizeChange) {
     if (this.size / this.maxSize < MAX_BRANCH_SIZE_RATIO && this.depth > 0) {
       if (Math.random() < sizeChange) {
-        // Branches grow out 90 degrees in either direction from their parent.
-        const angleOffset = (Math.random() - 0.5) * Math.PI;
+        const angleDirection = Math.random() > 0.5 ? 1 : -1;
+        // Branches grow out 45-90 degrees in either direction from their parent.
+        const angleOffset = angleDirection * (Math.random() * 0.25 + 0.25) * Math.PI;
         const newAngle = this.angle + angleOffset
         // Branches get increasingly smaller the closer they are to the end.
         const maxSizeLimit = this.maxSize - this.size / 2;
