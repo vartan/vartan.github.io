@@ -16,7 +16,7 @@ function onLoad() {
   addEventListener("resize", onResize);
   requestAnimationFrame(tick);
 
-  setInterval(flickerBackground, 200);
+  setInterval(flickerBackground, 1000 / 30);
 }
 
 /** 
@@ -185,7 +185,7 @@ addEventListener("load", onLoad);
 
 
 function flickerBackground() {
-  let redness = Math.floor(Math.random() * 16).toString(16);
+  let redness = Math.floor(Math.random() * 32).toString(16);
   if(redness.length === 1) {
     redness = "0" + redness;
   }
