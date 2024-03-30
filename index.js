@@ -10,7 +10,7 @@ const SPIKE_COLOR = "#333";
 /** The minimum number of spikes to draw when the browser has a small width. */
 const MIN_SPIKE_COUNT = 3;
 
-/** The maximum amount of redness in the background color, from Ox00-0x0F */
+/** The maximum amount of redness in the background color, from Ox00-0x0F. */
 const MAX_BACKGROUND_REDNESS = 0x20;
 
 /** 
