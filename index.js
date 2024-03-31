@@ -46,6 +46,7 @@ const rootSpikes = [];
 let contentFull;
 let contentText;
 let cursor;
+let devicePixelsPerUnit = PX_PER_UNIT;
 
 /** Runs when the document is finished loading. */
 function onLoad() {
@@ -118,13 +119,17 @@ function reset() {
  */
 function init() {
   // Resize the canvas to match the screen.
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const pixelRatio = window.devicePixelRatio;
+  devicePixelsPerUnit = PX_PER_UNIT * pixelRatio;
+  canvas.width = window.innerWidth * pixelRatio;
+  canvas.height = window.innerHeight * pixelRatio;
+  const scale = 1 / pixelRatio;
+  canvas.style.transform = "scale(" + scale +","+ scale + ")";
 
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
   drawFloor();
-  const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / PX_PER_UNIT / 4);
+  const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / devicePixelsPerUnit / 4);
   const averageSpikeDistance = 1 / spikeCount;
   for (let i = 0; i < spikeCount; i++) {
     // These values were mostly chosen by trial and error for what I
@@ -132,14 +137,14 @@ function init() {
     const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = averageSpikeDistance * (i + Math.random());
-    const maxSize = canvas.height / PX_PER_UNIT;
+    const maxSize = canvas.height / devicePixelsPerUnit;
     const spike = new Spike(
       angle,
       depth,
       maxSize * (0.5 + Math.random() * 0.5)
     );
-    spike.x = canvas.width * relativePosition / PX_PER_UNIT;
-    spike.y = canvas.height / PX_PER_UNIT;
+    spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
+    spike.y = canvas.height / devicePixelsPerUnit;
     rootSpikes.push(spike);
   }
 }
@@ -147,7 +152,7 @@ function init() {
 /** Fills a 1 unit tall floor at the bottom of the canvas. */
 function drawFloor() {
   ctx.fillStyle = SPIKE_COLOR;
-  ctx.fillRect(0, canvas.height - PX_PER_UNIT, canvas.width, PX_PER_UNIT);
+  ctx.fillRect(0, canvas.height - devicePixelsPerUnit, canvas.width, devicePixelsPerUnit);
 }
 
 /** 
@@ -225,10 +230,10 @@ class Spike {
   draw() {
     const end = this.getCoordinatesAtSize(this.size);
     ctx.beginPath();
-    ctx.moveTo(end.x * PX_PER_UNIT, end.y * PX_PER_UNIT);
+    ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
     const baseOffset = this.getBaseOffset();
-    ctx.lineTo((this.x + baseOffset.x) * PX_PER_UNIT, (this.y + baseOffset.y) * PX_PER_UNIT)
-    ctx.lineTo((this.x - baseOffset.x) * PX_PER_UNIT, (this.y - baseOffset.y) * PX_PER_UNIT)
+    ctx.lineTo((this.x + baseOffset.x) * devicePixelsPerUnit, (this.y + baseOffset.y) * devicePixelsPerUnit)
+    ctx.lineTo((this.x - baseOffset.x) * devicePixelsPerUnit, (this.y - baseOffset.y) * devicePixelsPerUnit)
     ctx.fillStyle = SPIKE_COLOR;
     ctx.fill();
   }
