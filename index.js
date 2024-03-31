@@ -26,7 +26,7 @@ const LENGTH_TO_BASE_RATIO = 1 / 20;
 const MAX_BRANCH_SIZE_RATIO = 0.9;
 
 /** The minimum distance along the spike to branch (from 0-1) */
-const MIN_BRANCH_SIZE_RATIO = 0.2;
+const MIN_BRANCH_SIZE_RATIO = 0.3;
 
 /** How often the cursor blinks on or off.*/
 const CURSOR_BLINK_MS = 500;
@@ -83,7 +83,7 @@ function typeNextCharacter() {
   if(currentLength < maxLength) {
     const nextChar = contentFull.textContent.charAt(currentLength);
     contentText.textContent += contentFull.textContent.charAt(currentLength);
-    let maxTimeout = nextChar.match(/[a-z]/i) ? 50 : 100;
+    let maxTimeout = nextChar.match(/[a-z]/i) ? 25 : 100;
     if(nextChar === "\n") {
       maxTimeout = 300;
     }
@@ -134,7 +134,7 @@ function init() {
   for (let i = 0; i < spikeCount; i++) {
     // These values were mostly chosen by trial and error for what I
     // personally feel looks good.
-    const angle = (Math.random() * 0.5 + 1.25) * Math.PI;
+    const angle = (Math.random() * 0.25 + 1.375) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
     const relativePosition = averageSpikeDistance * (i + Math.random());
     const maxSize = canvas.height / devicePixelsPerUnit;
@@ -198,7 +198,7 @@ class Spike {
       this.draw();
     }
     for (const branch of this.branches) {
-      branch.advance(sizeChange / 4);
+      branch.advance(sizeChange / 3);
     }
   }
 
