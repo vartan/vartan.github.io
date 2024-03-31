@@ -141,7 +141,7 @@ function init() {
     const spike = new Spike(
       angle,
       depth,
-      maxSize * (0.5 + Math.random() * 0.5)
+      maxSize * (1 - Math.random() * Math.random() * 0.5)
     );
     spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
     spike.y = canvas.height / devicePixelsPerUnit;
@@ -187,14 +187,17 @@ class Spike {
     this.maxSize = maxSize;
     /** The current length of the spike. */
     this.size = 0;
+    /** Allows spikes to grow at different rates. */
+    this.growthRateModifier = 0.5 + Math.random() * 0.5;
   }
 
   /* Grows the spike and redraws it, including its branches. */
   advance(sizeChange) {
     if (this.size !== this.maxSize) {
+      const modifiedSizeChange = sizeChange * this.growthRateModifier;
       // If the spike is already fully grown, don't bother growing/drawing it.
-      this.size = Math.min(this.size + sizeChange, this.maxSize);
-      this.maybeBranch(sizeChange);
+      this.size = Math.min(this.size + modifiedSizeChange, this.maxSize);
+      this.maybeBranch(modifiedSizeChange);
       this.draw();
     }
     for (const branch of this.branches) {
