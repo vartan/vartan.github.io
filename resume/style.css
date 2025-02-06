@@ -12,7 +12,8 @@
 
 }
 
-body {
+body,
+.jobtitle .year {
 	/*font:10.5pt "Times New roman", Times, Serif;*/
 	font: 9pt 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 	line-height: 1.4em;
@@ -355,8 +356,9 @@ em {
 	body {
 		/*font-size:9pt;*/
 	}
+
 	.contact {
-		padding: auto; 
+		padding: auto;
 		margin: auto;
 		text-align: center;
 	}
