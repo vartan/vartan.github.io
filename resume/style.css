@@ -355,6 +355,11 @@ em {
 	body {
 		/*font-size:9pt;*/
 	}
+	.contact {
+		padding: auto; 
+		margin: auto;
+		text-align: center;
+	}
 }
 
 @media screen and (max-height:320px) and (orientation:landscape) {
