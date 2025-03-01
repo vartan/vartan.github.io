@@ -23,6 +23,7 @@ body {
     font-size: 2rem;
     background: #CDF;
     padding: 0 var(--side-margin);
+    box-sizing: border-box;
 }
 
 .nav {
@@ -32,7 +33,7 @@ body {
     background: #BCF;
     border-top: 1px solid #9AF;
     border-bottom: 1px solid #78f;
-
+    box-sizing: border-box;
 }
 
 .nav li {
