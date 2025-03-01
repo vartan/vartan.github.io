@@ -1,76 +1,35 @@
-:root {
-    --side-margin: 2%;
-}
-
-@media only screen and (min-width: 600px) {
-    :root {
-        --side-margin: 10%;
-    }
-}
-
-html,
 body {
-    padding: 0;
-    margin: 0;
+  font-size: 16pt;
+  background: #000;
+  color: #BBB;
+  transition: background-color 0.2s ease;
 }
 
-body {
-    font: 12pt 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-    background-color: #FFF5f5;
+#content-text {
+  text-shadow: 0 0 10px black, 0 0 20px black;
 }
 
-.header {
-    font-size: 2rem;
-    background: #CDF;
-    padding: 0 var(--side-margin);
-    box-sizing: border-box;
+#content {
+  font-family: monospace;
+  white-space: pre-wrap;
 }
 
-.nav {
-    padding: 0 var(--side-margin);
-    margin: 0;
-    width: 100%;
-    background: #BCF;
-    border-top: 1px solid #9AF;
-    border-bottom: 1px solid #78f;
-    box-sizing: border-box;
+#content-full {
+  display: none;
 }
 
-.nav li {
-    list-style-type: none;
-    display: inline-block;
+#spike-field {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
 }
 
-.nav li a {
-    color: #00F;
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    text-decoration: none;
-    margin-right: 1rem;
-}
-.nav li a:hover {
-    /* text-shadow: 0 0 3px white; */
-    transform: scale(1.1);
-}
-#yoink-content {
-    margin: 0 var(--side-margin);
-    background-color: white;
-    min-height: calc(100% - 200px);
-    border-radius: 0 0 5px 5px;
-    /* box-shadow: 0 0 10px rgba(1,1,1,0.5); */
-    border-style: solid;
-    border-color: black;
-    border-width: 0 1px 1px 1px;
-
-    padding: 1rem;
+#mastodon {
+  display: none;
 }
 
-.footer {
-    margin: 0 var(--side-margin);
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    color: #aaa;
-    font-size: 0.75rem;
-    line-height: 2rem;
+.hidden {
+  visibility: hidden;
 }
