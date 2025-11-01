@@ -7,9 +7,9 @@ const SPIKE_GROWTH_PER_SECOND = 2;
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
 /** The color of spikes' shadow lines. */
-const SHADOW_COLOR = "#000";
+const SHADOW_COLOR = "#010";
 /** The color of spikes' highlights. */
-const HIGHLIGHT_COLOR = "#555";
+const HIGHLIGHT_COLOR = "#544";
 
 /** The minimum number of spikes to draw when the browser has a small width. */
 const MIN_SPIKE_COUNT = 3;
