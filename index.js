@@ -71,7 +71,7 @@ let contentFull;
 let contentText;
 let cursor;
 let devicePixelsPerUnit = PX_PER_UNIT;
-var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let hasUserInteraction = false;
 /** Runs when the document is finished loading. */
 function onLoad() {
   canvas = document.getElementById("spike-field");
@@ -92,6 +92,7 @@ function onLoad() {
   document.body.addEventListener("keypress", onKeyPress);
   document.body.addEventListener("keydown", onKeyDown);
   document.body.addEventListener("keyup", onKeyUp);
+  document.body.addEventListener("pointerdown", onPointerDown);
 }
 
 /** 
@@ -168,8 +169,17 @@ function typeCharacter(nextChar) {
 
 const oscMap = {};
 
+let _audioContext;
+function getAudioContext() {
+  if (!_audioContext && hasUserInteraction) {
+    _audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return _audioContext;
+}
+
 function playCharacterAudio(char, disableAutoStop, scale) {
-  if (disableAutoStop && oscMap[char]) {
+  let audioContext = getAudioContext();
+  if (disableAutoStop && oscMap[char] || !audioContext) {
     return;
   }
   scale = scale || PENTATONIC_A_MINOR_2_OCTAVES;
@@ -177,7 +187,7 @@ function playCharacterAudio(char, disableAutoStop, scale) {
   var osc = audioContext.createOscillator(); // instantiate an oscillator
   var gainNode = audioContext.createGain();
   gainNode.gain.value = 0.25;
-  osc.type = 'sawtooth'; // this is the default - also square, sawtooth, triangle
+  osc.type = 'square'; // this is the default - also square, sawtooth, triangle
   osc.frequency.value = 220 * Math.pow(2, scale[(char % scale.length)] / 12); // Hz
   osc.connect(gainNode).connect(audioContext.destination); // connect it to the destination
   osc.start(audioContext.currentTime); // start the oscillator
@@ -468,6 +478,7 @@ function flickerBackground() {
 }
 
 function onKeyDown(event) {
+  hasUserInteraction = true;
   if (event.repeat) { return; }
   playCharacterAudio(event.which, true, CHROMATIC_SCALE_TWO_OCTAVES);
 }
@@ -492,6 +503,10 @@ function onKeyUp(event) {
     maybeStop();
   }
 
+}
+
+function onPointerDown() {
+  hasUserInteraction = true;
 }
 
 addEventListener("load", onLoad);
