@@ -159,7 +159,7 @@ function init() {
 
 /** Fills a 1 unit tall floor at the bottom of the canvas. */
 function drawFloor() {
-  const FLOOR_HEIGHT = 1.5;
+  const FLOOR_HEIGHT = 1.75;
   ctx.fillStyle = SPIKE_COLOR;
   ctx.fillRect(0, canvas.height - devicePixelsPerUnit, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
   ctx.strokeStyle = SHADOW_COLOR;
