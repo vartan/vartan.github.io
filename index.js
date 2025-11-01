@@ -6,6 +6,8 @@ const SPIKE_GROWTH_PER_SECOND = 2;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
+const SHADOW_COLOR = "#000";
+const HIGHLIGHT_COLOR = "#555";
 
 /** The minimum number of spikes to draw when the browser has a small width. */
 const MIN_SPIKE_COUNT = 3;
@@ -144,10 +146,11 @@ function init() {
     const spike = new Spike(
       angle,
       depth,
-      maxSize * (1 - Math.random() * Math.random() * 0.5)
+      maxSize * (1 - Math.random() * Math.random() * 0.5),
+      /* hideShadowArtifact= */ true
     );
     spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
-    spike.y = canvas.height / devicePixelsPerUnit;
+    spike.y = canvas.height / devicePixelsPerUnit + Math.random()*-.5;
     rootSpikes.push(spike);
   }
 }
@@ -167,15 +170,18 @@ function drawFloor() {
 function tick(time) {
   const timeChange = time - lastTick;
   const sizeChange = timeChange / 1000 * SPIKE_GROWTH_PER_SECOND;
+  let isFinishedGrowing = true;
   for (const spike of rootSpikes) {
-    spike.advance(sizeChange);
+    isFinishedGrowing = spike.advance(sizeChange) && isFinishedGrowing;
   }
   lastTick = time;
-  requestAnimationFrame(tick);
+  if(!isFinishedGrowing) {
+    requestAnimationFrame(tick);
+  }
 }
 
 class Spike {
-  constructor(angle, depth, maxSize) {
+  constructor(angle, depth, maxSize, hideShadowArtifact) {
     /** List of all branches off of the spike. */
     this.branches = [];
     /** X coordinate of the spike base. */
@@ -192,20 +198,27 @@ class Spike {
     this.size = 0;
     /** Allows spikes to grow at different rates. */
     this.growthRateModifier = 0.5 + Math.random() * 0.5;
+    /** When true, it fills in the root of the spike where it provides some extra depth. */
+    this.hideShadowArtifact = hideShadowArtifact;
   }
 
-  /* Grows the spike and redraws it, including its branches. */
+  /* 
+   * Grows the spike and redraws it, including its branches. 
+   * 
+   * @return whether 
+   */
   advance(sizeChange) {
-    if (this.size !== this.maxSize) {
+    let isFinishedGrowing = this.size === this.maxSize;
+    if(!isFinishedGrowing) {
       const modifiedSizeChange = sizeChange * this.growthRateModifier;
-      // If the spike is already fully grown, don't bother growing/drawing it.
       this.size = Math.min(this.size + modifiedSizeChange, this.maxSize);
       this.maybeBranch(modifiedSizeChange);
-      this.draw();
     }
+    this.draw();
     for (const branch of this.branches) {
-      branch.advance(sizeChange / 3);
+      isFinishedGrowing = branch.advance(sizeChange / 3) && isFinishedGrowing;
     }
+    return isFinishedGrowing;
   }
 
   /** Randomly generates branches off the spike during growth. */
@@ -223,7 +236,7 @@ class Spike {
         const newMaxSize = maxSizeLimit * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const relativePosition = this.size;
-        const newSpike = new Spike(newAngle, newDepth, newMaxSize);
+        const newSpike = new Spike(newAngle, newDepth, newMaxSize, false);
         const origin = this.getCoordinatesAtSize(relativePosition);
         newSpike.x = origin.x;
         newSpike.y = origin.y;
@@ -233,15 +246,49 @@ class Spike {
   }
 
   /** Draws the spike. */
-  draw() {
+  draw(forced) {
     const end = this.getCoordinatesAtSize(this.size);
+    ctx.fillStyle = SPIKE_COLOR;
+    const baseOffset = this.getBaseOffset();
+
     ctx.beginPath();
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
-    const baseOffset = this.getBaseOffset();
-    ctx.lineTo((this.x + baseOffset.x) * devicePixelsPerUnit, (this.y + baseOffset.y) * devicePixelsPerUnit)
-    ctx.lineTo((this.x - baseOffset.x) * devicePixelsPerUnit, (this.y - baseOffset.y) * devicePixelsPerUnit)
-    ctx.fillStyle = SPIKE_COLOR;
+    ctx.lineTo((this.x + baseOffset.x1) * devicePixelsPerUnit, (this.y + baseOffset.y1) * devicePixelsPerUnit)
+    if(this.hideShadowArtifact) {
+      ctx.lineTo((this.x) * devicePixelsPerUnit, (this.y) * devicePixelsPerUnit);
+    }
+    ctx.lineTo((this.x + baseOffset.x2) * devicePixelsPerUnit, (this.y + baseOffset.y2) * devicePixelsPerUnit)
     ctx.fill();
+
+    let shadowX, highlightX, shadowY, highlightY;
+    if(baseOffset.y1 > baseOffset.y2) {
+      shadowX = baseOffset.x1;
+      shadowY = baseOffset.y1;
+      highlightX = baseOffset.x2;
+      highlightY = baseOffset.y2;
+    } else {
+      shadowX = baseOffset.x2;
+      shadowY = baseOffset.y2;
+      highlightX = baseOffset.x1;
+      highlightY = baseOffset.y1;
+    }
+
+    ctx.strokeStyle = SHADOW_COLOR;
+    ctx.lineWidth = 1;
+    for(let i = 7; i <= 10; i++) {
+      ctx.beginPath();
+      ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
+      ctx.lineTo((this.x + shadowX*i/10) * devicePixelsPerUnit, (this.y + shadowY*i/10) * devicePixelsPerUnit)
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = HIGHLIGHT_COLOR;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
+    ctx.lineTo((this.x + highlightX*.9) * devicePixelsPerUnit, (this.y + highlightY*.9) * devicePixelsPerUnit)
+    ctx.stroke();
+    
   }
 
   /**
@@ -258,10 +305,13 @@ class Spike {
   /** Generates the offset from the origin of the spike to the edge of its base. */
   getBaseOffset() {
     const length = this.size * LENGTH_TO_BASE_RATIO;
-    const angle = this.angle + Math.PI / 4;
-    const x = Math.cos(angle) * length;
-    const y = Math.sin(angle) * length;
-    return { x: x, y: y }
+    const angle1 = this.angle + Math.PI / 4;
+    const x1 = Math.cos(angle1) * length;
+    const y1 = Math.sin(angle1) * length;
+    const angle2 = this.angle - Math.PI / 4;
+    const x2 = Math.cos(angle2) * length;
+    const y2 = Math.sin(angle2) * length;
+    return { x1: x1, y1: y1, x2: x2, y2: y2 }
   }
 
   /** For debugging purposes, generates a recursive count of spikes. */
