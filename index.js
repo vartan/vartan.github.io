@@ -325,7 +325,10 @@ class Spike {
     return { x: x, y: y };
   }
 
-  /** Generates the offset from the origin of the spike to the edge of its base. */
+  /**
+   * Generates the offset from the origin of the spike to the edge of its base. 
+   * Each is at a 45 degree angle from the actual root. 
+   */
   getBaseOffset() {
     const length = this.size * LENGTH_TO_BASE_RATIO;
     const angle1 = this.angle + Math.PI / 4;
