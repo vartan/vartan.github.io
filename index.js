@@ -262,7 +262,7 @@ class Spike {
   }
 
   /** Draws the spike. */
-  draw(forced) {
+  draw() {
     const end = this.getCoordinatesAtSize(this.size);
     ctx.fillStyle = SPIKE_COLOR;
     const baseOffset = this.getBaseOffset();
