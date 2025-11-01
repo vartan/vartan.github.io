@@ -89,7 +89,7 @@ function typeNextCharacter() {
   const maxLength = contentFull.textContent.length;
   if(currentLength < maxLength) {
     const nextChar = contentFull.textContent.charAt(currentLength);
-    contentText.textContent += contentFull.textContent.charAt(currentLength);
+    contentText.appendChild(document.createTextNode(contentFull.textContent.charAt(currentLength)))
     let maxTimeout = nextChar.match(/[a-z]/i) ? 25 : 100;
     if(nextChar === "\n") {
       maxTimeout = 300;
