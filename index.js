@@ -159,16 +159,16 @@ function init() {
 
 /** Fills a 1 unit tall floor at the bottom of the canvas. */
 function drawFloor() {
-  const FLOOR_HEIGHT = 1.75;
+  const FLOOR_HEIGHT = 1.5;
   ctx.fillStyle = SPIKE_COLOR;
-  ctx.fillRect(0, canvas.height - devicePixelsPerUnit, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
+  ctx.fillRect(0, canvas.height - devicePixelsPerUnit* FLOOR_HEIGHT, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
   ctx.strokeStyle = SHADOW_COLOR;
   ctx.lineWidth = 1;
   const SHADOW_POSITIONS = [12, 16, 18, 19, 20];
   for(let i = 0; i < SHADOW_POSITIONS.length; i++) {
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height - devicePixelsPerUnit*SHADOW_POSITIONS[i]/20);
-    ctx.lineTo(canvas.width, canvas.height - devicePixelsPerUnit*SHADOW_POSITIONS[i]/20);
+    ctx.moveTo(0, canvas.height - FLOOR_HEIGHT*devicePixelsPerUnit*SHADOW_POSITIONS[i]/20);
+    ctx.lineTo(canvas.width, canvas.height - FLOOR_HEIGHT*devicePixelsPerUnit*SHADOW_POSITIONS[i]/20);
     ctx.stroke();
   }
 
