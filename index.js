@@ -7,7 +7,7 @@ const SPIKE_GROWTH_PER_SECOND = 3;
 /** Ratio of how much a branch grows in comparison to its parent. */
 const SPIKE_BRANCH_GROWTH_RATIO = 1 / 2;
 
-const ROOT_SPIKES_PER_UNIT = 2;
+const ROOT_SPIKES_PER_UNIT = 1.5;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
@@ -17,7 +17,7 @@ const SHADOW_COLOR = "#010";
 const HIGHLIGHT_COLOR = "#544";
 
 /** The minimum number of spikes to draw when the browser has a small width. */
-const MIN_SPIKE_COUNT = 20;
+const MIN_SPIKE_COUNT = 15;
 
 /** The maximum amount of saturation in the background color, from Ox00-0x0F. */
 const MAX_BACKGROUND_SATURATION = 0x15;
@@ -149,7 +149,7 @@ function init() {
     spikeYs.push(Math.random());
   }
   spikeYs.sort();
-  for (let i = spikeYs.length; i >= 0; i--) {
+  for (let i = spikeYs.length - 1; i >= 0; i--) {
     // These values were mostly chosen by trial and error for what I
     // personally feel looks good.
     const angle = (Math.random() * 0.25 + 1.375) * Math.PI;
@@ -199,9 +199,7 @@ function tick(time) {
     isFinishedGrowing = spike.advance(sizeChange) && isFinishedGrowing;
   }
   lastTick = time;
-  if (isFinishedGrowing) {
-    console.log("all done after " + Math.round((new Date().getTime() - SCRIPT_LOAD_TIME.getTime()) / 1000) + " seconds :)");
-  } else {
+  if (!isFinishedGrowing) {
     requestAnimationFrame(tick);
   }
 }
@@ -240,12 +238,12 @@ class Spike {
     let isFinishedGrowing = this.size === this.maxSize;
     if (!isFinishedGrowing) {
       const modifiedSizeChange = sizeChange * this.growthRateModifier;
+      const oldSize = this.size;
       this.size = Math.min(this.size + modifiedSizeChange, this.maxSize);
-      this.maybeBranch(modifiedSizeChange);
-      if (this.size === this.size + modifiedSizeChange) {
-        // Also consider it to be finished growing if the increase is smaller than floating point error.
-        finishedGrowing = true;
+      if (oldSize === this.size) {
+        isFinishedGrowing = true; // Consider it finished growing if we reach floating point rounding issues.
       }
+      this.maybeBranch(modifiedSizeChange);
     }
     this.draw();
     for (const branch of this.branches) {
