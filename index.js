@@ -208,7 +208,7 @@ class Spike {
   /** Randomly generates branches off the spike during growth. */
   maybeBranch(sizeChange) {
     const percentGrown = this.size / this.maxSize;
-    const isBranchElligible = percentGrown < MAX_BRANCH_SIZE_RATIO || percentGrown > MIN_BRANCH_SIZE_RATIO;
+    const isBranchElligible = percentGrown < MAX_BRANCH_SIZE_RATIO && percentGrown > MIN_BRANCH_SIZE_RATIO;
     if (isBranchElligible && this.depth > 0) {
       if (Math.random() * 5 < sizeChange) {
         const angleDirection = Math.random() > 0.5 ? 1 : -1;
