@@ -7,6 +7,8 @@ const SPIKE_GROWTH_PER_SECOND = 3;
 /** Ratio of how much a branch grows in comparison to its parent. */
 const SPIKE_BRANCH_GROWTH_RATIO = 1 / 4;
 
+const ROOT_SPIKES_PER_UNIT = 1 / 3;
+
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
 /** The color of spikes' shadow lines. */
@@ -15,7 +17,7 @@ const SHADOW_COLOR = "#010";
 const HIGHLIGHT_COLOR = "#544";
 
 /** The minimum number of spikes to draw when the browser has a small width. */
-const MIN_SPIKE_COUNT = 3;
+const MIN_SPIKE_COUNT = 7;
 
 /** The maximum amount of saturation in the background color, from Ox00-0x0F. */
 const MAX_BACKGROUND_SATURATION = 0x15;
@@ -139,28 +141,26 @@ function init() {
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
   drawFloor();
-  const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / devicePixelsPerUnit / 4);
-  const averageSpikeDistance = 1 / spikeCount;
+  const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / devicePixelsPerUnit * ROOT_SPIKES_PER_UNIT);
   let spikeYs = [];
   for (let i = 0; i < spikeCount; i++) {
-    spikeYs.push(canvas.height / devicePixelsPerUnit - Math.random() * 0.75);
+    spikeYs.push(Math.random());
   }
   spikeYs.sort();
-  for (let i = 0; i < spikeYs.length; i++) {
+  for (let i = spikeYs.length; i >= 0; i--) {
     // These values were mostly chosen by trial and error for what I
     // personally feel looks good.
     const angle = (Math.random() * 0.25 + 1.375) * Math.PI;
     const depth = 3 + Math.round(Math.random() * 2);
-    const relativePosition = averageSpikeDistance * (i + Math.random());
-    const maxSize = canvas.height / devicePixelsPerUnit;
+    const maxSize = canvas.height / devicePixelsPerUnit * (1 - spikeYs[i]);
     const spike = new Spike(
       angle,
       depth,
       maxSize * (1 - Math.random() * Math.random() * 0.5),
       /* shouldFillRoot= */ true
     );
-    spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
-    spike.y = spikeYs[i];
+    spike.x = canvas.width * Math.random() / devicePixelsPerUnit;
+    spike.y = canvas.height / devicePixelsPerUnit - spikeYs[i] * 0.75;
     rootSpikes.push(spike);
   }
 }
@@ -311,6 +311,10 @@ class Spike {
     ctx.beginPath();
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
     ctx.lineTo((this.x + highlightX * .9) * devicePixelsPerUnit, (this.y + highlightY * .9) * devicePixelsPerUnit)
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
+    ctx.lineTo((this.x + highlightX) * devicePixelsPerUnit, (this.y + highlightY) * devicePixelsPerUnit)
     ctx.stroke();
   }
 
