@@ -6,7 +6,9 @@ const SPIKE_GROWTH_PER_SECOND = 2;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
+/** The color of spikes' shadow lines. */
 const SHADOW_COLOR = "#000";
+/** The color of spikes' highlights. */
 const HIGHLIGHT_COLOR = "#555";
 
 /** The minimum number of spikes to draw when the browser has a small width. */
@@ -147,7 +149,7 @@ function init() {
       angle,
       depth,
       maxSize * (1 - Math.random() * Math.random() * 0.5),
-      /* hideShadowArtifact= */ true
+      /* shouldFillRoot= */ true
     );
     spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
     spike.y = canvas.height / devicePixelsPerUnit + Math.random()*-.5;
@@ -181,7 +183,7 @@ function tick(time) {
 }
 
 class Spike {
-  constructor(angle, depth, maxSize, hideShadowArtifact) {
+  constructor(angle, depth, maxSize, shouldFillRoot) {
     /** List of all branches off of the spike. */
     this.branches = [];
     /** X coordinate of the spike base. */
@@ -198,8 +200,11 @@ class Spike {
     this.size = 0;
     /** Allows spikes to grow at different rates. */
     this.growthRateModifier = 0.5 + Math.random() * 0.5;
-    /** When true, it fills in the root of the spike where it provides some extra depth. */
-    this.hideShadowArtifact = hideShadowArtifact;
+    /** 
+     * When true, it fills in the root of the spike where some drawing 
+     * artifacts otherwise provide some extra depth. 
+     */
+    this.shouldFillRoot = shouldFillRoot;
   }
 
   /* 
@@ -254,7 +259,7 @@ class Spike {
     ctx.beginPath();
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
     ctx.lineTo((this.x + baseOffset.x1) * devicePixelsPerUnit, (this.y + baseOffset.y1) * devicePixelsPerUnit)
-    if(this.hideShadowArtifact) {
+    if(this.shouldFillRoot) {
       ctx.lineTo((this.x) * devicePixelsPerUnit, (this.y) * devicePixelsPerUnit);
     }
     ctx.lineTo((this.x + baseOffset.x2) * devicePixelsPerUnit, (this.y + baseOffset.y2) * devicePixelsPerUnit)
