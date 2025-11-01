@@ -312,7 +312,6 @@ class Spike {
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
     ctx.lineTo((this.x + highlightX * .9) * devicePixelsPerUnit, (this.y + highlightY * .9) * devicePixelsPerUnit)
     ctx.stroke();
-
   }
 
   /**
