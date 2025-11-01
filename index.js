@@ -87,11 +87,11 @@ function toggleCursorVisibility() {
 function typeNextCharacter() {
   const currentLength = contentText.textContent.length;
   const maxLength = contentFull.textContent.length;
-  if(currentLength < maxLength) {
+  if (currentLength < maxLength) {
     const nextChar = contentFull.textContent.charAt(currentLength);
     contentText.appendChild(document.createTextNode(contentFull.textContent.charAt(currentLength)))
     let maxTimeout = nextChar.match(/[a-z]/i) ? 25 : 100;
-    if(nextChar === "\n") {
+    if (nextChar === "\n") {
       maxTimeout = 300;
     }
     const timeout = maxTimeout * (0.25 + Math.random() * 0.75)
@@ -131,7 +131,7 @@ function init() {
   canvas.width = window.innerWidth * pixelRatio;
   canvas.height = window.innerHeight * pixelRatio;
   const scale = 1 / pixelRatio;
-  canvas.style.transform = "scale(" + scale +","+ scale + ")";
+  canvas.style.transform = "scale(" + scale + "," + scale + ")";
 
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
@@ -152,7 +152,7 @@ function init() {
       /* shouldFillRoot= */ true
     );
     spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
-    spike.y = canvas.height / devicePixelsPerUnit + Math.random()*-.5;
+    spike.y = canvas.height / devicePixelsPerUnit + Math.random() * -.5;
     rootSpikes.push(spike);
   }
 }
@@ -161,14 +161,14 @@ function init() {
 function drawFloor() {
   const FLOOR_HEIGHT = 1.5;
   ctx.fillStyle = SPIKE_COLOR;
-  ctx.fillRect(0, canvas.height - devicePixelsPerUnit* FLOOR_HEIGHT, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
+  ctx.fillRect(0, canvas.height - devicePixelsPerUnit * FLOOR_HEIGHT, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
   ctx.strokeStyle = SHADOW_COLOR;
   ctx.lineWidth = 1;
   const SHADOW_POSITIONS = [12, 16, 18, 19, 20];
-  for(let i = 0; i < SHADOW_POSITIONS.length; i++) {
+  for (let i = 0; i < SHADOW_POSITIONS.length; i++) {
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height - FLOOR_HEIGHT*devicePixelsPerUnit*SHADOW_POSITIONS[i]/20);
-    ctx.lineTo(canvas.width, canvas.height - FLOOR_HEIGHT*devicePixelsPerUnit*SHADOW_POSITIONS[i]/20);
+    ctx.moveTo(0, canvas.height - FLOOR_HEIGHT * devicePixelsPerUnit * SHADOW_POSITIONS[i] / 20);
+    ctx.lineTo(canvas.width, canvas.height - FLOOR_HEIGHT * devicePixelsPerUnit * SHADOW_POSITIONS[i] / 20);
     ctx.stroke();
   }
 
@@ -188,7 +188,7 @@ function tick(time) {
     isFinishedGrowing = spike.advance(sizeChange) && isFinishedGrowing;
   }
   lastTick = time;
-  if(!isFinishedGrowing) {
+  if (!isFinishedGrowing) {
     requestAnimationFrame(tick);
   }
 }
@@ -225,7 +225,7 @@ class Spike {
    */
   advance(sizeChange) {
     let isFinishedGrowing = this.size === this.maxSize;
-    if(!isFinishedGrowing) {
+    if (!isFinishedGrowing) {
       const modifiedSizeChange = sizeChange * this.growthRateModifier;
       this.size = Math.min(this.size + modifiedSizeChange, this.maxSize);
       this.maybeBranch(modifiedSizeChange);
@@ -270,14 +270,14 @@ class Spike {
     ctx.beginPath();
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
     ctx.lineTo((this.x + baseOffset.x1) * devicePixelsPerUnit, (this.y + baseOffset.y1) * devicePixelsPerUnit)
-    if(this.shouldFillRoot) {
+    if (this.shouldFillRoot) {
       ctx.lineTo((this.x) * devicePixelsPerUnit, (this.y) * devicePixelsPerUnit);
     }
     ctx.lineTo((this.x + baseOffset.x2) * devicePixelsPerUnit, (this.y + baseOffset.y2) * devicePixelsPerUnit)
     ctx.fill();
 
     let shadowX, highlightX, shadowY, highlightY;
-    if(baseOffset.y1 > baseOffset.y2) {
+    if (baseOffset.y1 > baseOffset.y2) {
       shadowX = baseOffset.x1;
       shadowY = baseOffset.y1;
       highlightX = baseOffset.x2;
@@ -291,10 +291,10 @@ class Spike {
 
     ctx.strokeStyle = SHADOW_COLOR;
     ctx.lineWidth = 1;
-    for(let i = 7; i <= 10; i++) {
+    for (let i = 7; i <= 10; i++) {
       ctx.beginPath();
       ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
-      ctx.lineTo((this.x + shadowX*i/10) * devicePixelsPerUnit, (this.y + shadowY*i/10) * devicePixelsPerUnit)
+      ctx.lineTo((this.x + shadowX * i / 10) * devicePixelsPerUnit, (this.y + shadowY * i / 10) * devicePixelsPerUnit)
       ctx.stroke();
     }
 
@@ -302,9 +302,9 @@ class Spike {
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
-    ctx.lineTo((this.x + highlightX*.9) * devicePixelsPerUnit, (this.y + highlightY*.9) * devicePixelsPerUnit)
+    ctx.lineTo((this.x + highlightX * .9) * devicePixelsPerUnit, (this.y + highlightY * .9) * devicePixelsPerUnit)
     ctx.stroke();
-    
+
   }
 
   /**
@@ -354,7 +354,7 @@ function flickerBackground() {
     saturation = "0" + saturation;
   }
   // Alternate between red and green every 500ms
-  if(new Date().getMilliseconds() % 500 < 250) {
+  if (new Date().getMilliseconds() % 500 < 250) {
     document.body.style.backgroundColor = saturation + "0000";
   } else {
     document.body.style.backgroundColor = "00" + saturation + "00";
