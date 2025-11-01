@@ -61,6 +61,9 @@ let lastTick = 0;
 /** Used to restart animation if resized after drawing is done. */
 let isTicking = false;
 
+/** Used to track progress in the content text.*/
+let tickedCharacters = 0;
+
 /** Root spikes which grow from the bottom of the screen. */
 const rootSpikes = [];
 
@@ -68,7 +71,7 @@ let contentFull;
 let contentText;
 let cursor;
 let devicePixelsPerUnit = PX_PER_UNIT;
-
+var audioContext = new (window.AudioContext || window.webkitAudioContext)();
 /** Runs when the document is finished loading. */
 function onLoad() {
   canvas = document.getElementById("spike-field");
@@ -85,6 +88,9 @@ function onLoad() {
   setInterval(flickerBackground, BACKGROUND_FLICKER_RATE_MS);
   setInterval(toggleCursorVisibility, CURSOR_BLINK_MS);
   typeNextCharacter();
+
+  document.body.addEventListener("keydown", onKeyDown);
+  document.body.addEventListener("keyup", onKeyUp);
 }
 
 /** 
@@ -96,21 +102,88 @@ function toggleCursorVisibility() {
   cursor.className = cursor.className ? "" : "hidden";
 }
 
+const NOTE_A = 0;
+const NOTE_AS = 1;
+const NOTE_B = 2;
+const NOTE_C = 3;
+const NOTE_CS = 4;
+const NOTE_D = 5;
+const NOTE_DS = 6;
+const NOTE_E = 7;
+const NOTE_F = 8;
+const NOTE_FS = 9;
+const NOTE_G = 10;
+const NOTE_GS = 11;
+const CHROMATIC_SCALE = [
+  NOTE_A,
+  NOTE_AS,
+  NOTE_B,
+  NOTE_C,
+  NOTE_CS,
+  NOTE_D,
+  NOTE_DS,
+  NOTE_E,
+  NOTE_F,
+  NOTE_FS,
+  NOTE_G,
+  NOTE_GS
+];
+const BLUES_MINOR = [NOTE_C, NOTE_DS, NOTE_F, NOTE_FS, NOTE_G, NOTE_AS];
+const PENTATONIC_A_MINOR = [NOTE_E, NOTE_G, NOTE_A, NOTE_B, NOTE_D];
+const PENTATONIC_A_MINOR_2_OCTAVES = twoOctaves(PENTATONIC_A_MINOR);
+const BLUES_MINOR_2_OCTAVES = twoOctaves(BLUES_MINOR);
+const CHROMATIC_SCALE_TWO_OCTAVES = twoOctaves(CHROMATIC_SCALE);
+function twoOctaves(scale) {
+  return scale.concat(scale.map(note => note + 12))
+}
+
 /** 
  * Appends the next character to visible content, and schedules the next one. 
  */
 function typeNextCharacter() {
-  const currentLength = contentText.textContent.length;
+  const currentLength = tickedCharacters;
   const maxLength = contentFull.textContent.length;
   if (currentLength < maxLength) {
+    tickedCharacters++;
     const nextChar = contentFull.textContent.charAt(currentLength);
-    contentText.appendChild(document.createTextNode(contentFull.textContent.charAt(currentLength)))
-    let maxTimeout = nextChar.match(/[a-z]/i) ? 25 : 100;
-    if (nextChar === "\n") {
-      maxTimeout = 300;
-    }
-    const timeout = maxTimeout * (0.25 + Math.random() * 0.75)
+    const timeout = typeCharacter(nextChar);
+    playCharacterAudio(nextChar.charCodeAt(0));
     setTimeout(typeNextCharacter, timeout);
+  }
+}
+
+function typeCharacter(nextChar) {
+  contentText.appendChild(document.createTextNode(nextChar))
+  // Allow letters to type faster than special characters
+  let maxTimeout = nextChar.match(/[a-z]/i) ? 25 : 100;
+  if (nextChar === "\n") {
+    maxTimeout = 300;
+  }
+  // Randomize the typing time a little bit.
+  const timeout = maxTimeout * (0.25 + Math.random() * 0.75);
+  return timeout;
+}
+
+const oscMap = {};
+
+function playCharacterAudio(char, disableAutoStop, scale) {
+  if (disableAutoStop && oscMap[char]) {
+    return;
+  }
+  scale = scale || PENTATONIC_A_MINOR_2_OCTAVES;
+  console.log(scale);
+  // TODO: consider doing the thing where it sounds like the frequency is increasing/decreasing forever
+  var osc = audioContext.createOscillator(); // instantiate an oscillator
+  var gainNode = audioContext.createGain();
+  gainNode.gain.value = 0.25;
+  osc.type = 'sawtooth'; // this is the default - also square, sawtooth, triangle
+  osc.frequency.value = 220 * Math.pow(2, scale[(char % scale.length)] / 12); // Hz
+  osc.connect(gainNode).connect(audioContext.destination); // connect it to the destination
+  osc.start(audioContext.currentTime); // start the oscillator
+  if (!disableAutoStop) {
+    osc.stop(audioContext.currentTime + .05);
+  } else {
+    oscMap[char] = () => osc.stop(audioContext.currentTime);
   }
 }
 
@@ -391,6 +464,26 @@ function flickerBackground() {
   } else {
     document.body.style.backgroundColor = "00" + saturation + "00";
   }
+}
+
+function onKeyDown(event) {
+  if (event.repeat) { return; }
+  if (event.key.length !== 1) {
+    return
+  }
+  console.log("chromatic:");
+  console.log(CHROMATIC_SCALE_TWO_OCTAVES);
+  typeCharacter(event.key);
+  playCharacterAudio(event.key.charCodeAt(0), true, CHROMATIC_SCALE_TWO_OCTAVES);
+}
+function onKeyUp(event) {
+  const charCode = event.key.charCodeAt(0);
+  const maybeStop = oscMap[charCode];
+  if (maybeStop) {
+    delete oscMap[charCode];
+    maybeStop();
+  }
+
 }
 
 addEventListener("load", onLoad);
