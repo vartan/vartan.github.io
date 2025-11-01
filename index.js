@@ -2,7 +2,10 @@
 const PX_PER_UNIT = 50;
 
 /** How many units spikes grow each second. */
-const SPIKE_GROWTH_PER_SECOND = 2;
+const SPIKE_GROWTH_PER_SECOND = 3;
+
+/** Ratio of how much a branch grows in comparison to its parent. */
+const SPIKE_BRANCH_GROWTH_RATIO = 1 / 4;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
@@ -138,7 +141,12 @@ function init() {
   drawFloor();
   const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / devicePixelsPerUnit / 4);
   const averageSpikeDistance = 1 / spikeCount;
+  let spikeYs = [];
   for (let i = 0; i < spikeCount; i++) {
+    spikeYs.push(canvas.height / devicePixelsPerUnit - Math.random() * 0.75);
+  }
+  spikeYs.sort();
+  for (let i = 0; i < spikeYs.length; i++) {
     // These values were mostly chosen by trial and error for what I
     // personally feel looks good.
     const angle = (Math.random() * 0.25 + 1.375) * Math.PI;
@@ -152,19 +160,19 @@ function init() {
       /* shouldFillRoot= */ true
     );
     spike.x = canvas.width * relativePosition / devicePixelsPerUnit;
-    spike.y = canvas.height / devicePixelsPerUnit + Math.random() * -.5;
+    spike.y = spikeYs[i];
     rootSpikes.push(spike);
   }
 }
 
 /** Fills a 1 unit tall floor at the bottom of the canvas. */
 function drawFloor() {
-  const FLOOR_HEIGHT = 1.5;
+  const FLOOR_HEIGHT = 1.25;
   ctx.fillStyle = SPIKE_COLOR;
   ctx.fillRect(0, canvas.height - devicePixelsPerUnit * FLOOR_HEIGHT, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
   ctx.strokeStyle = SHADOW_COLOR;
   ctx.lineWidth = 1;
-  const SHADOW_POSITIONS = [12, 16, 18, 19, 20];
+  const SHADOW_POSITIONS = [4, 12, 16, 18, 19, 20];
   for (let i = 0; i < SHADOW_POSITIONS.length; i++) {
     ctx.beginPath();
     ctx.moveTo(0, canvas.height - FLOOR_HEIGHT * devicePixelsPerUnit * SHADOW_POSITIONS[i] / 20);
@@ -232,7 +240,7 @@ class Spike {
     }
     this.draw();
     for (const branch of this.branches) {
-      isFinishedGrowing = branch.advance(sizeChange / 3) && isFinishedGrowing;
+      isFinishedGrowing = branch.advance(sizeChange * SPIKE_BRANCH_GROWTH_RATIO) && isFinishedGrowing;
     }
     return isFinishedGrowing;
   }
