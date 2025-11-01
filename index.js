@@ -7,7 +7,11 @@ const SPIKE_GROWTH_PER_SECOND = 3;
 /** Ratio of how much a branch grows in comparison to its parent. */
 const SPIKE_BRANCH_GROWTH_RATIO = 1 / 2;
 
-const ROOT_SPIKES_PER_UNIT = 1.5;
+/** Number of spikes to grow per unit width. See {@link PX_PER_UNIT} */
+const ROOT_SPIKES_PER_UNIT = 1.3;
+
+/** The number of units high the floor is drawn. */
+const FLOOR_HEIGHT = 1.5;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
@@ -163,14 +167,13 @@ function init() {
       (1 - spikeYs[i])
     );
     spike.x = canvas.width * Math.random() / devicePixelsPerUnit;
-    spike.y = canvas.height / devicePixelsPerUnit - spikeYs[i] * 0.75;
+    spike.y = canvas.height / devicePixelsPerUnit - spikeYs[i] * FLOOR_HEIGHT;
     rootSpikes.push(spike);
   }
 }
 
 /** Fills a 1 unit tall floor at the bottom of the canvas. */
 function drawFloor() {
-  const FLOOR_HEIGHT = 1.5;
   ctx.fillStyle = SPIKE_COLOR;
   ctx.fillRect(0, canvas.height - devicePixelsPerUnit * FLOOR_HEIGHT, canvas.width, devicePixelsPerUnit * FLOOR_HEIGHT);
   ctx.strokeStyle = SHADOW_COLOR;
