@@ -24,7 +24,7 @@ const HIGHLIGHT_COLOR = "#544";
 const MIN_SPIKE_COUNT = 15;
 
 /** The maximum amount of saturation in the background color, from Ox00-0x0F. */
-const MAX_BACKGROUND_SATURATION = 0x15;
+const MAX_BACKGROUND_SATURATION = 0x1A;
 
 /** 
  * How often the background color is changed. Note that the browser may draw
