@@ -181,7 +181,7 @@ class Spike {
     this.y = 0;
     /** The absolute angle of the spike. */
     this.angle = angle;
-    /** The maximum number of generations of branches a spike can have. */
+    /** The remaining number of generations of branches a spike can have. */
     this.depth = depth;
     /** The maximum length of the spike. */
     this.maxSize = maxSize;
