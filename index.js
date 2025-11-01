@@ -87,6 +87,11 @@ function onLoad() {
   requestAnimationFrame(tick); // Draw the spike field.
   setInterval(flickerBackground, BACKGROUND_FLICKER_RATE_MS);
   setInterval(toggleCursorVisibility, CURSOR_BLINK_MS);
+
+  const hash = window.location.hash;
+  if (hash) {
+    contentFull.innerText = hash.substring(1);
+  }
   typeNextCharacter();
 
   document.body.addEventListener("keypress", onKeyPress);
