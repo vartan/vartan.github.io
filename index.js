@@ -10,14 +10,14 @@ const SPIKE_COLOR = "#333";
 /** The minimum number of spikes to draw when the browser has a small width. */
 const MIN_SPIKE_COUNT = 3;
 
-/** The maximum amount of redness in the background color, from Ox00-0x0F. */
-const MAX_BACKGROUND_REDNESS = 0x20;
+/** The maximum amount of saturation in the background color, from Ox00-0x0F. */
+const MAX_BACKGROUND_SATURATION = 0x15;
 
 /** 
  * How often the background color is changed. Note that the browser may draw
  * the background more frequently due to the transition style. 
  */
-const BACKGROUND_FLICKER_RATE_MS = 1000 / 30;
+const BACKGROUND_FLICKER_RATE_MS = 0.25;
 
 /** The ratio between the base of a spike and the length. */
 const LENGTH_TO_BASE_RATIO = 1 / 20;
@@ -280,11 +280,16 @@ function sum(acc, value) {
 }
 
 function flickerBackground() {
-  let redness = Math.floor(Math.random() * MAX_BACKGROUND_REDNESS).toString(16);
-  if (redness.length === 1) {
-    redness = "0" + redness;
+  let saturation = Math.floor(Math.random() * MAX_BACKGROUND_SATURATION).toString(16);
+  if (saturation.length === 1) {
+    saturation = "0" + saturation;
   }
-  document.body.style.backgroundColor = redness + "0000";
+  // Alternate between red and green every 500ms
+  if(new Date().getMilliseconds() % 500 < 250) {
+    document.body.style.backgroundColor = saturation + "0000";
+  } else {
+    document.body.style.backgroundColor = "00" + saturation + "00";
+  }
 }
 
 addEventListener("load", onLoad);
