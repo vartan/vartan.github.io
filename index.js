@@ -5,9 +5,9 @@ const PX_PER_UNIT = 50;
 const SPIKE_GROWTH_PER_SECOND = 3;
 
 /** Ratio of how much a branch grows in comparison to its parent. */
-const SPIKE_BRANCH_GROWTH_RATIO = 1 / 4;
+const SPIKE_BRANCH_GROWTH_RATIO = 1 / 2;
 
-const ROOT_SPIKES_PER_UNIT = 1 / 3;
+const ROOT_SPIKES_PER_UNIT = 2;
 
 /** The color of a spike. */
 const SPIKE_COLOR = "#333";
@@ -42,6 +42,8 @@ const BRANCH_CHANCE_MODIFIER = 4.5;
 
 /** How often the cursor blinks on or off.*/
 const CURSOR_BLINK_MS = 500;
+
+const SCRIPT_LOAD_TIME = new Date();
 
 /** HTML canvas element for the spike field. */
 let canvas;
@@ -157,7 +159,8 @@ function init() {
       angle,
       depth,
       maxSize * (1 - Math.random() * Math.random() * 0.5),
-      /* shouldFillRoot= */ true
+      /* shouldFillRoot= */ true,
+      (1 - spikeYs[i])
     );
     spike.x = canvas.width * Math.random() / devicePixelsPerUnit;
     spike.y = canvas.height / devicePixelsPerUnit - spikeYs[i] * 0.75;
@@ -196,13 +199,15 @@ function tick(time) {
     isFinishedGrowing = spike.advance(sizeChange) && isFinishedGrowing;
   }
   lastTick = time;
-  if (!isFinishedGrowing) {
+  if (isFinishedGrowing) {
+    console.log("all done after " + Math.round((new Date().getTime() - SCRIPT_LOAD_TIME.getTime()) / 1000) + " seconds :)");
+  } else {
     requestAnimationFrame(tick);
   }
 }
 
 class Spike {
-  constructor(angle, depth, maxSize, shouldFillRoot) {
+  constructor(angle, depth, maxSize, shouldFillRoot, baseGrowthRateModifier) {
     /** List of all branches off of the spike. */
     this.branches = [];
     /** X coordinate of the spike base. */
@@ -218,7 +223,7 @@ class Spike {
     /** The current length of the spike. */
     this.size = 0;
     /** Allows spikes to grow at different rates. */
-    this.growthRateModifier = 0.5 + Math.random() * 0.5;
+    this.growthRateModifier = baseGrowthRateModifier * (0.5 + Math.random() * 0.5);
     /** 
      * When true, it fills in the root of the spike where some drawing 
      * artifacts otherwise provide some extra depth. 
@@ -237,10 +242,14 @@ class Spike {
       const modifiedSizeChange = sizeChange * this.growthRateModifier;
       this.size = Math.min(this.size + modifiedSizeChange, this.maxSize);
       this.maybeBranch(modifiedSizeChange);
+      if (this.size === this.size + modifiedSizeChange) {
+        // Also consider it to be finished growing if the increase is smaller than floating point error.
+        finishedGrowing = true;
+      }
     }
     this.draw();
     for (const branch of this.branches) {
-      isFinishedGrowing = branch.advance(sizeChange * SPIKE_BRANCH_GROWTH_RATIO) && isFinishedGrowing;
+      isFinishedGrowing = branch.advance(sizeChange) && isFinishedGrowing;
     }
     return isFinishedGrowing;
   }
@@ -260,7 +269,7 @@ class Spike {
         const newMaxSize = maxSizeLimit * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const relativePosition = this.size;
-        const newSpike = new Spike(newAngle, newDepth, newMaxSize, false);
+        const newSpike = new Spike(newAngle, newDepth, newMaxSize, false, this.growthRateModifier * SPIKE_BRANCH_GROWTH_RATIO);
         const origin = this.getCoordinatesAtSize(relativePosition);
         newSpike.x = origin.x;
         newSpike.y = origin.y;
