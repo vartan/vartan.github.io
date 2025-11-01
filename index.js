@@ -183,11 +183,10 @@ function playCharacterAudio(char, disableAutoStop, scale) {
     return;
   }
   scale = scale || PENTATONIC_A_MINOR_2_OCTAVES;
-  // TODO: consider doing the thing where it sounds like the frequency is increasing/decreasing forever
   var osc = audioContext.createOscillator(); // instantiate an oscillator
   var gainNode = audioContext.createGain();
   gainNode.gain.value = 0.25;
-  osc.type = 'square'; // this is the default - also square, sawtooth, triangle
+  osc.type = 'sawtooth';
   osc.frequency.value = 220 * Math.pow(2, scale[(char % scale.length)] / 12); // Hz
   osc.connect(gainNode).connect(audioContext.destination); // connect it to the destination
   osc.start(audioContext.currentTime); // start the oscillator
