@@ -58,6 +58,9 @@ let ctx;
 /** Used to track the time since the last tick. */
 let lastTick = 0;
 
+/** Used to restart animation if resized after drawing is done. */
+let isTicking = false;
+
 /** Root spikes which grow from the bottom of the screen. */
 const rootSpikes = [];
 
@@ -76,8 +79,9 @@ function onLoad() {
   init();
 
   addEventListener("resize", onResize);
-  requestAnimationFrame(tick);
 
+  // Set up all of the timers.
+  requestAnimationFrame(tick); // Draw the spike field.
   setInterval(flickerBackground, BACKGROUND_FLICKER_RATE_MS);
   setInterval(toggleCursorVisibility, CURSOR_BLINK_MS);
   typeNextCharacter();
@@ -118,6 +122,9 @@ function typeNextCharacter() {
 function onResize() {
   reset();
   init();
+  if (!isTicking) {
+    tick();
+  }
 }
 
 /** 
@@ -147,11 +154,17 @@ function init() {
   // Draw a floor so the spikes appear to grow out of a medium.
   // As an added bonus, the floor hides the bottom edge of the spikes.
   drawFloor();
+  initializeSpikes();
+}
+
+function initializeSpikes() {
   const spikeCount = Math.max(MIN_SPIKE_COUNT, canvas.width / devicePixelsPerUnit * ROOT_SPIKES_PER_UNIT);
   let spikeYs = [];
   for (let i = 0; i < spikeCount; i++) {
     spikeYs.push(Math.random());
   }
+  // Ensure root spikes are added with the closest spikes last in order to
+  // preserve depth.
   spikeYs.sort();
   for (let i = spikeYs.length - 1; i >= 0; i--) {
     // These values were mostly chosen by trial and error for what I
@@ -195,6 +208,7 @@ function drawFloor() {
  * previous frame was rendered.
  */
 function tick(time) {
+  isTicking = true;
   const timeChange = time - lastTick;
   const sizeChange = timeChange / 1000 * SPIKE_GROWTH_PER_SECOND;
   let isFinishedGrowing = true;
@@ -202,7 +216,9 @@ function tick(time) {
     isFinishedGrowing = spike.advance(sizeChange) && isFinishedGrowing;
   }
   lastTick = time;
-  if (!isFinishedGrowing) {
+  if (isFinishedGrowing) {
+    isTicking = false;
+  } else {
     requestAnimationFrame(tick);
   }
 }
