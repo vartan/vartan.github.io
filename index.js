@@ -171,7 +171,6 @@ function playCharacterAudio(char, disableAutoStop, scale) {
     return;
   }
   scale = scale || PENTATONIC_A_MINOR_2_OCTAVES;
-  console.log(scale);
   // TODO: consider doing the thing where it sounds like the frequency is increasing/decreasing forever
   var osc = audioContext.createOscillator(); // instantiate an oscillator
   var gainNode = audioContext.createGain();
@@ -471,8 +470,6 @@ function onKeyDown(event) {
   if (event.key.length !== 1) {
     return
   }
-  console.log("chromatic:");
-  console.log(CHROMATIC_SCALE_TWO_OCTAVES);
   typeCharacter(event.key);
   playCharacterAudio(event.key.charCodeAt(0), true, CHROMATIC_SCALE_TWO_OCTAVES);
 }
