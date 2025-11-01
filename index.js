@@ -17,7 +17,7 @@ const SHADOW_COLOR = "#010";
 const HIGHLIGHT_COLOR = "#544";
 
 /** The minimum number of spikes to draw when the browser has a small width. */
-const MIN_SPIKE_COUNT = 7;
+const MIN_SPIKE_COUNT = 20;
 
 /** The maximum amount of saturation in the background color, from Ox00-0x0F. */
 const MAX_BACKGROUND_SATURATION = 0x15;
