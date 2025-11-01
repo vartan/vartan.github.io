@@ -26,7 +26,10 @@ const LENGTH_TO_BASE_RATIO = 1 / 20;
 const MAX_BRANCH_SIZE_RATIO = 0.9;
 
 /** The minimum distance along the spike to branch (from 0-1) */
-const MIN_BRANCH_SIZE_RATIO = 0.3;
+const MIN_BRANCH_SIZE_RATIO = 0.1;
+
+/** Scales how often branches occur. Higher values produces less branching. */
+const BRANCH_CHANCE_MODIFIER = 4.5;
 
 /** How often the cursor blinks on or off.*/
 const CURSOR_BLINK_MS = 500;
@@ -210,7 +213,7 @@ class Spike {
     const percentGrown = this.size / this.maxSize;
     const isBranchElligible = percentGrown < MAX_BRANCH_SIZE_RATIO && percentGrown > MIN_BRANCH_SIZE_RATIO;
     if (isBranchElligible && this.depth > 0) {
-      if (Math.random() * 5 < sizeChange) {
+      if (Math.random() * BRANCH_CHANCE_MODIFIER < sizeChange) {
         const angleDirection = Math.random() > 0.5 ? 1 : -1;
         // Branches grow out 45-90 degrees in either direction from their parent.
         const angleOffset = angleDirection * (Math.random() * 0.25 + 0.25) * Math.PI;
