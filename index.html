@@ -5,8 +5,44 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>vartan.dev</title>
-        <link rel="stylesheet" href="styles.css" blocking="render"/>
         <script src="index.js" defer></script>
+        <style>
+body {
+  font-size: 16pt;
+  background: #000;
+  color: #BBB;
+  transition: background-color 0.2s ease;
+}
+
+#content-text {
+  text-shadow: 0 0 10px black, 0 0 20px black;
+}
+
+#content {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+
+#content-full {
+  display: none;
+}
+
+#spike-field {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+
+#mastodon {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+        </style>
     </head>
     <body aria-labelledby="content-full" tabIndex="0">
         <div id="content"><span id="content-text"></span><span id="cursor">&block;</span></div>
