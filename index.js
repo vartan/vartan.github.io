@@ -176,7 +176,6 @@ function initializeSpikes() {
       angle,
       depth,
       maxSize * (1 - Math.random() * Math.random() * 0.5),
-      /* shouldFillRoot= */ true,
       (1 - spikeYs[i])
     );
     spike.x = canvas.width * Math.random() / devicePixelsPerUnit;
@@ -224,7 +223,7 @@ function tick(time) {
 }
 
 class Spike {
-  constructor(angle, depth, maxSize, shouldFillRoot, baseGrowthRateModifier) {
+  constructor(angle, depth, maxSize, baseGrowthRateModifier) {
     /** List of all branches off of the spike. */
     this.branches = [];
     /** X coordinate of the spike base. */
@@ -241,11 +240,6 @@ class Spike {
     this.size = 0;
     /** Allows spikes to grow at different rates. */
     this.growthRateModifier = baseGrowthRateModifier * (0.5 + Math.random() * 0.5);
-    /** 
-     * When true, it fills in the root of the spike where some drawing 
-     * artifacts otherwise provide some extra depth. 
-     */
-    this.shouldFillRoot = shouldFillRoot;
   }
 
   /* 
@@ -286,7 +280,7 @@ class Spike {
         const newMaxSize = maxSizeLimit * (0.33 + Math.random() * 0.33);
         const newDepth = this.depth - 1;
         const relativePosition = this.size;
-        const newSpike = new Spike(newAngle, newDepth, newMaxSize, false, this.growthRateModifier * SPIKE_BRANCH_GROWTH_RATIO);
+        const newSpike = new Spike(newAngle, newDepth, newMaxSize, this.growthRateModifier * SPIKE_BRANCH_GROWTH_RATIO);
         const origin = this.getCoordinatesAtSize(relativePosition);
         newSpike.x = origin.x;
         newSpike.y = origin.y;
@@ -304,9 +298,7 @@ class Spike {
     ctx.beginPath();
     ctx.moveTo(end.x * devicePixelsPerUnit, end.y * devicePixelsPerUnit);
     ctx.lineTo((this.x + baseOffset.x1) * devicePixelsPerUnit, (this.y + baseOffset.y1) * devicePixelsPerUnit)
-    if (this.shouldFillRoot) {
-      ctx.lineTo((this.x) * devicePixelsPerUnit, (this.y) * devicePixelsPerUnit);
-    }
+    ctx.lineTo(this.x * devicePixelsPerUnit, this.y * devicePixelsPerUnit);
     ctx.lineTo((this.x + baseOffset.x2) * devicePixelsPerUnit, (this.y + baseOffset.y2) * devicePixelsPerUnit)
     ctx.fill();
 
