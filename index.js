@@ -467,14 +467,15 @@ function flickerBackground() {
 
 function onKeyDown(event) {
   if (event.repeat) { return; }
-  if (event.key.length !== 1) {
-    return
+  let key = String.fromCharCode(event.which);
+  if (!event.shiftKey) {
+    key = key.toLowerCase();
   }
-  typeCharacter(event.key);
-  playCharacterAudio(event.key.charCodeAt(0), true, CHROMATIC_SCALE_TWO_OCTAVES);
+  typeCharacter(key);
+  playCharacterAudio(event.which, true, CHROMATIC_SCALE_TWO_OCTAVES);
 }
 function onKeyUp(event) {
-  const charCode = event.key.charCodeAt(0);
+  const charCode = event.which;
   const maybeStop = oscMap[charCode];
   if (maybeStop) {
     delete oscMap[charCode];
