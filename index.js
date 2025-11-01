@@ -89,6 +89,7 @@ function onLoad() {
   setInterval(toggleCursorVisibility, CURSOR_BLINK_MS);
   typeNextCharacter();
 
+  document.body.addEventListener("keypress", onKeyPress);
   document.body.addEventListener("keydown", onKeyDown);
   document.body.addEventListener("keyup", onKeyUp);
 }
@@ -161,6 +162,7 @@ function typeCharacter(nextChar) {
   }
   // Randomize the typing time a little bit.
   const timeout = maxTimeout * (0.25 + Math.random() * 0.75);
+  cursor.scrollIntoView();
   return timeout;
 }
 
@@ -467,13 +469,21 @@ function flickerBackground() {
 
 function onKeyDown(event) {
   if (event.repeat) { return; }
-  let key = String.fromCharCode(event.which);
-  if (!event.shiftKey) {
-    key = key.toLowerCase();
-  }
-  typeCharacter(key);
   playCharacterAudio(event.which, true, CHROMATIC_SCALE_TWO_OCTAVES);
 }
+
+function onKeyPress(event) {
+  if (event.repeat) { return; }
+
+  let key = String.fromCharCode(event.which);
+
+  if (event.which === 13) {
+    typeCharacter("\r\n");
+  } else {
+    typeCharacter(key);
+  }
+}
+
 function onKeyUp(event) {
   const charCode = event.which;
   const maybeStop = oscMap[charCode];
