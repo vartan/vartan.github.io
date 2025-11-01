@@ -90,7 +90,7 @@ function onLoad() {
 
   const hash = window.location.hash;
   if (hash) {
-    contentFull.innerText = hash.substring(1);
+    contentFull.innerText = unescape(hash.substring(1));
   }
   typeNextCharacter();
 
