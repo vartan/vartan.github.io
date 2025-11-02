@@ -123,9 +123,7 @@ function onLineTyped(line: string) {
     CONFIG.autoplayDelayScale = parseInt(setPlayerSpeedRe[1], 10);
     return;
   }
-  console.log("checking setSustainTime");
   const setSustainTime = line.match(/set sustainTime ([\d.]+)/i);
-  console.log(setSustainTime);
   if (setSustainTime) {
     CONFIG.sustainTime = parseInt(setSustainTime[1], 10);
     return;
