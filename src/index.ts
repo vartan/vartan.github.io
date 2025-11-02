@@ -120,14 +120,12 @@ function onLineTyped(line: string) {
   }
   const setPlayerSpeedRe = line.match(/set autoplayDelayScale ([\d\.]+)/i);
   if (setPlayerSpeedRe) {
-    CONFIG.autoplayDelayScale = parseFloat(setPlayerSpeedRe[1], 10);
+    CONFIG.autoplayDelayScale = parseFloat(setPlayerSpeedRe[1]);
     return;
   }
   const setSustainTime = line.match(/set sustainTime ([\d\.]+)/i);
   if (setSustainTime) {
-    console.log(setSustainTime);
-    CONFIG.sustainTime = parseFloat(setSustainTime[1], 10);
-    console.log("sustain time: " + CONFIG.sustainTime);
+    CONFIG.sustainTime = parseFloat(setSustainTime[1]);
     return;
   }
   const setScaleRe = line.match(/set scale ([\w\d]+)/i);
