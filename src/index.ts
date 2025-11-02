@@ -118,14 +118,16 @@ function onLineTyped(line: string) {
     CONFIG.oscillatorType = setOscillatorRe[1].toLowerCase() as OscillatorType;
     return;
   }
-  const setPlayerSpeedRe = line.match(/set autoplayDelayScale ([\d.]+)/i);
+  const setPlayerSpeedRe = line.match(/set autoplayDelayScale ([\d\.]+)/i);
   if (setPlayerSpeedRe) {
-    CONFIG.autoplayDelayScale = parseInt(setPlayerSpeedRe[1], 10);
+    CONFIG.autoplayDelayScale = parseFloat(setPlayerSpeedRe[1], 10);
     return;
   }
-  const setSustainTime = line.match(/set sustainTime ([\d.]+)/i);
+  const setSustainTime = line.match(/set sustainTime ([\d\.]+)/i);
   if (setSustainTime) {
-    CONFIG.sustainTime = parseInt(setSustainTime[1], 10);
+    console.log(setSustainTime);
+    CONFIG.sustainTime = parseFloat(setSustainTime[1], 10);
+    console.log("sustain time: " + CONFIG.sustainTime);
     return;
   }
   const setScaleRe = line.match(/set scale ([\w\d]+)/i);
