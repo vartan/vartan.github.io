@@ -8,9 +8,13 @@ interface AppConfig {
   devicePixelsPerUnit: number;
   oscillatorType: OscillatorType;
   scale: Pitch[];
+  autoplayDelayScale: number;
+  sustainTime: number;
 }
 export const CONFIG: AppConfig = {
   devicePixelsPerUnit: PX_PER_UNIT,
   oscillatorType: 'sawtooth',
   scale: PENTATONIC_A_MINOR_2_OCTAVES,
+  autoplayDelayScale: 1,
+  sustainTime: .05,
 }

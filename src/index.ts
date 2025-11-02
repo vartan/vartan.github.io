@@ -118,6 +118,18 @@ function onLineTyped(line: string) {
     CONFIG.oscillatorType = setOscillatorRe[1].toLowerCase() as OscillatorType;
     return;
   }
+  const setPlayerSpeedRe = line.match(/set autoplayDelayScale ([\d.]+)/i);
+  if (setPlayerSpeedRe) {
+    CONFIG.autoplayDelayScale = parseInt(setPlayerSpeedRe[1], 10);
+    return;
+  }
+  console.log("checking setSustainTime");
+  const setSustainTime = line.match(/set sustainTime ([\d.]+)/i);
+  console.log(setSustainTime);
+  if (setSustainTime) {
+    CONFIG.sustainTime = parseInt(setSustainTime[1], 10);
+    return;
+  }
   const setScaleRe = line.match(/set scale ([\w\d]+)/i);
   if (setScaleRe) {
     const scale = NAME_TO_SCALE[setScaleRe[1]];
@@ -141,7 +153,7 @@ function typeCharacter(nextChar: string) {
   // Randomize the typing time a little bit.
   const timeout = maxTimeout * (0.25 + Math.random() * 0.75);
   cursor.scrollIntoView();
-  return timeout;
+  return timeout * CONFIG.autoplayDelayScale;
 }
 
 let oscMap: { [key in number]: () => void } = {};
@@ -168,7 +180,7 @@ function playCharacterAudio(char: number, disableAutoStop: boolean = false, scal
   osc.connect(gainNode).connect(audioContext.destination); // connect it to the destination
   osc.start(audioContext.currentTime); // start the oscillator
   if (!disableAutoStop) {
-    osc.stop(audioContext.currentTime + .05);
+    osc.stop(audioContext.currentTime + CONFIG.sustainTime);
   } else {
     oscMap[char] = () => osc.stop(audioContext.currentTime);
   }
