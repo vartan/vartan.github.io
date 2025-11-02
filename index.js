@@ -485,13 +485,15 @@ function onKeyDown(event) {
   hasUserInteraction = true;
   if (event.repeat) { return; }
   playCharacterAudio(event.which, true, CHROMATIC_SCALE_TWO_OCTAVES);
+  if (event.which === 8) {
+    contentText.lastChild && contentText.lastChild.remove();
+  }
 }
 
 function onKeyPress(event) {
   if (event.repeat) { return; }
 
   let key = String.fromCharCode(event.which);
-
   if (event.which === 13) {
     typeCharacter("\r\n");
   } else {
