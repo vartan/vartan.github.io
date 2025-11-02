@@ -2,6 +2,10 @@ import { Spike, SPIKE_COLOR, SHADOW_COLOR } from './spike';
 import { CONFIG, PX_PER_UNIT } from './config';
 import { NAME_TO_SCALE } from './music';
 
+// TODO: separate the following into their own file:
+// * Command line interface (possibly command handling as well)
+// * Playing Audio
+
 /** How many units spikes grow each second. */
 const SPIKE_GROWTH_PER_SECOND = 3;
 
