@@ -1,6 +1,6 @@
 import { Spike, SPIKE_COLOR, SHADOW_COLOR } from './spike';
 import { CONFIG, PX_PER_UNIT } from './config';
-import { PENTATONIC_A_MINOR_2_OCTAVES, CHROMATIC_SCALE_TWO_OCTAVES } from './music';
+import { NAME_TO_SCALE } from './music';
 
 /** How many units spikes grow each second. */
 const SPIKE_GROWTH_PER_SECOND = 3;
@@ -46,6 +46,9 @@ let tickedCharacters = 0;
 
 /** Root spikes which grow from the bottom of the screen. */
 const rootSpikes: Spike[] = [];
+
+/** Buffer for the secret command line. */
+let lineBuffer = "";
 
 let contentFull: HTMLElement;
 let contentText: HTMLElement;
@@ -105,12 +108,31 @@ function typeNextCharacter() {
   }
 }
 
+function onLineTyped(line: string) {
+  const setOscillatorRe = line.match(/set oscillatorType (sawtooth|sine|triangle|square)/i);
+  if (setOscillatorRe) {
+    CONFIG.oscillatorType = setOscillatorRe[1].toLowerCase() as OscillatorType;
+    return;
+  }
+  const setScaleRe = line.match(/set scale ([\w\d]+)/i);
+  if (setScaleRe) {
+    const scale = NAME_TO_SCALE[setScaleRe[1]];
+    if (scale) {
+      CONFIG.scale = scale;
+    }
+  }
+}
+
 function typeCharacter(nextChar: string) {
   contentText.appendChild(document.createTextNode(nextChar))
   // Allow letters to type faster than special characters
   let maxTimeout = nextChar.match(/[a-z]/i) ? 25 : 100;
-  if (nextChar === "\n") {
+  if (nextChar === "\n" || nextChar === "\r\n") {
     maxTimeout = 300;
+    onLineTyped(lineBuffer);
+    lineBuffer = "";
+  } else {
+    lineBuffer += nextChar;
   }
   // Randomize the typing time a little bit.
   const timeout = maxTimeout * (0.25 + Math.random() * 0.75);
@@ -128,15 +150,16 @@ function getAudioContext() {
   return _audioContext;
 }
 
-function playCharacterAudio(char: number, disableAutoStop: boolean = false, scale = PENTATONIC_A_MINOR_2_OCTAVES) {
+function playCharacterAudio(char: number, disableAutoStop: boolean = false, scale = CONFIG.scale) {
   let audioContext = getAudioContext();
   if (disableAutoStop && oscMap[char] || !audioContext) {
     return;
   }
   var osc = audioContext.createOscillator(); // instantiate an oscillator
+
   var gainNode = audioContext.createGain();
   gainNode.gain.value = 0.25;
-  osc.type = 'sawtooth';
+  osc.type = CONFIG.oscillatorType;
   osc.frequency.value = 220 * Math.pow(2, scale[(char % scale.length)] / 12); // Hz
   osc.connect(gainNode).connect(audioContext.destination); // connect it to the destination
   osc.start(audioContext.currentTime); // start the oscillator
@@ -271,7 +294,7 @@ function flickerBackground() {
 function onKeyDown(event: KeyboardEvent) {
   hasUserInteraction = true;
   if (event.repeat) { return; }
-  playCharacterAudio(event.which, true, CHROMATIC_SCALE_TWO_OCTAVES);
+  playCharacterAudio(event.which, true);
   if (event.which === 8) {
     contentText.lastChild && contentText.lastChild.remove();
   }
