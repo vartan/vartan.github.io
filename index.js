@@ -98,6 +98,7 @@ function onLoad() {
   document.body.addEventListener("keydown", onKeyDown);
   document.body.addEventListener("keyup", onKeyUp);
   document.body.addEventListener("pointerdown", onPointerDown);
+  window.addEventListener("blur", onWindowBlur);
 }
 
 /** 
@@ -172,7 +173,7 @@ function typeCharacter(nextChar) {
   return timeout;
 }
 
-const oscMap = {};
+let oscMap = {};
 
 let _audioContext;
 function getAudioContext() {
@@ -513,6 +514,16 @@ function onKeyUp(event) {
 
 function onPointerDown() {
   hasUserInteraction = true;
+}
+
+function onWindowBlur() {
+  for (const key in oscMap) {
+    if (!oscMap.hasOwnProperty(key)) {
+      continue;
+    }
+    oscMap[key]();
+  }
+  oscMap = {};
 }
 
 addEventListener("load", onLoad);
