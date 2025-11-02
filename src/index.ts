@@ -1,6 +1,6 @@
 import { Spike, SPIKE_COLOR, SHADOW_COLOR } from './spike';
 import { CONFIG, PX_PER_UNIT } from './config';
-
+import { PENTATONIC_A_MINOR_2_OCTAVES, CHROMATIC_SCALE_TWO_OCTAVES } from './music';
 
 /** How many units spikes grow each second. */
 const SPIKE_GROWTH_PER_SECOND = 3;
@@ -89,40 +89,6 @@ function toggleCursorVisibility() {
   cursor.className = cursor.className ? "" : "hidden";
 }
 
-const NOTE_A = 0;
-const NOTE_AS = 1;
-const NOTE_B = 2;
-const NOTE_C = 3;
-const NOTE_CS = 4;
-const NOTE_D = 5;
-const NOTE_DS = 6;
-const NOTE_E = 7;
-const NOTE_F = 8;
-const NOTE_FS = 9;
-const NOTE_G = 10;
-const NOTE_GS = 11;
-const CHROMATIC_SCALE = [
-  NOTE_A,
-  NOTE_AS,
-  NOTE_B,
-  NOTE_C,
-  NOTE_CS,
-  NOTE_D,
-  NOTE_DS,
-  NOTE_E,
-  NOTE_F,
-  NOTE_FS,
-  NOTE_G,
-  NOTE_GS
-];
-const BLUES_MINOR = [NOTE_C, NOTE_DS, NOTE_F, NOTE_FS, NOTE_G, NOTE_AS];
-const PENTATONIC_A_MINOR = [NOTE_E, NOTE_G, NOTE_A, NOTE_B, NOTE_D];
-const PENTATONIC_A_MINOR_2_OCTAVES = twoOctaves(PENTATONIC_A_MINOR);
-const BLUES_MINOR_2_OCTAVES = twoOctaves(BLUES_MINOR);
-const CHROMATIC_SCALE_TWO_OCTAVES = twoOctaves(CHROMATIC_SCALE);
-function twoOctaves(scale: number[]) {
-  return scale.concat(scale.map(note => note + 12))
-}
 
 /** 
  * Appends the next character to visible content, and schedules the next one. 
