@@ -99,7 +99,9 @@ function twoOctaves<T extends Pitch[]>(scale: [...T]): T extends Array<infer U> 
 export const BLUES_MINOR = [Pitch.C, Pitch.DS, Pitch.F, Pitch.FS, Pitch.G, Pitch.AS];
 export const PENTATONIC_A_MINOR = [Pitch.E, Pitch.G, Pitch.A, Pitch.B, Pitch.D];
 export const PENTATONIC_A_MINOR_2_OCTAVES = twoOctaves(PENTATONIC_A_MINOR);
+console.log(BLUES_MINOR);
 export const BLUES_MINOR_2_OCTAVES = twoOctaves(BLUES_MINOR);
+console.log(BLUES_MINOR_2_OCTAVES);
 export const CHROMATIC_SCALE_TWO_OCTAVES = twoOctaves(CHROMATIC_SCALE);
 
 
