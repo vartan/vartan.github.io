@@ -131,6 +131,7 @@ function onLineTyped(line: string) {
   const setScaleRe = line.match(/set scale ([\w\d]+)/i);
   if (setScaleRe) {
     const scale = NAME_TO_SCALE[setScaleRe[1]];
+    console.log(scale);
     if (scale) {
       CONFIG.scale = scale;
     }

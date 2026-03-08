@@ -25,7 +25,7 @@ export type IncreaseSemitone<T extends Pitch> =
   T extends Pitch.F ? Pitch.FS :
   T extends Pitch.FS ? Pitch.G :
   T extends Pitch.G ? Pitch.GS :
-  T extends Pitch.GS ? Pitch.A : Pitch.A;
+  T extends Pitch.GS ? Pitch.A : never;
 
 export type DecreaseSemitone<T extends Pitch> =
   T extends Pitch.A ? Pitch.GS :
